@@ -282,7 +282,7 @@
   <BoxLayout profile="fs25_buttonBox" id="buttonsPanel">
     <Button profile="buttonBack" id="backButton" text="$l10n_button_back" onClick="onClickBack"/>
     <Button profile="buttonOK" id="okButton" text="$l10n_button_save" onClick="onClickSave"/>
-    <Button profile="buttonCancel" text="$l10n_ui_WoodHarvesterMeasurement_resetDefaults" onClick="onClickResetDefaults"/>
-    <Button profile="buttonCancel" text="$l10n_ui_WoodHarvesterMeasurement_resetStand" onClick="onClickResetStand"/>
+    <Button profile="buttonCancel" text="$l10n_ui_WoodHarvesterMeasurement_resetDefaults" onClick="onClickResetDefaults" inputAction="MENU_EXTRA_1"/>
+    <Button profile="buttonCancel" text="$l10n_ui_WoodHarvesterMeasurement_resetStand" onClick="onClickResetStand" inputAction="MENU_EXTRA_1"/>
   </BoxLayout>
 </GUI>
