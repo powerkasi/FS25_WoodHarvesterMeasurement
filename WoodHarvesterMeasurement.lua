@@ -13,7 +13,7 @@ WoodHarvesterMeasurement.defaults = {
 	-- cutMaxRadius = 0, -- H6 = D60cm, DH7 = 70cm
 	cutLengthMin = 1.0, -- GIATN's default
 	cutLengthMax = 8.0, -- GIATN's default
-	cutLengthStep = 1. -- GIATN's default
+	cutLengthStep = 1.0 -- GIATN's default
 }
 
 WoodHarvesterMeasurement.defaulHUDConfigs =
@@ -49,23 +49,23 @@ function WoodHarvesterMeasurement.initSpecialization()
 	local schemaSavegame = Vehicle.xmlSchemaSavegame
 	schemaSavegame:register(
 		XMLValueType.FLOAT,
-		"vehicles.vehicle(?).FS22_WoodHarvesterMeasurement.woodHarvesterMeasurement#cubicMetreTotal",
+		"vehicles.vehicle(?).FS25_WoodHarvesterMeasurement.woodHarvesterMeasurement#cubicMetreTotal",
 		"Total cubic metres",
 		0
 	)
 	schemaSavegame:register(
 		XMLValueType.STRING,
-		"vehicles.vehicle(?).FS22_WoodHarvesterMeasurement.woodHarvesterMeasurement#radiusThresholds",
+		"vehicles.vehicle(?).FS25_WoodHarvesterMeasurement.woodHarvesterMeasurement#radiusThresholds",
 		"Radius thresholds"
 	)
 	schemaSavegame:register(
 		XMLValueType.STRING,
-		"vehicles.vehicle(?).FS22_WoodHarvesterMeasurement.woodHarvesterMeasurement#hudConfigs",
+		"vehicles.vehicle(?).FS25_WoodHarvesterMeasurement.woodHarvesterMeasurement#hudConfigs",
 		"HUD configs"
 	)
 	schemaSavegame:register(
 		XMLValueType.STRING,
-		"vehicles.vehicle(?).FS22_WoodHarvesterMeasurement.woodHarvesterMeasurement#currentStand",
+		"vehicles.vehicle(?).FS25_WoodHarvesterMeasurement.woodHarvesterMeasurement#currentStand",
 		"Current stand statistics"
 	)
 end
@@ -144,36 +144,29 @@ function WoodHarvesterMeasurement:onLoad(savegame)
 	if savegame ~= nil then
 		specWoodHarvesterMeasurement.cubicMetreTotal =
 			savegame.xmlFile:getValue(
-			savegame.key .. ".FS22_WoodHarvesterMeasurement.woodHarvesterMeasurement#cubicMetreTotal",
-			0
-		)
+				savegame.key .. ".FS25_WoodHarvesterMeasurement.woodHarvesterMeasurement#cubicMetreTotal",
+				0
+			)
 		specWoodHarvesterMeasurement.radiusThresholds =
 			savegame.xmlFile:getValue(
-			savegame.key .. ".FS22_WoodHarvesterMeasurement.woodHarvesterMeasurement#radiusThresholds",
-			WoodHarvesterMeasurement.defaultRadiusThresholds
-		)
+				savegame.key .. ".FS25_WoodHarvesterMeasurement.woodHarvesterMeasurement#radiusThresholds",
+				WoodHarvesterMeasurement.defaultRadiusThresholds
+			)
 		specWoodHarvesterMeasurement.hudConfigs =
 			savegame.xmlFile:getValue(
-			savegame.key .. ".FS22_WoodHarvesterMeasurement.woodHarvesterMeasurement#hudConfigs",
-			WoodHarvesterMeasurement.defaulHUDConfigs
-		)
+				savegame.key .. ".FS25_WoodHarvesterMeasurement.woodHarvesterMeasurement#hudConfigs",
+				WoodHarvesterMeasurement.defaulHUDConfigs
+			)
 		specWoodHarvesterMeasurement.currentStand =
 			savegame.xmlFile:getValue(
-			savegame.key .. ".FS22_WoodHarvesterMeasurement.woodHarvesterMeasurement#currentStand",
-			json.encode(Stand:new())
-		)
+				savegame.key .. ".FS25_WoodHarvesterMeasurement.woodHarvesterMeasurement#currentStand",
+				json.encode(Stand:new())
+			)
 	else
 		specWoodHarvesterMeasurement.cubicMetreTotal = 0.0
 		specWoodHarvesterMeasurement.radiusThresholds = WoodHarvesterMeasurement.defaultRadiusThresholds
 		specWoodHarvesterMeasurement.hudConfigs = WoodHarvesterMeasurement.defaulHUDConfigs
 		specWoodHarvesterMeasurement.currentStand = json.encode(Stand:new())
-	end
-
-	-- Support legacy versions
-	local decodedHudConfigs = json.decode(specWoodHarvesterMeasurement.hudConfigs)
-	if decodedHudConfigs.offsetX == nil then
-		decodedHudConfigs.offsetX = json.decode(WoodHarvesterMeasurement.defaulHUDConfigs).offsetX
-		specWoodHarvesterMeasurement.hudConfigs = json.encode(decodedHudConfigs)
 	end
 
 	-- prependedFunction() prepend an existing function with the given function or if the original
@@ -235,32 +228,32 @@ function WoodHarvesterMeasurement:onRegisterActionEvents(isActiveForInput)
 
 			_, actionEventId =
 				self:addActionEvent(
-				specWoodHarvesterMeasurement.actionEvents,
-				InputAction.WHM_SET_TREE_SPECIE_TO_PINE,
-				self,
-				WoodHarvesterMeasurement.actionEventSetTreeSpecieToPine,
-				false,
-				true,
-				false,
-				true,
-				nil
-			)
+					specWoodHarvesterMeasurement.actionEvents,
+					InputAction.WHM_SET_TREE_SPECIE_TO_PINE,
+					self,
+					WoodHarvesterMeasurement.actionEventSetTreeSpecieToPine,
+					false,
+					true,
+					false,
+					true,
+					nil
+				)
 			g_inputBinding:setActionEventTextPriority(actionEventId, GS_PRIO_HIGH)
 			g_inputBinding:setActionEventTextVisibility(actionEventId, true)
 			g_inputBinding:setActionEventActive(actionEventId, false)
 
 			_, actionEventId =
 				self:addActionEvent(
-				specWoodHarvesterMeasurement.actionEvents,
-				InputAction.WHM_SET_TREE_SPECIE_TO_SPRUCE,
-				self,
-				WoodHarvesterMeasurement.actionEventSetTreeSpecieToSpruce,
-				false,
-				true,
-				false,
-				true,
-				nil
-			)
+					specWoodHarvesterMeasurement.actionEvents,
+					InputAction.WHM_SET_TREE_SPECIE_TO_SPRUCE,
+					self,
+					WoodHarvesterMeasurement.actionEventSetTreeSpecieToSpruce,
+					false,
+					true,
+					false,
+					true,
+					nil
+				)
 			g_inputBinding:setActionEventTextPriority(actionEventId, GS_PRIO_HIGH)
 			g_inputBinding:setActionEventTextVisibility(actionEventId, true)
 			g_inputBinding:setActionEventActive(actionEventId, false)
@@ -304,8 +297,6 @@ function WoodHarvesterMeasurement:onCutTree(radius)
 		local specWoodHarvesterMeasurement = self.spec_woodHarvesterMeasurement
 
 		local previousCutRadius = specWoodHarvesterMeasurement.previousCutRadius
-		local attachedSplitShapeLastCutY = spec.attachedSplitShapeLastCutY
-		local attachedSplitShapeY = spec.attachedSplitShapeY
 
 		-- Got new split; calculate cubicMetreTotals
 		if previousCutRadius ~= 0 then
@@ -315,11 +306,11 @@ function WoodHarvesterMeasurement:onCutTree(radius)
 			self:setCurrentLength((spec.attachedSplitShapeY - specWoodHarvesterMeasurement.previousCutY) * 100)
 
 			if radius ~= 0 then -- Normal case, when it cuts the split
-				length = (attachedSplitShapeLastCutY - specWoodHarvesterMeasurement.previousCutY)
-				averageRadius = ((specWoodHarvesterMeasurement.previousCutRadius + radius) / 2)
+				length = (spec.attachedSplitShapeLastCutY - specWoodHarvesterMeasurement.previousCutY)
+				averageRadius = ((previousCutRadius + radius) / 2)
 			else -- Case if split never got cutted
-				length = attachedSplitShapeY - specWoodHarvesterMeasurement.previousCutY
-				averageRadius = ((specWoodHarvesterMeasurement.previousCutRadius + (spec.lastDiameter / 2)) / 2)
+				length = spec.attachedSplitShapeY - specWoodHarvesterMeasurement.previousCutY
+				averageRadius = ((previousCutRadius + (spec.lastDiameter / 2)) / 2)
 			end
 
 			-- Just make sure to skip negative values
@@ -331,12 +322,12 @@ function WoodHarvesterMeasurement:onCutTree(radius)
 		else -- Create new tree
 			local newCurrentTree =
 				json.encode(
-				Tree:new(
-					{
-						specie = specWoodHarvesterMeasurement.treeSpecie
-					}
+					Tree:new(
+						{
+							specie = specWoodHarvesterMeasurement.treeSpecie
+						}
+					)
 				)
-			)
 			self:setJSONObjectValue("currentTree", newCurrentTree)
 
 			-- Add new tree into stand
@@ -347,7 +338,7 @@ function WoodHarvesterMeasurement:onCutTree(radius)
 
 		-- Store for next cut calculations
 		specWoodHarvesterMeasurement.previousCutRadius = radius
-		specWoodHarvesterMeasurement.previousCutY = attachedSplitShapeLastCutY
+		specWoodHarvesterMeasurement.previousCutY = spec.attachedSplitShapeLastCutY
 
 		self:setCurrentLength(0)
 		self:setCutOnGoing(false)

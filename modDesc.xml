@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no" ?>
-<modDesc descVersion="63">
-	<author>powerkasi</author>
+<modDesc descVersion="105">
+	<author>powerkasi, DiscoFlower8890</author>
     
 	<title>
 		<en>Wood Harvester Measurement</en>
@@ -10,68 +10,42 @@
         <en>
 <![CDATA[
 Wood harvester addon to measure count and volume of cutted splits. 
-There is two type of splits, log and pulpwood.
-Threshold values for pine and spruce logs/pulpwoods can be changed from menu.
+There is three type of splits, log, shortwood and pulpwood.
+Threshold values for pine and spruce logs/shortwood/pulpwoods can be changed from menu.
+Setting threshold as 0 will ignore the sortment.
 
 Default keys:
 - ',' = Set tree specie to pine
 - '-' = Set tree specie to spruce
 - Alt + m = Open settings menu
 
-Compatible with following mods:
-- Manual Cutting for Wood Harvester
 
 Use following page to post bug reports:
-https://github.com/powerkasi/FS22_WoodHarvesterMeasurement/issues
-
-Version 1.0.0.1:
-- Change default keys
-- Change translation for tree specie to tree type
-
-Version 1.0.0.2:
-- Update to support FS22
-- Finnish translations
-
-Version 1.0.0.3:
-- HUD scale now follows game settings scale
-- HUD offset option
+https://github.com/powerkasi/FS25_WoodHarvesterMeasurement/issues
 ]]>
 		</en>
 		<de>
 <![CDATA[
-Holzernter-Add-On zum Messen der Anzahl und des Volumens der geschnittenen Spalten.
-Es gibt zwei Arten von Spaltholz, Stammholz und Sperrholz.
-Schwellenwerte für Kiefern- und Fichtenstämme/Zellholz können über das Menü geändert werden.
+Holzvollernter-Erweiterung zur Messung von Anzahl und Volumen der geschnittenen Abschnitte.
+Es gibt drei Sortimente: Stammholz, Kurzholz und Industrieholz.
+Schwellenwerte für Kiefern- und Fichtenstammholz/-kurzholz/-industrieholz können im Menü geändert werden.
+Wird ein Schwellenwert auf 0 gesetzt, wird das jeweilige Sortiment ignoriert.
 
-Standardschlüssel:
+Standardtasten:
 - ',' = Baumart auf Kiefer setzen
 - '-' = Baumart auf Fichte setzen
-- Alt + m = Einstellungsmenü öffnen
-
-Kompatibel mit folgenden Mods:
-- Manuelles Schneiden für Holzerntemaschinen
+- Alt + m = Einstellungen öffnen
 
 Verwenden Sie die folgende Seite, um Fehlerberichte zu veröffentlichen:
-https://github.com/powerkasi/FS22_WoodHarvesterMeasurement/issues
+https://github.com/powerkasi/FS25_WoodHarvesterMeasurement/issues
 
-Version 1.0.0.1:
-- Standardschlüssel ändern
-- Übersetzung für Baumart in Baumart ändern
-
-Version 1.0.0.2:
-- Update zur Unterstützung von FS22
-- Finnische Übersetzungen
-
-Version 1.0.0.3:
-- Die HUD-Skalierung folgt jetzt der Skala der Spieleinstellungen
-- HUD-Offset-Option
 ]]>
 		</de>
  	</description>
 	
 	<multiplayer supported="true"/>   
 	<iconFilename>icon.dds</iconFilename>
-	<version>1.0.0.3</version>
+	<version>1.0.0.0</version>
 	
 	<extraSourceFiles>
 		<sourceFile filename="Register.lua" />
@@ -90,11 +64,16 @@ Version 1.0.0.3:
 			<en>Wood Harvester Measurement: Tree type to pine</en>
 			<fi>Wood Harvester Measurement: Aseta puulaji mänty</fi>
 			<de>Wood Harvester Measurement: Baumart auf Kiefer stellen</de>
+			<sv>Wood Harvester Measurement: Trädtyp till tall</sv>
+			<fr>Wood Harvester Measurement: Type d'arbre pin</fr>
 		</text>
 		<text name="input_WHM_SET_TREE_SPECIE_TO_SPRUCE">
 			<en>Wood Harvester Measurement: Tree type to spruce</en>
 			<fi>Wood Harvester Measurement: Aseta puulaji kuusi</fi>
 			<de>Wood Harvester Measurement: Baumart auf Fichte stellen</de>
+			<sv>Wood Harvester Measurement: Trädtyp till gran</sv>
+			<fr>Wood Harvester Measurement: Type d'arbre épicéa,épinette</fr>
+		</text>
 		</text>
 
 		<!-- GUI Translations -->
@@ -358,21 +337,30 @@ Version 1.0.0.3:
 			<en>PINE</en>
 			<fi>MÄNTY</fi>
 			<de>KIEFER</de>
+			<sv>TALL</sv>
+			<fr>PIN</fr>
 		</text>
 		<text name="WOODHARVESTERMEASUREMENT_SPRUCE">
 			<en>SPRUCE</en>
 			<fi>KUUSI</fi>
 			<de>FICHTE</de>
+			<sv>GRAN</sv>
+			<fr>Épicéa</fr>
 		</text>
 		<text name="WOODHARVESTERMEASUREMENT_UNKNOWN_SPECIE">
 			<en>SET TREE TYPE!</en>
 			<fi>ASETA PUULAJI!</fi>
 			<de>BAUMART!</de>
+			<sv>VÄLJ TRÄDTYP!</sv>
+			<fr>DÉFINIR LE TYPE D'ARBRE !</fr>
 		</text>
 		<text name="WOODHARVESTERMEASUREMENT_LOG">
 			<en>Log</en>
 			<fi>Tukki</fi>
 			<de>Stamm</de>
+			<sv>Timmer</sv>
+			<fr>Billot</fr>
+		</text>
 		<text name="WOODHARVESTERMEASUREMENT_SHORTWOOD">
 			<en>Shortwood</en>
 			<fi>Pikkutukki</fi>
@@ -384,11 +372,15 @@ Version 1.0.0.3:
 			<en>Pulpwood</en>
 			<fi>Kuitu</fi>
 			<de>Industrie</de>
+			<sv>Massa</sv>
+			<fr>Pate</fr>
 		</text>
 		<text name="WOODHARVESTERMEASUREMENT_UNKNOWN_TREE_TYPE">
 			<en>-</en>
 			<fi>-</fi>
 			<de>-</de>
+			<sv>-</sv>
+			<fr>-</fr>
 		</text>
 	</l10n>
 	
