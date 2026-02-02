@@ -1,18 +1,19 @@
 --[[
 	Tree.lua
-	Author: powerkasi
+	Author: powerkasi, DiscoFlower8890
 ]]
 
 Species = {
-	UNKNOWN = 0,
-	PINE = 1, -- mänty
-	SPRUCE = 2 -- kuusi
+    UNKNOWN = 0,
+    PINE = 1, -- mänty
+    SPRUCE = 2 -- kuusi
 }
 
 SplitTypes = {
-	UNKNOWN = 0,
-	LOG = 1,
-	PULPWOOD = 8
+    UNKNOWN = 0,
+    LOG = 1,
+    SHORTWOOD = 2,
+    PULPWOOD = 8 -- why 8 here?
 }
 
 Tree = {
@@ -46,7 +47,7 @@ function Tree.specieToString(specie)
     if specie == Species.PINE then
         return "Pine"
     elseif specie == Species.SPRUCE then
-        return  "Spruce"
+        return "Spruce"
     else
         return "Unknown"
     end
@@ -55,8 +56,10 @@ end
 function Tree.splitTypeToString(specie)
     if specie == SplitTypes.LOG then
         return "Log"
+    elseif specie == SplitTypes.SHORTWOOD then
+        return "Short"
     elseif specie == SplitTypes.PULPWOOD then
-        return  "Pulpwood"
+        return "Pulpwood"
     else
         return "Unknown"
     end

@@ -1,27 +1,31 @@
 --[[
 	Stand.lua
-	Author: powerkasi
+	Author: powerkasi, DiscoFlower8890
 ]]
 
 Stand = {
-    splitCountStand 				= 0,
-	splitCountPineLogStand 			= 0,
-	splitCountPinePulpwoodStand 	= 0,
-	splitCountSpruceLogStand		= 0,
-	splitCountSprucePulpwoodStand 	= 0,
-    splitCountUnknownLogStand		= 0,
-	splitCountUnknownPulpwoodStand 	= 0,
+    splitCountStand                = 0,
+    splitCountPineLogStand         = 0,
+    splitCountPineShortStand       = 0,
+    splitCountPinePulpwoodStand    = 0,
+    splitCountSpruceLogStand       = 0,
+    splitCountSpruceShortStand     = 0,
+    splitCountSprucePulpwoodStand  = 0,
+    splitCountUnknownLogStand      = 0,
+    splitCountUnknownPulpwoodStand = 0,
 
-	cubicMetreStand 				= 0.0,
-	cubicMetrePineLogStand 			= 0.0,
-	cubicMetrePinePulpwoodStand 	= 0.0,
-	cubicMetreSpruceLogStand 		= 0.0,
-	cubicMetreSprucePulpwoodStand 	= 0.0,
-    cubicMetreUnknownLogStand 		= 0.0,
-	cubicMetreUnknownPulpwoodStand 	= 0.0,
+    cubicMetreStand                = 0.0,
+    cubicMetrePineLogStand         = 0.0,
+    cubicMetrePineShortStand       = 0.0,
+    cubicMetrePinePulpwoodStand    = 0.0,
+    cubicMetreSpruceLogStand       = 0.0,
+    cubicMetreSpruceShortStand     = 0.0,
+    cubicMetreSprucePulpwoodStand  = 0.0,
+    cubicMetreUnknownLogStand      = 0.0,
+    cubicMetreUnknownPulpwoodStand = 0.0,
 
-    maxNumberOfTrees                = 10,
-    trees                           = {}
+    maxNumberOfTrees               = 10,
+    trees                          = {}
 }
 
 function Stand:new(o)
@@ -31,16 +35,20 @@ function Stand:new(o)
 
     o.splitCountStand = o.splitCountStand or self.splitCountStand
     o.splitCountPineLogStand = o.splitCountPineLogStand or self.splitCountPineLogStand
+    o.splitCountPineShortStand = o.splitCountPineShortStand or self.splitCountPineShortStand
     o.splitCountPinePulpwoodStand = o.splitCountPinePulpwoodStand or self.splitCountPinePulpwoodStand
     o.splitCountSpruceLogStand = o.splitCountSpruceLogStand or self.splitCountSpruceLogStand
+    o.splitCountSpruceShortStand = o.splitCountSpruceShortStand or self.splitCountSpruceShortStand
     o.splitCountSprucePulpwoodStand = o.splitCountSprucePulpwoodStand or self.splitCountSprucePulpwoodStand
     o.splitCountUnknownLogStand = o.splitCountUnknownLogStand or self.splitCountUnknownLogStand
     o.splitCountUnknownPulpwoodStand = o.splitCountUnknownPulpwoodStand or self.splitCountUnknownPulpwoodStand
 
     o.cubicMetreStand = o.cubicMetreStand or self.cubicMetreStand
     o.cubicMetrePineLogStand = o.cubicMetrePineLogStand or self.cubicMetrePineLogStand
+    o.cubicMetrePineShortStand = o.cubicMetrePineShortStand or self.cubicMetrePineShortStand
     o.cubicMetrePinePulpwoodStand = o.cubicMetrePinePulpwoodStand or self.cubicMetrePinePulpwoodStand
     o.cubicMetreSpruceLogStand = o.cubicMetreSpruceLogStand or self.cubicMetreSpruceLogStand
+    o.cubicMetreSpruceShortStand = o.cubicMetreSpruceShortStand or self.cubicMetreSpruceShortStand
     o.cubicMetreSprucePulpwoodStand = o.cubicMetreSprucePulpwoodStand or self.cubicMetreSprucePulpwoodStand
     o.cubicMetreUnknownLogStand = o.cubicMetreUnknownLogStand or self.cubicMetreUnknownLogStand
     o.cubicMetreUnknownPulpwoodStand = o.cubicMetreUnknownPulpwoodStand or self.cubicMetreUnknownPulpwoodStand
@@ -75,25 +83,25 @@ function Stand:updateStandStats()
 
     if lastSplit.treeType ~= SplitTypes.UNKNOWN then
         local specie, type = Tree.specieToString(lastTree.specie), Tree.splitTypeToString(lastSplit.treeType)
-        self["splitCount"..specie..type.."Stand"] = self["splitCount"..specie..type.."Stand"] + 1
-        self["cubicMetre"..specie..type.."Stand"] = self["cubicMetre"..specie..type.."Stand"] + lastSplit.cubeMetre
+        self["splitCount" .. specie .. type .. "Stand"] = self["splitCount" .. specie .. type .. "Stand"] + 1
+        self["cubicMetre" .. specie .. type .. "Stand"] = self["cubicMetre" .. specie .. type .. "Stand"] + lastSplit.cubeMetre
         self.splitCountStand = self.splitCountStand + 1
         self.cubicMetreStand = self.cubicMetreStand + lastSplit.cubeMetre
     end
 end
 
-function Stand:changeSpecie(specie)
+function Stand:changeSpecie(oldSpecie, newSpecie)
     local lastTree = self.trees[#self.trees]
-    local oldSpecie = Tree.specieToString(lastTree.specie)
-    local newSpecie = Tree.specieToString(specie)
+    local oldSpecie = Tree.specieToString(oldSpecie)
+    local newSpecie = Tree.specieToString(newSpecie)
 
     for index, split in ipairs(lastTree.splits) do
         if split.treeType ~= SplitTypes.UNKNOWN then
             local type = Tree.splitTypeToString(split.treeType)
-            self["splitCount"..oldSpecie..type.."Stand"] = self["splitCount"..oldSpecie..type.."Stand"] - 1
-            self["splitCount"..newSpecie..type.."Stand"] = self["splitCount"..newSpecie..type.."Stand"] + 1
-            self["cubicMetre"..oldSpecie..type.."Stand"] = self["cubicMetre"..oldSpecie..type.."Stand"] - split.cubeMetre
-            self["cubicMetre"..newSpecie..type.."Stand"] = self["cubicMetre"..newSpecie..type.."Stand"] + split.cubeMetre
+            self["splitCount" .. oldSpecie .. type .. "Stand"] = self["splitCount" .. oldSpecie .. type .. "Stand"] - 1
+            self["splitCount" .. newSpecie .. type .. "Stand"] = self["splitCount" .. newSpecie .. type .. "Stand"] + 1
+            self["cubicMetre" .. oldSpecie .. type .. "Stand"] = self["cubicMetre" .. oldSpecie .. type .. "Stand"] - split.cubeMetre
+            self["cubicMetre" .. newSpecie .. type .. "Stand"] = self["cubicMetre" .. newSpecie .. type .. "Stand"] + split.cubeMetre
         end
     end
 end

@@ -26,15 +26,18 @@ WoodHarvesterMeasurement.defaulHUDConfigs =
 
 WoodHarvesterMeasurement.defaultRadiusThresholds =
 	json.encode(
-	{
-		pineLogMinRadius = 0.16,
-		pinePulpwoodMinRadius = 0.06,
-		spruceLogMinRadius = 0.16,
-		sprucePulpwoodMinRadius = 0.07,
-		fallbackLogMinRadius = 0.16,
-		fallbackPulpwoodMinRadius = 0.06
-	}
-)
+		{
+			pineLogMinRadius = 0.16,
+			pineShortMinRadius = 0.10,
+			pinePulpwoodMinRadius = 0.06,
+			spruceLogMinRadius = 0.16,
+			spruceShortMinRadius = 0.10,
+			sprucePulpwoodMinRadius = 0.07,
+			fallbackLogMinRadius = 0.16,
+			fallbackShortMinRadius = 0.10,
+			fallbackPulpwoodMinRadius = 0.06
+		}
+	)
 
 function WoodHarvesterMeasurement.prerequisitesPresent(specializations)
 	return true
@@ -363,26 +366,35 @@ function WoodHarvesterMeasurement:addNewSplit(length, averageRadius)
 
 	-- Pine
 	if specWoodHarvesterMeasurement.treeSpecie == Species.PINE then
-		-- Spruce
-		if spec.lastDiameter >= radiusThresholds.pineLogMinRadius then
+		if spec.lastDiameter >= radiusThresholds.pineLogMinRadius and radiusThresholds.pineLogMinRadius ~= 0 then -- Setting 0 will now ignore the type
 			treeType = SplitTypes.LOG
-		elseif spec.lastDiameter >= radiusThresholds.pinePulpwoodMinRadius then
+		elseif spec.lastDiameter >= radiusThresholds.pineShortMinRadius and radiusThresholds.pineShortMinRadius ~= 0 then
+			treeType = SplitTypes.SHORTWOOD
+		elseif spec.lastDiameter >= radiusThresholds.pinePulpwoodMinRadius and radiusThresholds.pinePulpwoodMinRadius ~= 0 then
 			treeType = SplitTypes.PULPWOOD
 		else
+			-- These don't get saved anywhere anymore so having a warning might be good
+			-- but then if you feed the tree through without cutting it will display the warning so eh
 			treeType = SplitTypes.UNKNOWN
 		end
 	elseif specWoodHarvesterMeasurement.treeSpecie == Species.SPRUCE then
-		-- Fallback
-		if spec.lastDiameter >= radiusThresholds.spruceLogMinRadius then
+		if spec.lastDiameter >= radiusThresholds.spruceLogMinRadius and radiusThresholds.spruceLogMinRadius ~= 0 then -- Setting 0 will now ignore the type
 			treeType = SplitTypes.LOG
-		elseif spec.lastDiameter >= radiusThresholds.sprucePulpwoodMinRadius then
+		elseif spec.lastDiameter >= radiusThresholds.spruceShortMinRadius and radiusThresholds.spruceShortMinRadius ~= 0 then
+			treeType = SplitTypes.SHORTWOOD
+		elseif spec.lastDiameter >= radiusThresholds.sprucePulpwoodMinRadius and radiusThresholds.sprucePulpwoodMinRadius ~= 0 then
 			treeType = SplitTypes.PULPWOOD
 		else
+			-- These don't get saved anywhere anymore so having a warning might be good
+			-- but then if you feed the tree through without cutting it will display the warning so eh
 			treeType = SplitTypes.UNKNOWN
 		end
 	else
+		g_currentMission:showBlinkingWarning("Select a species first!")
 		if spec.lastDiameter >= radiusThresholds.fallbackLogMinRadius then
 			treeType = SplitTypes.LOG
+		elseif spec.lastDiameter >= radiusThresholds.fallbackShortMinRadius then
+			treeType = SplitTypes.SHORTWOOD
 		elseif spec.lastDiameter >= radiusThresholds.fallbackPulpwoodMinRadius then
 			treeType = SplitTypes.PULPWOOD
 		else
@@ -691,6 +703,8 @@ function WoodHarvesterMeasurement.treeTypeToString(self, treeType)
 	local specWoodHarvesterMeasurement = self.spec_woodHarvesterMeasurement
 	if treeType == SplitTypes.LOG then
 		return g_i18n:getText("WOODHARVESTERMEASUREMENT_LOG")
+	elseif treeType == SplitTypes.SHORTWOOD then
+		return g_i18n:getText("WOODHARVESTERMEASUREMENT_SHORTWOOD")
 	elseif treeType == SplitTypes.PULPWOOD then
 		return g_i18n:getText("WOODHARVESTERMEASUREMENT_PULPWOOD")
 	else

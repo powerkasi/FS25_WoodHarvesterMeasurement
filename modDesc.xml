@@ -373,6 +373,12 @@ Version 1.0.0.3:
 			<en>Log</en>
 			<fi>Tukki</fi>
 			<de>Stamm</de>
+		<text name="WOODHARVESTERMEASUREMENT_SHORTWOOD">
+			<en>Shortwood</en>
+			<fi>Pikkutukki</fi>
+			<de>Kurz Holz</de>
+			<sv>Kubb</sv>
+			<fr>Billot Court</fr>
 		</text>
 		<text name="WOODHARVESTERMEASUREMENT_PULPWOOD">
 			<en>Pulpwood</en>
