@@ -734,6 +734,10 @@ function WoodHarvesterMeasurement:onUpdate()
 	local specWoodHarvesterMeasurement = self.spec_woodHarvesterMeasurement
 
 	if spec.attachedSplitShape ~= nil and spec.isAttachedSplitShapeMoving then
+		if specWoodHarvesterMeasurement.previousCutRadius == 0 then
+			specWoodHarvesterMeasurement.previousCutY = spec.attachedSplitShapeLastCutY
+		end
+
 		if specWoodHarvesterMeasurement.currentDiameter ~= 0 then
 			self:setCurrentLength((spec.attachedSplitShapeY - specWoodHarvesterMeasurement.previousCutY) * 100)
 		end
