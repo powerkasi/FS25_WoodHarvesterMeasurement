@@ -257,6 +257,22 @@ function WoodHarvesterMeasurement:onRegisterActionEvents(isActiveForInput)
 			g_inputBinding:setActionEventTextPriority(actionEventId, GS_PRIO_HIGH)
 			g_inputBinding:setActionEventTextVisibility(actionEventId, true)
 			g_inputBinding:setActionEventActive(actionEventId, false)
+
+			_, actionEventId =
+				self:addActionEvent(
+					specWoodHarvesterMeasurement.actionEvents,
+					InputAction.WHM_TOGGLE_SPECIE,
+					self,
+					WoodHarvesterMeasurement.actionEventToggleTreeSpecie,
+					false,
+					true,
+					false,
+					true,
+					nil
+				)
+			g_inputBinding:setActionEventTextPriority(actionEventId, GS_PRIO_HIGH)
+			g_inputBinding:setActionEventTextVisibility(actionEventId, true)
+			g_inputBinding:setActionEventActive(actionEventId, false)
 		end
 	end
 end
@@ -288,6 +304,15 @@ end
 function WoodHarvesterMeasurement.actionEventSetTreeSpecieToSpruce(self, actionName, inputValue, callbackState, isAnalog)
 	local specWoodHarvesterMeasurement = self.spec_woodHarvesterMeasurement
 	self:setTreeSpecie(Species.SPRUCE)
+end
+
+function WoodHarvesterMeasurement.actionEventToggleTreeSpecie(self, actionName, inputValue, callbackState, isAnalog)
+	local specWoodHarvesterMeasurement = self.spec_woodHarvesterMeasurement
+	if specWoodHarvesterMeasurement.treeSpecie == Species.SPRUCE then
+		self:setTreeSpecie(Species.PINE)
+	else
+		self:setTreeSpecie(Species.SPRUCE)
+	end
 end
 
 -- When tree cutting happening
@@ -674,6 +699,13 @@ function WoodHarvesterMeasurement:onDraw()
 	if actionEvent ~= nil then
 		g_inputBinding:setActionEventActive(actionEvent.actionEventId, true)
 		g_inputBinding:setActionEventText(actionEvent.actionEventId, g_i18n:getText("input_WHM_SET_TREE_SPECIE_TO_SPRUCE"))
+	end
+
+	actionEvent = specWoodHarvesterMeasurement.actionEvents[InputAction.WHM_TOGGLE_SPECIE]
+	if actionEvent ~= nil then
+		g_inputBinding:setActionEventActive(actionEvent.actionEventId, true)
+		g_inputBinding:setActionEventText(actionEvent.actionEventId,
+			g_i18n:getText("input_WHM_TOGGLE_SPECIE"))
 	end
 
 	self:drawHUD()

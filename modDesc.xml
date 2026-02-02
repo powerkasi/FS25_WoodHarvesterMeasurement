@@ -74,6 +74,12 @@ https://github.com/powerkasi/FS25_WoodHarvesterMeasurement/issues
 			<sv>Wood Harvester Measurement: Trädtyp till gran</sv>
 			<fr>Wood Harvester Measurement: Type d'arbre épicéa,épinette</fr>
 		</text>
+		<text name="input_WHM_TOGGLE_SPECIE">
+			<en>Wood Harvester Measurement: Switch tree type</en>
+			<fi>Wood Harvester Measurement: Vaihda puulaji</fi>
+			<de>Wood Harvester Measurement: Baumtyp wechseln</de>
+			<sv>Wood Harvester Measurement: Byt trädtyp</sv>
+			<fr>Wood Harvester Measurement: Changer le type d'arbre</fr>
 		</text>
 
 		<!-- GUI Translations -->
@@ -388,6 +394,7 @@ https://github.com/powerkasi/FS25_WoodHarvesterMeasurement/issues
 		<action name="WHM_OPEN_SETTINGS" category="VEHICLE" ignoreComboMask="false"/>
 		<action name="WHM_SET_TREE_SPECIE_TO_PINE" category="VEHICLE" ignoreComboMask="false"/>
 		<action name="WHM_SET_TREE_SPECIE_TO_SPRUCE" category="VEHICLE" ignoreComboMask="false"/>
+		<action name="WHM_TOGGLE_SPECIE" category="VEHICLE" ignoreComboMask="false"/>
 	</actions>
 	
 	<inputBinding>
@@ -399,6 +406,9 @@ https://github.com/powerkasi/FS25_WoodHarvesterMeasurement/issues
 		</actionBinding>
 		<actionBinding action="WHM_SET_TREE_SPECIE_TO_SPRUCE">
 			<binding device="KB_MOUSE_DEFAULT" input="KEY_slash"/>
+		</actionBinding>
+		<actionBinding action="WHM_TOGGLE_SPECIE">
+			<binding device="KB_MOUSE_DEFAULT" input=""/>
 		</actionBinding>
 	</inputBinding>
 	
