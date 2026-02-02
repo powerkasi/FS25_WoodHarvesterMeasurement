@@ -18,11 +18,11 @@ WoodHarvesterMeasurement.defaults = {
 
 WoodHarvesterMeasurement.defaulHUDConfigs =
 	json.encode(
-	{
-		position = HUDPosition.BOTTOMCENTER,
-		offsetX = HUDOffset.DEFAULT
-	}
-)
+		{
+			position = HUDPosition.HIDDEN,
+			offsetX = HUDOffset.DEFAULT
+		}
+	)
 
 WoodHarvesterMeasurement.defaultRadiusThresholds =
 	json.encode(
@@ -431,6 +431,11 @@ function WoodHarvesterMeasurement:drawHUD()
 	local style = WoodHarvesterMeasurement.hudStyles["default"]
 
 	local hudConfigs = json.decode(specWoodHarvesterMeasurement.hudConfigs)
+
+	if hudConfigs.position == HUDPosition.HIDDEN then
+		return
+	end
+
 	local hudType
 	if hudConfigs.position == HUDPosition.BOTTOMCENTER then
 		hudType = WoodHarvesterMeasurement.hudTypes.bottomCenter

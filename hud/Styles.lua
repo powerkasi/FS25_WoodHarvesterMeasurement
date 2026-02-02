@@ -1,6 +1,6 @@
 --[[
 	Styles.lua
-	Author: powerkasi
+	Author: powerkasi, DiscoFlower8890
 ]]
 
 Styles = {
@@ -18,47 +18,54 @@ Styles = {
 			height = 224, -- 64 + 64 / 2 + 64 / 1.5 * 3
 			bigCardWidth = 128, -- 0.05
 			bigCardheight = 64, -- 0.05
+		},
+		hidden = {
+			bottomMargin = 25, --could probs just nil all these
+			width = 256,
+			height = 224, -- 64 + 64 / 2 + 64 / 1.5 * 3
+			bigCardWidth = 128, -- 0.05
+			bigCardheight = 64, -- 0.05
 		}
 	},
 
 	hudStyles = {
 		ponsse = {
-			backgroundColor 			= Colors.WHITE,
-			backgroundOpacity 			= 0.3,
+			backgroundColor             = Colors.WHITE,
+			backgroundOpacity           = 0.3,
 			cutOnGoingBackgroundOpacity = 0.8,
-			pineBackgroundColor			= Colors.PONSSE_BLUE,
-			spruceBackgroundColor		= Colors.PONSSE_GREEN,
-			highlightBackGroundColor	= Colors.PONSSE_YELLOW,
-			fontColor					= Colors.BLACK
+			pineBackgroundColor         = Colors.PONSSE_BLUE,
+			spruceBackgroundColor       = Colors.PONSSE_GREEN,
+			highlightBackGroundColor    = Colors.PONSSE_YELLOW,
+			fontColor                   = Colors.BLACK
 		},
 		komatsu = {
-			backgroundColor 			= Colors.KOMATSU_DARKBLUE,
-			backgroundOpacity 			= 0.3,
+			backgroundColor             = Colors.KOMATSU_DARKBLUE,
+			backgroundOpacity           = 0.3,
 			cutOnGoingBackgroundOpacity = 0.8,
-			pineBackgroundColor			= Colors.BLUE,
-			spruceBackgroundColor		= Colors.GREEN,
-			highlightBackGroundColor	= Colors.KOMATSU_DARKBLUE,
-			fontColor					= Colors.KOMATSU_YELLOW
+			pineBackgroundColor         = Colors.BLUE,
+			spruceBackgroundColor       = Colors.GREEN,
+			highlightBackGroundColor    = Colors.KOMATSU_DARKBLUE,
+			fontColor                   = Colors.KOMATSU_YELLOW
 		},
 		johndeere = {
-			backgroundColor 			= Colors.WHITE,
-			backgroundOpacity 			= 0.3,
+			backgroundColor             = Colors.WHITE,
+			backgroundOpacity           = 0.3,
 			cutOnGoingBackgroundOpacity = 0.8,
-			pineBackgroundColor			= Colors.BLUE,
-			spruceBackgroundColor		= Colors.GREEN,
-			highlightBackGroundColor	= Colors.YELLOW,
-			fontColor					= Colors.BLACK
+			pineBackgroundColor         = Colors.BLUE,
+			spruceBackgroundColor       = Colors.GREEN,
+			highlightBackGroundColor    = Colors.YELLOW,
+			fontColor                   = Colors.BLACK
 		},
 		default = {
 			-- sideHudBottomMargin			= 0.35,
 			-- centerHudBottomMargin 		= 0.154,
-			backgroundColor 			= Colors.WHITE,
-			backgroundOpacity 			= 0.3,
+			backgroundColor             = Colors.WHITE,
+			backgroundOpacity           = 0.3,
 			cutOnGoingBackgroundOpacity = 0.8,
-			pineBackgroundColor			= Colors.BLUE,
-			spruceBackgroundColor		= Colors.GREEN,
-			highlightBackGroundColor	= Colors.YELLOW,
-			fontColor					= Colors.BLACK
+			pineBackgroundColor         = Colors.BLUE,
+			spruceBackgroundColor       = Colors.GREEN,
+			highlightBackGroundColor    = Colors.YELLOW,
+			fontColor                   = Colors.BLACK
 		}
 	}
 }

@@ -1,6 +1,6 @@
 --[[
 	Enums.lua
-	Author: powerkasi
+	Author: powerkasi, DiscoFlower8890
 ]]
 
 -- GIANTS's enums
@@ -33,8 +33,9 @@ Colors = {      -- R            G           B
 }
 
 HUDPosition = {
-    BOTTOMCENTER = 1,
-    BOTTOMRIGHT = 2
+    HIDDEN = 1,
+    BOTTOMCENTER = 2,
+    BOTTOMRIGHT = 3
 }
 
 HUDOffset = {
