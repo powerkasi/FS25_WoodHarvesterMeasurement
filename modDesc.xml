@@ -77,12 +77,14 @@ Version 1.0.0.3:
 		<sourceFile filename="Register.lua" />
 	</extraSourceFiles>
 
-		<l10n>
+	<l10n>
 		<!-- Action Translations -->
 		<text name="input_WHM_OPEN_SETTINGS">
 			<en>Wood Harvester Measurement: Menu</en>
 			<fi>Wood Harvester Measurement: Valikko</fi>
 			<de>Wood Harvester Measurement: Menü</de>
+			<sv>Wood Harvester Measurement: Meny</sv>
+			<fr>Wood Harvester Measurement: Menu</fr>
 		</text>
 		<text name="input_WHM_SET_TREE_SPECIE_TO_PINE">
 			<en>Wood Harvester Measurement: Tree type to pine</en>
@@ -96,200 +98,259 @@ Version 1.0.0.3:
 		</text>
 
 		<!-- GUI Translations -->
-		<text name="WOODHARVESTERMEASUREMENT_HEADER">
-			<en>Wood Harvester Measurement: Menu</en>
-			<fi>Wood Harvester Measurement: Valikko</fi>
-			<de>Wood Harvester Measurement: Menü</de>
+		<text name="ui_WoodHarvesterMeasurement_guiTitle">
+			<en>Wood Harvester Measurement</en>
+			<fi>Wood Harvester Measurement</fi>
+			<de>Wood Harvester Measurement</de>
+			<sv>Wood Harvester Measurement</sv>
+			<fr>Wood Harvester Measurement</fr>
 		</text>
-		<text name="WOODHARVESTERMEASUREMENT_GLOBAL_TITLE">
-			<en>Global Settings</en>
-			<fi>Yleiset Asetukset</fi>
-			<de>Globale Einstellungen</de>
+		<text name="ui_WoodHarvesterMeasurement_sectionSortment">
+			<en>Sortment Settings</en>
+			<fi>Laatu Asetukset</fi>
+			<de>Sortiments-Einstellungen</de>
+			<sv>Sortiment Inställningar</sv>
+			<fr>Réglage des éspèces</fr>
 		</text>
-
-		 <!-- GUI Global Settings -->
-		<text name="WOODHARVESTERMEASUREMENT_CUT_LENGTH_MIN">
-			<en>Cut length min (m)</en>
-			<fi>Minimi katkaisupituus (m)</fi>
-			<de>Schnittlänge min (m)</de>
+		<text name="ui_WoodHarvesterMeasurement_sectionHud">
+			<en>Hud Settings</en>
+			<fi>Näkymän Asetukset</fi>
+			<de>Hud-Einstellungen</de>
+			<sv>Hud Inställningar</sv>
+			<fr>Paramètres du hud</fr>
 		</text>
-		<text name="WOODHARVESTERMEASUREMENT_CUT_LENGTH_MAX">
-			<en>Cut length max (m)</en>
-			<fi>Maksimi katkaisupituus (m)</fi>
-			<de>Schnittlänge max (m)</de>
-		</text>
-		<text name="WOODHARVESTERMEASUREMENT_CUT_LENGTH_STEP">
-			<en>Cut length step (m)</en>
-			<fi>Katkaisupituuden väli (m)</fi>
-			<de>Schnittlängenschritt (m)</de>
-		</text>
-
-		<!-- GUI Mod Specific Settings -->
-		<text name="WOODHARVESTERMEASUREMENT_MOD_SETTINGS_TITLE">
+		<text name="ui_WoodHarvesterMeasurement_sectionModSpecific">
 			<en>Harvester Settings</en>
-			<fi>Harvesterikohtaiset asetukset</fi>
+			<fi>Hakkuupään Asetukset</fi>
 			<de>Harvester-Einstellungen</de>
+			<sv>Skördar Inställningar</sv>
+			<fr>Paramètre de l'abatteuse</fr>
 		</text>
-		<text name="WOODHARVESTERMEASUREMENT_PINE_LOG_MIN_DIAMETER">
-			<en>Pine log min diameter (cm)</en>
-			<fi>Mäntytukin minimi läpimitta (cm)</fi>
-			<de>Kiefer-Stammholz min. Ø (cm)</de>
-		</text>
-		<text name="WOODHARVESTERMEASUREMENT_PINE_PULPWOOD_MIN_DIAMETER">
-			<en>Pine pulpwood min diameter (cm)</en>
-			<fi>Mäntykuidun minimi läpimitta (cm)</fi>
-			<de>Kiefer-Industrieholz min. Ø (cm)</de>
-		</text>
-		<text name="WOODHARVESTERMEASUREMENT_SPRUCE_LOG_MIN_DIAMETER">
-			<en>Spruce log min diameter (cm)</en>
-			<fi>Kuusitukin minimi läpimitta (cm)</fi>
-			<de>Fichte-Stammholz min. Ø (cm)</de>
-		</text>
-		<text name="WOODHARVESTERMEASUREMENT_SPRUCE_PULPWOOD_MIN_DIAMETER">
-			<en>Spruce pulpwood min diameter (cm)</en>
-			<fi>Kuusikuidun minimi läpimitta</fi>
-			<de>Fichte-Industrieholz min. Ø (cm)</de>
-		</text>
-
-		<!-- GUI Harvester INFO/Settings -->
-		<text name="WOODHARVESTERMEASUREMENT_STATS_TITLE_TOTAL">
-			<en>Harvester Info</en>
-			<fi>Harvesterin tiedot</fi>
-			<de>Harvester-Info</de>
-		</text>
-		<text name="WOODHARVESTERMEASUREMENT_VEHICLE_MODEL">
-			<en>Id, name and model</en>
-			<fi>Id, nimi ja malli</fi>
-			<de>ID, Name und Modell</de>
-		</text>
-		<text name="WOODHARVESTERMEASUREMENT_CUBIC_METRE_TOTAL">
-			<en>Total cubic meters cutted</en>
-			<fi>Hakatut kuutiometrit yhteensä</fi>
-			<de>Gesamt Festmeter geschnitten</de>
-		</text>
-		<text name="WOODHARVESTERMEASUREMENT_VEHICLE_HUD_POSITION">
-			<en>HUD position</en>
-			<fi>HUD:in sijainti</fi>
-			<de>HUD-Position</de>
-		</text>
-		<text name="WOODHARVESTERMEASUREMENT_VEHICLE_HUD_OFFSET">
-			<en>HUD offset</en>
-			<fi>HUD:in offset</fi>
-			<de>HUD-Offset</de>
-		</text>
-		<text name="WOODHARVESTERMEASUREMENT_HUD_POSITION_1">
-			<en>Bottom Center</en>
-			<fi>Alhaalla keskellä</fi>
-			<de>Unten in der Mitte</de>
-		</text>
-		<text name="WOODHARVESTERMEASUREMENT_HUD_POSITION_2">
-			<en>Bottom Right</en>
-			<fi>Alhaalla oikealla</fi>
-			<de>Unten rechts</de>
-		</text>
-		<text name="WOODHARVESTERMEASUREMENT_HUD_POSITION_TOOLTIP">
-			<en>Choose heads-up display position in screen</en>
-			<fi>Valitse HUD-näytön sijainti ruudulla</fi>
-			<de>Wählen Sie die Position des Heads-up-Displays auf dem Bildschirm</de>
-		</text>
-		<text name="WOODHARVESTERMEASUREMENT_HUD_OFFSET_TOOLTIP">
-			<en>Choose heads-up display's offset</en>
-			<fi>Valitse HUD-näytön offsetti</fi>
-			<de>Wählen Sie den Offset des Heads-up-Displays</de>
-		</text>
-
-		<!-- GUI Stand Stats -->
-		<text name="WOODHARVESTERMEASUREMENT_STATS_TITLE_STAND">
+		<text name="ui_WoodHarvesterMeasurement_sectionStandStats">
 			<en>Stand Stats</en>
 			<fi>Leimikon tilastot</fi>
 			<de>Abteilungsstatistik</de>
+			<sv>Produktionsöversikt</sv>
+			<fr>Stayistiques de la parcelle</fr>
 		</text>
-		<text name="WOODHARVESTERMEASUREMENT_SPLIT_COUNT_PINE_LOG_STAND">
+
+		<text name="ui_WoodHarvesterMeasurement_cutLengthMinTitle">
+			<en>Cut length min (m)</en>
+			<fi>Minimi katkaisupituus (m)</fi>
+			<de>Schnittlänge min (m)</de>
+			<sv>Kap längd min</sv>
+			<fr>Longeur de coupe min (m)</fr>
+		</text>
+		<text name="ui_WoodHarvesterMeasurement_cutLengthMaxTitle">
+			<en>Cut length max (m)</en>
+			<fi>Maksimi katkaisupituus (m)</fi>
+			<de>Schnittlänge max (m)</de>
+			<sv>Kap längd max</sv>
+			<fr>Longeur de coupe max (m)</fr>
+		</text>
+		<text name="ui_WoodHarvesterMeasurement_cutLengthStepTitle">
+			<en>Cut length step (m)</en>
+			<fi>Katkaisupituuden väli (m)</fi>
+			<de>Schnittlängenschritt (m)</de>
+			<sv>Kap längd steg</sv>
+			<fr>Longueur de coupe par étape</fr>
+		</text>
+
+		<text name="ui_WoodHarvesterMeasurement_pineLogMinTitle">
+			<en>Pine log min diameter (cm)</en>
+			<fi>Mäntytukin minimi läpimitta (cm)</fi>
+			<de>Kiefer-Stammholz min. Ø (cm)</de>
+			<sv>Tall timmer min diameter</sv>
+			<fr>Diamètre minimum billot: pin (cm)</fr>
+		</text>
+		<text name="ui_WoodHarvesterMeasurement_pineShortMinTitle">
+			<en>Pine shortwood min diameter (cm)</en>
+			<fi>Mäntypikkutukin minimi läpimitta (cm)</fi>
+			<de>Mindestdurchmesser von Kiefernholz (cm)</de>
+			<sv>Tall kubb min diameter</sv>
+			<fr>Diamètre minimum billot court: pin (cm)</fr>
+		</text>
+		<text name="ui_WoodHarvesterMeasurement_pinePulpwoodMinTitle">
+			<en>Pine pulpwood min diameter (cm)</en>
+			<fi>Mäntykuidun minimi läpimitta (cm)</fi>
+			<de>Kiefer-Industrieholz min. Ø (cm)</de>
+			<sv>Barr massa min diameter</sv>
+			<fr>Diamètre minimum pate: pin (cm)</fr>
+		</text>
+		<text name="ui_WoodHarvesterMeasurement_spruceLogMinTitle">
+			<en>Spruce log min diameter (cm)</en>
+			<fi>Kuusitukin minimi läpimitta (cm)</fi>
+			<de>Fichte-Stammholz min. Ø (cm)</de>
+			<sv>Gran timmer min diameter</sv>
+			<fr>Diamètre minimum billot: épicéa (cm)</fr>
+		</text>
+		<text name="ui_WoodHarvesterMeasurement_spruceShortMinTitle">
+			<en>Spruce shortwood min diameter (cm)</en>
+			<fi>Kuusipikkutukin minimi läpimitta (cm)</fi>
+			<de>Mindestdurchmesser von Fichten-Kurzholz (cm)</de>
+			<sv>Gran kubb min diameter</sv>
+			<fr>Diamètre minimum billot court: épicéa (cm)</fr>
+		</text>
+		<text name="ui_WoodHarvesterMeasurement_sprucePulpwoodMinTitle">
+			<en>Spruce pulpwood min diameter (cm)</en>
+			<fi>Kuusikuidun minimi läpimitta</fi>
+			<de>Fichte-Industrieholz min. Ø (cm)</de>
+			<sv>Gran massa min diameter</sv>
+			<fr>Diamètre minimum pate: épicéa (cm)</fr>
+		</text>
+
+		<!-- GUI Harvester INFO/Settings -->
+		<text name="ui_WoodHarvesterMeasurement_hudPositionTitle">
+			<en>HUD</en>
+			<fi>HUD</fi>
+			<de>HUD</de>
+			<sv>HUD</sv>
+			<fr>HUD</fr>
+		</text>
+		<text name="ui_WoodHarvesterMeasurement_hudOffsetTitle">
+			<en>HUD offset</en>
+			<fi>HUD:in offset</fi>
+			<de>HUD-Offset</de>
+			<sv>HUD-Offset</sv>
+			<fr>Décalage du HUD</fr>
+		</text>
+		<text name="ui_WoodHarvesterMeasurement_hudPosCenter">
+			<en>Bottom Center</en>
+			<fi>Alhaalla keskellä</fi>
+			<de>Unten in der Mitte</de>
+			<sv>Nederst i mitten</sv>
+			<fr>En bas au centre</fr>
+		</text>
+		<text name="ui_WoodHarvesterMeasurement_hudPosRight">
+			<en>Bottom Right</en>
+			<fi>Alhaalla oikealla</fi>
+			<de>Unten rechts</de>
+			<sv>Nederst till Höger</sv>
+			<fr>En bas à droite</fr>
+		</text>
+		<text name="ui_WoodHarvesterMeasurement_hudPosHidden">
+			<en>Hidden</en>
+			<fi>Piilotettu</fi>
+			<de>Versteckt</de>
+			<sv>Gömd</sv>
+			<fr>Caché le HUD</fr>
+		</text>
+
+		<!-- Splits-->
+		<text name="ui_WoodHarvesterMeasurement_splitCountPineLogStand">
 			<en>Pine log split count</en>
 			<fi>Mäntytukit</fi>
 			<de>Anzahl des Kiefern-Stammholz</de>
+			<sv>Antal stockar tall timmer</sv>
+			<fr>Nombre fractionné billot: pin</fr>
 		</text>
-		<text name="WOODHARVESTERMEASUREMENT_SPLIT_COUNT_PINE_PULPWOOD_STAND">
+		<text name="ui_WoodHarvesterMeasurement_splitCountPineShortStand">
+			<en>Pine shortwood split count</en>
+			<fi>Mäntypikkutukit</fi>
+			<de>Kiefern-Kurzholz-Spaltanzahl</de>
+			<sv>Antal stockar tall kubb</sv>
+			<fr>Nombre fractionné billot court: pin</fr>
+		</text>
+		<text name="ui_WoodHarvesterMeasurement_splitCountPinePulpwoodStand">
 			<en>Pine pulpwood split count</en>
 			<fi>Mäntykuidut</fi>
 			<de>Anzahl des Kiefern-Industrieholz</de>
+			<sv>Antal stockar barr massa</sv>
+			<fr>Nombre fractionné pate: pin</fr>
 		</text>
-		<text name="WOODHARVESTERMEASUREMENT_SPLIT_COUNT_SPRUCE_LOG_STAND">
+		<text name="ui_WoodHarvesterMeasurement_splitCountSpruceLogStand">
 			<en>Spruce log split count</en>
 			<fi>Kuusitukit</fi>
 			<de>Anzahl des Fichten-Stammholz</de>
+			<sv>Antal stockar gran timmer</sv>
+			<fr>Nombre fractionné billot: épicéa</fr>
 		</text>
-		<text name="WOODHARVESTERMEASUREMENT_SPLIT_COUNT_SPRUCE_PULPWOOD_STAND">
+		<text name="ui_WoodHarvesterMeasurement_splitCountSpruceShortStand">
+			<en>Spruce shortwood split count</en>
+			<fi>Kuusipikkutukit</fi>
+			<de>Fichten-Kurzholzspaltzahl</de>
+			<sv>Antal stockar gran kubb</sv>
+			<fr>Nombre fractionné billot court: épicéa</fr>
+		</text>
+		<text name="ui_WoodHarvesterMeasurement_splitCountSprucePulpwoodStand">
 			<en>Spruce pulpwood split count</en>
 			<fi>Kuusikuidut</fi>
 			<de>Anzahl des Fichten-Industrieholz</de>
+			<sv>Antal stockar gran massa</sv>
+			<fr>Nombre fractionné pate: épicéa</fr>
 		</text>
-		<text name="WOODHARVESTERMEASUREMENT_SPLIT_COUNT_UNKNOWN_LOG_STAND">
-			<en>Unknown log split count</en>
-			<fi>Tuntemattomat tukit</fi>
-			<de>Unsortierte Anzahl an Stammholz</de>
-		</text>
-		<text name="WOODHARVESTERMEASUREMENT_SPLIT_COUNT_UNKNOWN_PULPWOOD_STAND">
-			<en>Unknown pulpwood split count</en>
-			<fi>Tuntemattomat kuidut</fi>
-			<de>Unsortierte Anzahl an Industrieholz</de>
-		</text>
-		<text name="WOODHARVESTERMEASUREMENT_SPLIT_COUNT_STAND">
+		<text name="ui_WoodHarvesterMeasurement_splitCountStand">
 			<en>Total</en>
 			<fi>Yhteensä</fi>
 			<de>Gesamt</de>
+			<sv>Totalt</sv>
+			<fr>Nombre fractionné total</fr>
 		</text>
-		<text name="WOODHARVESTERMEASUREMENT_CUBIC_METRE_PINE_LOG_STAND">
+
+		<!-- Volume-->
+		<text name="ui_WoodHarvesterMeasurement_cubicMetrePineLogStand">
 			<en>Pine log volume</en>
 			<fi>Mäntytukkien tilavuus</fi>
 			<de>FM Kiefern-Stammholz</de>
+			<sv>Tall timmer volym</sv>
+			<fr>Volume billot: pin</fr>
 		</text>
-		<text name="WOODHARVESTERMEASUREMENT_CUBIC_METRE_PINE_PUPWOOD_STAND">
+		<text name="ui_WoodHarvesterMeasurement_cubicMetrePineShortStand">
+			<en>Pine shortwood volume</en>
+			<fi>Mäntypikkutukkien tilavuus</fi>
+			<de>Kiefern-Kurzholzvolumen</de>
+			<sv>Tall kubb volym</sv>
+			<fr>Volume billot court: pin</fr>
+		</text>
+		<text name="ui_WoodHarvesterMeasurement_cubicMetrePinePulpwoodStand">
 			<en>Pine pulpwood volume</en>
 			<fi>Mäntykuitujen tilavuus</fi>
 			<de>FM Kiefern-Industrieholz</de>
+			<sv>Barrmassa volym</sv>
+			<fr>Volume pate: pin</fr>
 		</text>
-		<text name="WOODHARVESTERMEASUREMENT_CUBIC_METRE_SPRUCE_LOG_STAND">
+		<text name="ui_WoodHarvesterMeasurement_cubicMetreSpruceLogStand">
 			<en>Spruce log volume</en>
 			<fi>Kuusitukkien tilavuus</fi>
 			<de>FM Fichten-Stammholz</de>
+			<sv>Gran timmer volym</sv>
+			<fr>Volume billot: épicéa</fr>
 		</text>
-		<text name="WOODHARVESTERMEASUREMENT_CUBIC_METRE_SPRUCE_PUPWOOD_STAND">
+		<text name="ui_WoodHarvesterMeasurement_cubicMetreSpruceShortStand">
+			<en>Spruce shortwood volume</en>
+			<fi>Kuusipikkutukkien tilavuus</fi>
+			<de>Fichten-Kurzholzvolumen</de>
+			<sv>Gran kubb volym</sv>
+			<fr>Volume billot court: épicéa</fr>
+		</text>
+		<text name="ui_WoodHarvesterMeasurement_cubicMetreSprucePulpwoodStand">
 			<en>Spruce pulpwood volume</en>
 			<fi>Kuusikuitujen tilavuus</fi>
 			<de>FM Fichten-Industrieholz</de>
+			<sv>Granmassa volym</sv>
+			<fr>Volume pate: épicéa</fr>
 		</text>
-		<text name="WOODHARVESTERMEASUREMENT_CUBIC_METRE_UNKNOWN_LOG_STAND">
-			<en>Unknown log volume</en>
-			<fi>Tuntemattomien tukkien tilavuus</fi>
-			<de>FM Unsortiertes-Stammholz</de>
-		</text>
-		<text name="WOODHARVESTERMEASUREMENT_CUBIC_METRE_UNKNOWN_PUPWOOD_STAND">
-			<en>Unknown pulpwood volume</en>
-			<fi>Tuntemattomien kuitujen tilavuus</fi>
-			<de>FM Unsortiertes-Industrieholz</de>
-		</text>
-		<text name="WOODHARVESTERMEASUREMENT_CUBIC_METRE_STAND">
+		<text name="ui_WoodHarvesterMeasurement_cubicMetreStand">
 			<en>Total</en>
 			<fi>Yhteensä</fi>
 			<de>Gesamt</de>
+			<sv>Total volym</sv>
+			<fr>Volume total</fr>
 		</text>
 
-		<!-- GUI Controls -->
-		<text name="WOODHARVESTERMEASUREMENT_UNDO">
-			<en>Undo</en>
-			<fi>Peruuta</fi>
-			<de>Rückgängig machen</de>
-		</text>
-		<text name="WOODHARVESTERMEASUREMENT_RESET_TO_DEFAULT">
+		<text name="ui_WoodHarvesterMeasurement_resetDefaults">
 			<en>Reset defaults</en>
 			<fi>Palauta oletusasetukset</fi>
 			<de>Standard</de>
+			<sv>Återställ Standard</sv>
+			<fr>Réinitialiser les valeurs par défaut</fr>
 		</text>
-		<text name="WOODHARVESTERMEASUREMENT_RESET_STAND">
+		<text name="ui_WoodHarvesterMeasurement_resetStand">
 			<en>Reset stand stats</en>
 			<fi>Nollaa leimikon tilastot</fi>
 			<de>Abteilungsstatistik zurücksetzen</de>
+			<sv>Återställ Produktionsöversikt</sv>
+			<fr>Réinitialiser les statistiques de la parcelle</fr>
 		</text>
 
 		<!-- HUD Translations -->

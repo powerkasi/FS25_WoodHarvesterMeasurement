@@ -1,137 +1,288 @@
-<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <GUI onOpen="onOpen" onClose="onClose" onCreate="onCreate">
+  <!-- author powerkasi, DiscoFlower8890-->
+  <Bitmap profile="fs25_fullScreenBackground" id="whc_background" />
+  <!-- menu container -->
+  <GuiElement profile="fs25_menuContainer">
+    <!-- HEADER -->
+    <GuiElement profile="fs25_menuHeaderPanel">
+      <Bitmap profile="fs25_menuHeaderIconBg">
+        <Bitmap profile="fs25_menuHeaderIcon" imageSliceId="gui.icon_options_generalSettings2" />
+      </Bitmap>
+      <Text profile="fs25_menuHeaderTitle" text="$l10n_ui_WoodHarvesterMeasurement_guiTitle" />
+    </GuiElement>
+    
+    <!-- SHIFT SHIM : moves all inner content left by 45px to align with the icon-->
+    <GuiElement position="-45px 0px" size="100% 100%">
+      <!-- BODY AREA -->
+      <BoxLayout profile="fs25_settingsLayout" id="rootLayout"
+        flowDirection="horizontal"
+        spacing="60px"
+        margin="20px 0px 40px 0px"
+        justifyContent="spaceBetween">
 
-	<!-- Screen 2580px 1080px -->
-	<GuiElement type="bitmap" profile="uiElementCenter" position="0px 0px" size="1650px 800px">
-		<GuiElement type="bitmap" profile="uiFullInGameBackground" size="1650px 800px"/>
-		<GuiElement type="empty" profile="ingameMenuFrameHeaderPanel" position="0px 0px" size="1200px 100px">
-			<GuiElement type="text" profile="ingameMenuFrameHeaderText" position="50px 0px" size="1150px 64px" text="$l10n_WOODHARVESTERMEASUREMENT_HEADER" />
-		</GuiElement>
+        <!-- LEFT COLUMN : GLOBAL & HARVESTER SETTINGS -->
+        <GuiElement size="900px 100%" clipLayout="true">
+          <ScrollingLayout profile="fs25_settingsLayout" id="leftPanel">
 
-		<GuiElement type="empty" profile="uiElementCenter" position="0px -14px" size="1650px 628px">
+            <!-- GLOBAL SETTINGS -->
+            <Text profile="fs25_settingsSectionHeader"
+              text="$l10n_ui_WoodHarvesterMeasurement_sectionModSpecific"/>
 
-			<!-- GLOBAL SETTINGS -->
-			<GuiElement type="boxLayout" profile="ingameMenuSettingsLayout" position="50px -0px" size="400px 580px">
-				<GuiElement type="text" profile="sectionHeaderText" size="400px 24px" text="$l10n_WOODHARVESTERMEASUREMENT_GLOBAL_TITLE" />
+            <Bitmap profile="fs25_multiTextOptionContainer">
+              <TextInput profile="fs25_settingsTextInput" id="cutLengthMin"
+                onTextChanged="onCutLengthChanged">
+                <ThreePartBitmap profile="fs25_textInputBg" />
+                <Bitmap profile="fs25_textInputIconBox">
+                    <Bitmap profile="fs25_textInputIcon" />
+                </Bitmap>
+              </TextInput>
+              <Text profile="fs25_settingsMultiTextOptionTitle"
+                text="$l10n_ui_WoodHarvesterMeasurement_cutLengthMinTitle"/>
+            </Bitmap>
 
-				<GuiElement name="cutLengthMin" type="textInput" profile="basicTextInput" onCreate="onCreateSpecTextInput">
-					<GuiElement type="text" profile="basicMultiTextOptionTitle" text="$l10n_WOODHARVESTERMEASUREMENT_CUT_LENGTH_MIN" />
-				</GuiElement>
-				<GuiElement name="cutLengthMax" type="textInput" profile="basicTextInput" onCreate="onCreateSpecTextInput">
-					<GuiElement type="text" profile="basicMultiTextOptionTitle" text="$l10n_WOODHARVESTERMEASUREMENT_CUT_LENGTH_MAX"/>
-				</GuiElement>
-				<GuiElement name="cutLengthStep" type="textInput" profile="basicTextInput" onCreate="onCreateSpecTextInput">
-					<GuiElement type="text" profile="basicMultiTextOptionTitle" text="$l10n_WOODHARVESTERMEASUREMENT_CUT_LENGTH_STEP"/>
-				</GuiElement>
-			</GuiElement>
+            <Bitmap profile="fs25_multiTextOptionContainer">
+              <TextInput profile="fs25_settingsTextInput" id="cutLengthMax"
+                onTextChanged="onCutLengthChanged"
+                imeDescription="$l10n_ui_WoodHarvesterMeasurement_cutLengthMaxTitle">
+                <ThreePartBitmap profile="fs25_textInputBg" />
+                <Bitmap profile="fs25_textInputIconBox">
+                    <Bitmap profile="fs25_textInputIcon" />
+                </Bitmap>
+              </TextInput>
+              <Text profile="fs25_settingsMultiTextOptionTitle"
+                text="$l10n_ui_WoodHarvesterMeasurement_cutLengthMaxTitle"/>
+            </Bitmap>
 
-			<!-- HARVESTER SPECIFIC SETTINGS -->
-			<GuiElement type="boxLayout" profile="ingameMenuSettingsLayout" position="450px 0px" size="400px 580px">
-				<GuiElement type="text" profile="sectionHeaderText" size="400px 24px" text="$l10n_WOODHARVESTERMEASUREMENT_MOD_SETTINGS_TITLE" />
+            <Bitmap profile="fs25_multiTextOptionContainer">
+              <TextInput profile="fs25_settingsTextInput" id="cutLengthStep"
+                onTextChanged="onCutLengthChanged"
+                imeDescription="$l10n_ui_WoodHarvesterMeasurement_cutLengthStepTitle">
+                <ThreePartBitmap profile="fs25_textInputBg" />
+                <Bitmap profile="fs25_textInputIconBox">
+                    <Bitmap profile="fs25_textInputIcon" />
+                </Bitmap>
+              </TextInput>
+              <Text profile="fs25_settingsMultiTextOptionTitle"
+                text="$l10n_ui_WoodHarvesterMeasurement_cutLengthStepTitle"/>
+            </Bitmap>
 
-				<GuiElement name="radiusThresholds.pineLogMinRadius" type="textInput" profile="basicTextInput" onCreate="onCreateTextInput">
-					<GuiElement type="text" profile="basicMultiTextOptionTitle" text="$l10n_WOODHARVESTERMEASUREMENT_PINE_LOG_MIN_DIAMETER"/>
-				</GuiElement>
-				<GuiElement name="radiusThresholds.pinePulpwoodMinRadius" type="textInput" profile="basicTextInput" onCreate="onCreateTextInput">
-					<GuiElement type="text" profile="basicMultiTextOptionTitle" text="$l10n_WOODHARVESTERMEASUREMENT_PINE_PULPWOOD_MIN_DIAMETER"/>
-				</GuiElement>
-				<GuiElement name="radiusThresholds.spruceLogMinRadius" type="textInput" profile="basicTextInput" onCreate="onCreateTextInput">
-					<GuiElement type="text" profile="basicMultiTextOptionTitle" text="$l10n_WOODHARVESTERMEASUREMENT_SPRUCE_LOG_MIN_DIAMETER"/>
-				</GuiElement>
-				<GuiElement name="radiusThresholds.sprucePulpwoodMinRadius" type="textInput" profile="basicTextInput" onCreate="onCreateTextInput">
-					<GuiElement type="text" profile="basicMultiTextOptionTitle" text="$l10n_WOODHARVESTERMEASUREMENT_SPRUCE_PULPWOOD_MIN_DIAMETER" />
-				</GuiElement>
-				<GuiElement name="hudConfigs.position" type="multiTextOption" profile="basicTextInput" onCreate="onCreateMultiTextOption" toolTipElementId="ingameMenuHelpBoxText" toolTipText="">
-					<GuiElement type="button" profile="multiTextOptionLeft" />
-					<GuiElement type="button" profile="multiTextOptionRight" />
-					<GuiElement type="text" profile="multiTextOptionText" size="194px 48px" />
-					<GuiElement type="text" profile="basicMultiTextOptionTitle" text="$l10n_WOODHARVESTERMEASUREMENT_VEHICLE_HUD_POSITION" />
-					<GuiElement type="bitmap" profile="multiTextOptionBg" size="194px 48px" />
-				</GuiElement>
-				<GuiElement name="hudConfigs.offsetX" type="multiTextOption" profile="basicTextInput" onCreate="onCreateMultiTextOption" toolTipElementId="ingameMenuHelpBoxText" toolTipText="">
-					<GuiElement type="button" profile="multiTextOptionLeft" />
-					<GuiElement type="button" profile="multiTextOptionRight" />
-					<GuiElement type="text" profile="multiTextOptionText" size="194px 48px" />
-					<GuiElement type="text" profile="basicMultiTextOptionTitle" text="$l10n_WOODHARVESTERMEASUREMENT_VEHICLE_HUD_OFFSET" />
-					<GuiElement type="bitmap" profile="multiTextOptionBg" size="194px 48px" />
-				</GuiElement>
-			</GuiElement>
+            <!-- SORTMENT SETTINGS -->
+            <Text profile="fs25_settingsSectionHeader"
+              text="$l10n_ui_WoodHarvesterMeasurement_sectionSortment"/>
 
-			<!-- HARVESTTER INFO -->
-			<GuiElement type="boxLayout" profile="ingameMenuSettingsLayout" position="850px 0px" size="350px 580px">
-				<GuiElement name="modTotalStatsText" type="text" profile="sectionHeaderText" size="350px 24px" text="$l10n_WOODHARVESTERMEASUREMENT_STATS_TITLE_TOTAL" />
-				<GuiElement name="idNameModel" type="text" profile="basicTextHarvesterInfo" onCreate="onCreateCustomText">
-					<GuiElement type="text" profile="multiTextOptionTitleHarvester" text="$l10n_WOODHARVESTERMEASUREMENT_VEHICLE_MODEL"/>
-				</GuiElement>
-				<GuiElement name="cubicMetreTotal" type="text" profile="basicTextHarvesterInfo" onCreate="onCreateText">
-					<GuiElement type="text" profile="multiTextOptionTitleHarvester" text="$l10n_WOODHARVESTERMEASUREMENT_CUBIC_METRE_TOTAL"/>
-				</GuiElement>
-			</GuiElement>
+            <Bitmap profile="fs25_multiTextOptionContainer">
+              <TextInput profile="fs25_settingsTextInput" id="pineLogMinRadius"
+                onTextChanged="onRadiusChanged">
+                <ThreePartBitmap profile="fs25_textInputBg" />
+                <Bitmap profile="fs25_textInputIconBox">
+                    <Bitmap profile="fs25_textInputIcon" />
+                </Bitmap>
+              </TextInput>
+              <Text profile="fs25_settingsMultiTextOptionTitle"
+                text="$l10n_ui_WoodHarvesterMeasurement_pineLogMinTitle"/>
+            </Bitmap>
 
-			<!-- STAND STATS -->
-			<GuiElement type="boxLayout" profile="ingameMenuSettingsLayout" position="1200px 100px" size="400px 800px">
-				<GuiElement name="modStandStatsText" type="text" profile="standStatsSectionHeader" size="400px 24px" textWrapWidth="350px" text="$l10n_WOODHARVESTERMEASUREMENT_STATS_TITLE_STAND" />
+            <Bitmap profile="fs25_multiTextOptionContainer">
+              <TextInput profile="fs25_settingsTextInput" id="pineShortMinRadius"
+                onTextChanged="onRadiusChanged">
+                <ThreePartBitmap profile="fs25_textInputBg" />
+                <Bitmap profile="fs25_textInputIconBox">
+                    <Bitmap profile="fs25_textInputIcon" />
+                </Bitmap>
+              </TextInput>
+              <Text profile="fs25_settingsMultiTextOptionTitle"
+                text="$l10n_ui_WoodHarvesterMeasurement_pineShortMinTitle"/>
+            </Bitmap>
 
-				<GuiElement name="currentStand.splitCountPineLogStand" type="text" profile="basicTextStandStats" onCreate="onCreateText">
-					<GuiElement type="text" profile="multiTextOptionTitleStandStats" text="$l10n_WOODHARVESTERMEASUREMENT_SPLIT_COUNT_PINE_LOG_STAND"/>
-				</GuiElement>
-				<GuiElement name="currentStand.splitCountPinePulpwoodStand" type="text" profile="basicTextStandStats" onCreate="onCreateText">
-					<GuiElement type="text" profile="multiTextOptionTitleStandStats" text="$l10n_WOODHARVESTERMEASUREMENT_SPLIT_COUNT_PINE_PULPWOOD_STAND"/>
-				</GuiElement>
-				<GuiElement name="currentStand.splitCountSpruceLogStand" type="text" profile="basicTextStandStats" onCreate="onCreateText">
-					<GuiElement type="text" profile="multiTextOptionTitleStandStats" text="$l10n_WOODHARVESTERMEASUREMENT_SPLIT_COUNT_SPRUCE_LOG_STAND"/>
-				</GuiElement>
-				<GuiElement name="currentStand.splitCountSprucePulpwoodStand" type="text" profile="basicTextStandStats" onCreate="onCreateText">
-					<GuiElement type="text" profile="multiTextOptionTitleStandStats" text="$l10n_WOODHARVESTERMEASUREMENT_SPLIT_COUNT_SPRUCE_PULPWOOD_STAND"/>
-				</GuiElement>
-				<GuiElement name="currentStand.splitCountUnknownLogStand" type="text" profile="basicTextStandStats" onCreate="onCreateText">
-					<GuiElement type="text" profile="multiTextOptionTitleStandStats" text="$l10n_WOODHARVESTERMEASUREMENT_SPLIT_COUNT_UNKNOWN_LOG_STAND"/>
-				</GuiElement>
-				<GuiElement name="currentStand.splitCountUnknownPulpwoodStand" type="text" profile="basicTextStandStats" onCreate="onCreateText">
-					<GuiElement type="text" profile="multiTextOptionTitleStandStats" text="$l10n_WOODHARVESTERMEASUREMENT_SPLIT_COUNT_UNKNOWN_PULPWOOD_STAND"/>
-				</GuiElement>
-				<GuiElement name="currentStand.splitCountStand" type="text" profile="basicTextTotalStandStats" onCreate="onCreateText">
-					<GuiElement type="text" profile="multiTextOptionTitleTotal" text="$l10n_WOODHARVESTERMEASUREMENT_SPLIT_COUNT_STAND"/>
-				</GuiElement>
+            <Bitmap profile="fs25_multiTextOptionContainer">
+              <TextInput profile="fs25_settingsTextInput" id="pinePulpwoodMinRadius"
+                onTextChanged="onRadiusChanged">
+                <ThreePartBitmap profile="fs25_textInputBg" />
+                <Bitmap profile="fs25_textInputIconBox">
+                    <Bitmap profile="fs25_textInputIcon" />
+                </Bitmap>
+              </TextInput>
+              <Text profile="fs25_settingsMultiTextOptionTitle"
+                text="$l10n_ui_WoodHarvesterMeasurement_pinePulpwoodMinTitle"/>
+            </Bitmap>
 
-				<GuiElement name="currentStand.cubicMetrePineLogStand" type="text" profile="basicTextStandStats" onCreate="onCreateText">
-					<GuiElement type="text" profile="multiTextOptionTitleStandStats" text="$l10n_WOODHARVESTERMEASUREMENT_CUBIC_METRE_PINE_LOG_STAND"/>
-				</GuiElement>
-				<GuiElement name="currentStand.cubicMetrePinePulpwoodStand" type="text" profile="basicTextStandStats" onCreate="onCreateText">
-					<GuiElement type="text" profile="multiTextOptionTitleStandStats" text="$l10n_WOODHARVESTERMEASUREMENT_CUBIC_METRE_PINE_PUPWOOD_STAND"/>
-				</GuiElement>
-				<GuiElement name="currentStand.cubicMetreSpruceLogStand" type="text" profile="basicTextStandStats" onCreate="onCreateText">
-					<GuiElement type="text" profile="multiTextOptionTitleStandStats" text="$l10n_WOODHARVESTERMEASUREMENT_CUBIC_METRE_SPRUCE_LOG_STAND"/>
-				</GuiElement>
-				<GuiElement name="currentStand.cubicMetreSprucePulpwoodStand" type="text" profile="basicTextStandStats" onCreate="onCreateText">
-					<GuiElement type="text" profile="multiTextOptionTitleStandStats" text="$l10n_WOODHARVESTERMEASUREMENT_CUBIC_METRE_SPRUCE_PUPWOOD_STAND"/>
-				</GuiElement>
-				<GuiElement name="currentStand.cubicMetreUnknownLogStand" type="text" profile="basicTextStandStats" onCreate="onCreateText">
-					<GuiElement type="text" profile="multiTextOptionTitleStandStats" text="$l10n_WOODHARVESTERMEASUREMENT_CUBIC_METRE_UNKNOWN_LOG_STAND"/>
-				</GuiElement>
-				<GuiElement name="currentStand.cubicMetreUnknownPulpwoodStand" type="text" profile="basicTextStandStats" onCreate="onCreateText">
-					<GuiElement type="text" profile="multiTextOptionTitleStandStats" text="$l10n_WOODHARVESTERMEASUREMENT_CUBIC_METRE_UNKNOWN_PUPWOOD_STAND"/>
-				</GuiElement>
-				<GuiElement name="currentStand.cubicMetreStand" type="text" profile="basicTextTotalStandStats" onCreate="onCreateText">
-					<GuiElement type="text" profile="multiTextOptionTitleTotal" text="$l10n_WOODHARVESTERMEASUREMENT_CUBIC_METRE_STAND"/>
-				</GuiElement>
-			</GuiElement>
+            <Bitmap profile="fs25_multiTextOptionContainer">
+              <TextInput profile="fs25_settingsTextInput" id="spruceLogMinRadius"
+                onTextChanged="onRadiusChanged">
+                <ThreePartBitmap profile="fs25_textInputBg" />
+                <Bitmap profile="fs25_textInputIconBox">
+                    <Bitmap profile="fs25_textInputIcon" />
+                </Bitmap>
+              </TextInput>
+              <Text profile="fs25_settingsMultiTextOptionTitle"
+                text="$l10n_ui_WoodHarvesterMeasurement_spruceLogMinTitle"/>
+            </Bitmap>
 
+            <Bitmap profile="fs25_multiTextOptionContainer">
+              <TextInput profile="fs25_settingsTextInput" id="spruceShortMinRadius"
+                onTextChanged="onRadiusChanged">
+                <ThreePartBitmap profile="fs25_textInputBg" />
+                <Bitmap profile="fs25_textInputIconBox">
+                    <Bitmap profile="fs25_textInputIcon" />
+                </Bitmap>
+              </TextInput>
+              <Text profile="fs25_settingsMultiTextOptionTitle"
+                text="$l10n_ui_WoodHarvesterMeasurement_spruceShortMinTitle"/>
+            </Bitmap>
 
-			<!-- HELP TEXT -->
-			<GuiElement type="bitmap" name="helpElement" profile="ingameMenuHelpRowBg" position="50px -5px 0px 0px" size="1150px 48px" id="ingameMenuHelpBox" visible="false" onCreate="onCreateHelpText">
-				<GuiElement type="bitmap" profile="ingameMenuHelpRowIcon" />
-				<GuiElement type="text" name="helpText" profile="ingameMenuHelpRowText" id="ingameMenuHelpBoxText" text="" onCreate="onCreateHelpText" onTextChanged="onHelpTextChanged"/>
-			</GuiElement>
-		</GuiElement>
+            <Bitmap profile="fs25_multiTextOptionContainer">
+              <TextInput profile="fs25_settingsTextInput" id="sprucePulpwoodMinRadius"
+                onTextChanged="onRadiusChanged">
+                <ThreePartBitmap profile="fs25_textInputBg" />
+                <Bitmap profile="fs25_textInputIconBox">
+                    <Bitmap profile="fs25_textInputIcon" />
+                </Bitmap>
+              </TextInput>
+              <Text profile="fs25_settingsMultiTextOptionTitle"
+                text="$l10n_ui_WoodHarvesterMeasurement_sprucePulpwoodMinTitle"/>
+            </Bitmap>
 
-		<!-- BUTTONS -->
-		<GuiElement type="flowLayout" profile="buttonBoxDocked" position="50px 0px" size="1150px 70px" id="buttonsPC">
-			<GuiElement type="button" profile="buttonBack" text="$l10n_button_back" onClick="onClickBack" id="backButton" />
-			<GuiElement type="button" profile="buttonOK" text="$l10n_button_save" onClick="onClickSave" />
-			<GuiElement type="button" profile="buttonCancel" text="$l10n_WOODHARVESTERMEASUREMENT_UNDO" onClick="onClickUndoButton" />
-			<GuiElement type="button" profile="buttonCancel" text="$l10n_WOODHARVESTERMEASUREMENT_RESET_TO_DEFAULT" onClick="onClickResetDefaultButton" />
-			<GuiElement type="button" profile="buttonCancel" text="$l10n_WOODHARVESTERMEASUREMENT_RESET_STAND" onClick="onClickResetStandStats" />
-		</GuiElement>
-	</GuiElement>
+            <!-- HUD CONFIG -->
+            <Text profile="fs25_settingsSectionHeader"
+              text="$l10n_ui_WoodHarvesterMeasurement_sectionHud"/>
+
+              <Bitmap profile="fs25_multiTextOptionContainer" id="hudPosSettingBox">
+              <MultiTextOption profile="fs25_settingsMultiTextOption"
+                id="hudPositionSetting"
+                onClick="onClickHudPosition">
+              </MultiTextOption>
+              <Text profile="fs25_settingsMultiTextOptionTitle"
+                text="$l10n_ui_WoodHarvesterMeasurement_hudPositionTitle"/>
+            </Bitmap>
+
+            <Bitmap profile="fs25_multiTextOptionContainer" id="hudOffsetSettingBox">
+              <MultiTextOption profile="fs25_settingsMultiTextOption" id="hudOffsetSetting"
+                onClick="onClickHudOffset">
+              </MultiTextOption>
+              <Text profile="fs25_settingsMultiTextOptionTitle"
+                text="$l10n_ui_WoodHarvesterMeasurement_hudOffsetTitle"/>
+            </Bitmap>
+          </ScrollingLayout>
+        </GuiElement>
+
+        <!-- RIGHT COLUMN : STAND STATS -->
+        <GuiElement size="700px 100%" clipLayout="true">
+          <ScrollingLayout profile="fs25_settingsLayout" id="rightPanel">
+            <!-- SPLIT COUNTS -->
+            <Text profile="fs25_settingsSectionHeader"
+              text="$l10n_ui_WoodHarvesterMeasurement_sectionStandStats"/>
+            <Bitmap profile="fs25_multiTextOptionContainer">
+              <Text profile="fs25_settingsMultiTextOptionTitle" 
+                text="$l10n_ui_WoodHarvesterMeasurement_splitCountPineLogStand"/>
+              <Text profile="fs25_settingsMultiTextOptionTitle" id="splitCountPineLogStand" 
+                textAlignment="right"/>
+            </Bitmap>
+            <Bitmap profile="fs25_multiTextOptionContainer">
+              <Text profile="fs25_settingsMultiTextOptionTitle" 
+                text="$l10n_ui_WoodHarvesterMeasurement_splitCountPineShortStand"/>
+              <Text profile="fs25_settingsMultiTextOptionTitle" id="splitCountPineShortStand" 
+                textAlignment="right"/>
+            </Bitmap>
+            <Bitmap profile="fs25_multiTextOptionContainer">
+              <Text profile="fs25_settingsMultiTextOptionTitle" 
+                text="$l10n_ui_WoodHarvesterMeasurement_splitCountPinePulpwoodStand"/>
+              <Text profile="fs25_settingsMultiTextOptionTitle" id="splitCountPinePulpwoodStand" 
+                textAlignment="right"/>
+            </Bitmap>
+            <Bitmap profile="fs25_multiTextOptionContainer">
+              <Text profile="fs25_settingsMultiTextOptionTitle" 
+                text="$l10n_ui_WoodHarvesterMeasurement_splitCountSpruceLogStand"/>
+              <Text profile="fs25_settingsMultiTextOptionTitle" id="splitCountSpruceLogStand" 
+                textAlignment="right"/>
+            </Bitmap>
+            <Bitmap profile="fs25_multiTextOptionContainer">
+              <Text profile="fs25_settingsMultiTextOptionTitle" 
+                text="$l10n_ui_WoodHarvesterMeasurement_splitCountSpruceShortStand"/>
+              <Text profile="fs25_settingsMultiTextOptionTitle" id="splitCountSpruceShortStand" 
+                textAlignment="right"/>
+            </Bitmap>
+            <Bitmap profile="fs25_multiTextOptionContainer">
+              <Text profile="fs25_settingsMultiTextOptionTitle" 
+                text="$l10n_ui_WoodHarvesterMeasurement_splitCountSprucePulpwoodStand"/>
+              <Text profile="fs25_settingsMultiTextOptionTitle" id="splitCountSprucePulpwoodStand" 
+                textAlignment="right"/>
+            </Bitmap>
+
+            <GuiElement size="100% 2px">
+              <Bitmap size="100% 100%" imageFilename="data/shared/white_diffuse.dds" imageColor="0.925 0.937 0.890 1"/>
+            </GuiElement>
+
+            <Bitmap profile="fs25_multiTextOptionContainer">
+              <Text profile="fs25_settingsMultiTextOptionTitle" 
+                text="$l10n_ui_WoodHarvesterMeasurement_splitCountStand"/>
+              <Text profile="fs25_settingsMultiTextOptionTitle" id="splitCountStand" 
+                textAlignment="right"/>
+            </Bitmap>
+
+            <GuiElement size="100% 5px"/>
+
+            <!-- VOLUMES -->
+            <Bitmap profile="fs25_multiTextOptionContainer">
+              <Text profile="fs25_settingsMultiTextOptionTitle" 
+                text="$l10n_ui_WoodHarvesterMeasurement_cubicMetrePineLogStand"/>
+              <Text profile="fs25_settingsMultiTextOptionTitle" id="cubicMetrePineLogStand" 
+                textAlignment="right"/>
+            </Bitmap>
+            <Bitmap profile="fs25_multiTextOptionContainer">
+              <Text profile="fs25_settingsMultiTextOptionTitle" 
+                text="$l10n_ui_WoodHarvesterMeasurement_cubicMetrePineShortStand"/>
+              <Text profile="fs25_settingsMultiTextOptionTitle" id="cubicMetrePineShortStand" 
+                textAlignment="right"/>
+            </Bitmap>
+            <Bitmap profile="fs25_multiTextOptionContainer">
+              <Text profile="fs25_settingsMultiTextOptionTitle" 
+                text="$l10n_ui_WoodHarvesterMeasurement_cubicMetrePinePulpwoodStand"/>
+              <Text profile="fs25_settingsMultiTextOptionTitle" id="cubicMetrePinePulpwoodStand" 
+                textAlignment="right"/>
+            </Bitmap>
+            <Bitmap profile="fs25_multiTextOptionContainer">
+              <Text profile="fs25_settingsMultiTextOptionTitle" 
+                text="$l10n_ui_WoodHarvesterMeasurement_cubicMetreSpruceLogStand"/>
+              <Text profile="fs25_settingsMultiTextOptionTitle" id="cubicMetreSpruceLogStand" 
+                textAlignment="right"/>
+            </Bitmap>
+            <Bitmap profile="fs25_multiTextOptionContainer">
+              <Text profile="fs25_settingsMultiTextOptionTitle" 
+                text="$l10n_ui_WoodHarvesterMeasurement_cubicMetreSpruceShortStand"/>
+              <Text profile="fs25_settingsMultiTextOptionTitle" id="cubicMetreSpruceShortStand" 
+                textAlignment="right"/>
+            </Bitmap>
+            <Bitmap profile="fs25_multiTextOptionContainer">
+              <Text profile="fs25_settingsMultiTextOptionTitle" 
+                text="$l10n_ui_WoodHarvesterMeasurement_cubicMetreSprucePulpwoodStand"/>
+              <Text profile="fs25_settingsMultiTextOptionTitle" id="cubicMetreSprucePulpwoodStand" 
+                textAlignment="right"/>
+            </Bitmap>
+
+            <GuiElement size="100% 2px">
+              <Bitmap size="100% 100%" imageFilename="data/shared/white_diffuse.dds" imageColor="0.925 0.937 0.890 1"/>
+            </GuiElement>
+
+            <Bitmap profile="fs25_multiTextOptionContainer">
+              <Text profile="fs25_settingsMultiTextOptionTitle" 
+                text="$l10n_ui_WoodHarvesterMeasurement_cubicMetreStand"/>
+              <Text profile="fs25_settingsMultiTextOptionTitle" id="cubicMetreStand" 
+                textAlignment="right"/>
+            </Bitmap>
+          </ScrollingLayout>
+        </GuiElement>
+      </BoxLayout>
+    </GuiElement>
+
+    <Bitmap profile="fs25_settingsTooltipSeparator"/>
+  </GuiElement>
+
+  <!-- BUTTONS -->
+  <BoxLayout profile="fs25_buttonBox" id="buttonsPanel">
+    <Button profile="buttonBack" id="backButton" text="$l10n_button_back" onClick="onClickBack"/>
+    <Button profile="buttonOK" id="okButton" text="$l10n_button_save" onClick="onClickSave"/>
+    <Button profile="buttonCancel" text="$l10n_ui_WoodHarvesterMeasurement_resetDefaults" onClick="onClickResetDefaults"/>
+    <Button profile="buttonCancel" text="$l10n_ui_WoodHarvesterMeasurement_resetStand" onClick="onClickResetStand"/>
+  </BoxLayout>
 </GUI>

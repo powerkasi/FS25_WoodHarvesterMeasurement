@@ -1,6 +1,6 @@
 --[[
 	WoodHarvesterMeasurement.lua
-	Author: powerkasi
+	Author: powerkasi, DiscoFlower8890
 ]]
 local modDirectory = g_currentModDirectory
 
@@ -191,17 +191,12 @@ function WoodHarvesterMeasurement:onLoad(savegame)
 	-- GUI
 	if self.isClient then
 		if specWoodHarvesterMeasurement.gui == nil then
-			g_gui:loadProfiles(modDirectory .. "gui/guiProfiles.xml")
 			specWoodHarvesterMeasurement.gui = {}
-			specWoodHarvesterMeasurement.gui["settingController"] = SettingsController.new(nil, nil, self)
+			specWoodHarvesterMeasurement.gui.settingController = SettingsController.new(g_currentModName, self)
 
-			-- Description
-			-- Load a UI screen view's elements from an XML definition.
-			-- Definition
-			-- loadGui(xmlFilename View, name Screen, controller FrameElement, isFrame [optional,)
 			g_gui:loadGui(
 				modDirectory .. "gui/settingsGui.xml",
-				"settingsGui",
+				"WoodHarvesterMeasurement_UI",
 				specWoodHarvesterMeasurement.gui.settingController
 			)
 		end
@@ -221,16 +216,16 @@ function WoodHarvesterMeasurement:onRegisterActionEvents(isActiveForInput)
 		if self:getIsActiveForInput(true) then
 			local _, actionEventId =
 				self:addActionEvent(
-				specWoodHarvesterMeasurement.actionEvents,
-				InputAction.WHM_OPEN_SETTINGS,
-				self,
-				WoodHarvesterMeasurement.actionOpenSettings,
-				false,
-				true,
-				false,
-				true,
-				nil
-			)
+					specWoodHarvesterMeasurement.actionEvents,
+					InputAction.WHM_OPEN_SETTINGS,
+					self,
+					WoodHarvesterMeasurement.actionOpenSettings,
+					false,
+					true,
+					false,
+					true,
+					nil
+				)
 			g_inputBinding:setActionEventTextPriority(actionEventId, GS_PRIO_HIGH)
 			g_inputBinding:setActionEventTextVisibility(actionEventId, true)
 			g_inputBinding:setActionEventActive(actionEventId, false)
@@ -270,22 +265,10 @@ function WoodHarvesterMeasurement:onRegisterActionEvents(isActiveForInput)
 	end
 end
 
-function WoodHarvesterMeasurement.actionOpenSettings(self, actionName, inputValue, callbackState, isAnalog)
-	local specWoodHarvesterMeasurement = self.spec_woodHarvesterMeasurement
-	if specWoodHarvesterMeasurement.gui.settingController ~= nil then
-		if specWoodHarvesterMeasurement.gui.settingController.isOpen then
-			-- Close settings
-			specWoodHarvesterMeasurement.gui.settingController:onClickBack()
-		elseif g_gui.currentGui == nil and specWoodHarvesterMeasurement.gui.settingController.isOpen ~= true then
-			-- Display a screen identified by name.
-			specWoodHarvesterMeasurement.gui["settingController"] = SettingsController.new(nil, nil, self)
-			g_gui:loadGui(
-				modDirectory .. "gui/settingsGui.xml",
-				"settingsGui",
-				specWoodHarvesterMeasurement.gui.settingController
-			)
-			g_gui:showGui("settingsGui")
-		end
+function WoodHarvesterMeasurement.actionOpenSettings(self)
+	local gui = self.spec_woodHarvesterMeasurement.gui
+	if gui ~= nil and gui.settingController ~= nil then
+		g_gui:showDialog("WoodHarvesterMeasurement_UI")
 	end
 end
 
@@ -474,14 +457,14 @@ function WoodHarvesterMeasurement:drawHUD()
 
 	local parent =
 		Card:new(
-		{
-			x = 0.0, -- screen.left
-			y = 0.0, -- screen.bottom
-			width = 1.0, -- fill screen
-			height = 1.0, -- fill screen
-			backgroundOpacity = 0.0
-		}
-	)
+			{
+				x = 0.0, -- screen.left
+				y = 0.0, -- screen.bottom
+				width = 1.0, -- fill screen
+				height = 1.0, -- fill screen
+				backgroundOpacity = 0.0
+			}
+		)
 
 	local containerdW = hudType.width or 0
 	local containerH = hudType.height or 0
@@ -492,97 +475,98 @@ function WoodHarvesterMeasurement:drawHUD()
 		getNormalizedScreenValues(hudType.width * g_gameSettings.uiScale, hudType.height * g_gameSettings.uiScale)
 
 	local hudContainer
-	local speedMeterX, speedMeterY = g_currentMission.hud.speedMeter.gearElement:getPosition()
+	local speedMeterX = g_currentMission.hud.speedMeter.gearIcon.x
+	local speedMeterY = g_currentMission.hud.speedMeter.gearIcon.y
 
 	if hudType == WoodHarvesterMeasurement.hudTypes.bottomCenter then
 		hudContainer =
 			Card:new(
-			{
-				anchors = {
-					horizontalCenter = parent.horizontalCenter,
-					bottom = parent.bottom,
-					bottomMargin = bottomMargin / g_gameSettings.uiScale
-				},
-				width = containerdW,
-				height = containerH,
-				backgroundOpacity = 0.0
-			}
-		)
+				{
+					anchors = {
+						horizontalCenter = parent.horizontalCenter,
+						bottom = parent.bottom,
+						bottomMargin = bottomMargin / g_gameSettings.uiScale
+					},
+					width = containerdW,
+					height = containerH,
+					backgroundOpacity = 0.0
+				}
+			)
 	else
 		hudContainer =
 			Card:new(
-			{
-				anchors = {
-					right = speedMeterX + g_currentMission.hud.speedMeter.gearElement:getWidth(),
-					bottom = speedMeterY + g_currentMission.hud.speedMeter.gearElement:getHeight(),
-					bottomMargin = bottomMargin
-				},
-				width = containerdW,
-				height = containerH,
-				backgroundOpacity = 0.0
-			}
-		)
+				{
+					anchors = {
+						right = speedMeterX + g_currentMission.hud.speedMeter.gearIcon.width,
+						bottom = speedMeterY + g_currentMission.hud.speedMeter.gearIcon.height,
+						bottomMargin = bottomMargin
+					},
+					width = containerdW,
+					height = containerH,
+					backgroundOpacity = 0.0
+				}
+			)
 	end
 
 	local diameterCardW, diameterCardH =
 		getNormalizedScreenValues(
-		hudType.bigCardWidth * g_gameSettings.uiScale,
-		hudType.bigCardheight * g_gameSettings.uiScale
-	)
+			hudType.bigCardWidth * g_gameSettings.uiScale,
+			hudType.bigCardheight * g_gameSettings.uiScale
+		)
 
 	-- Current diameter
 	local diameterCard =
 		Card:new(
-		{
-			anchors = {
-				top = hudContainer.top,
-				right = hudContainer.right
-			},
-			width = diameterCardW,
-			height = diameterCardH,
-			fontSize = self:scalePixelToScreenHeight(32),
-			 --diameterCardH / 2,
-			fontColor = style.fontColor,
-			text = textDiameter,
-			backgroundColor = backgroundColor,
-			backgroundOpacity = backgroundOpacity or 0.3
-		}
-	)
+			{
+				anchors = {
+					top = hudContainer.top,
+					right = hudContainer.right
+				},
+				width = diameterCardW,
+				height = diameterCardH,
+				fontSize = self:scalePixelToScreenHeight(32),
+				--diameterCardH / 2,
+				fontColor = style.fontColor,
+				text = textDiameter,
+				backgroundColor = backgroundColor,
+				backgroundOpacity = backgroundOpacity or 0.3
+			}
+		)
 
 	-- Current length
 	local lengthCard =
 		Card:new(
-		{
-			anchors = {
-				top = diameterCard.top,
-				right = diameterCard.left
-			},
-			width = diameterCard.width,
-			height = diameterCard.height,
-			fontSize = diameterCard.fontSize,
-			fontColor = style.fontColor,
-			text = textLength,
-			backgroundColor = backgroundColor,
-			backgroundOpacity = backgroundOpacity or 0.3
-		}
-	)
+			{
+				anchors = {
+					top = diameterCard.top,
+					right = diameterCard.left
+				},
+				width = diameterCard.width,
+				height = diameterCard.height,
+				fontSize = diameterCard.fontSize,
+				fontColor = style.fontColor,
+				text = textLength,
+				backgroundColor = backgroundColor,
+				backgroundOpacity = backgroundOpacity or 0.3
+			}
+		)
 
 	-- Tree specie card
 	local specieCard =
 		Card:new(
-		{
-			anchors = {
-				top = lengthCard.bottom,
-				left = lengthCard.left
-			},
-			width = diameterCard.width,
-			height = diameterCard.height / 2,
-			fontSize = diameterCard.fontSize / 2,
-			fontColor = style.fontColor,
-			text = specieString,
-			backgroundColor = style.backgroundColor
-		}
-	)
+			{
+				anchors = {
+					top = lengthCard.bottom,
+					left = lengthCard.left
+				},
+				width = diameterCard.width,
+				height = diameterCard.height / 2,
+				fontSize = diameterCard.fontSize / 2,
+				fontColor = style.fontColor,
+				text = specieString,
+				backgroundColor = style.backgroundColor
+			}
+		)
 
 	-- Current tree status
 	local statusCubeMetre, statusLength = 0, 0
@@ -594,21 +578,21 @@ function WoodHarvesterMeasurement:drawHUD()
 
 	local currentTreeStatusCard =
 		Card:new(
-		{
-			anchors = {
-				top = diameterCard.bottom,
-				right = diameterCard.right
-			},
-			width = diameterCard.width,
-			height = diameterCard.height / 2,
-			fontSize = diameterCard.fontSize / 2.5,
-			fontColor = style.fontColor,
-			text = string.format("%.0f", (statusCubeMetre * 1000)) ..
-				"L\n" .. string.format("%.0f", (statusLength * 100)) .. "cm",
-			backgroundColor = style.highlightBackGroundColor,
-			backgroundOpacity = 0.7
-		}
-	)
+			{
+				anchors = {
+					top = diameterCard.bottom,
+					right = diameterCard.right
+				},
+				width = diameterCard.width,
+				height = diameterCard.height / 2,
+				fontSize = diameterCard.fontSize / 2.5,
+				fontColor = style.fontColor,
+				text = string.format("%.0f", (statusCubeMetre * 1000)) ..
+					"L\n" .. string.format("%.0f", (statusLength * 100)) .. "cm",
+				backgroundColor = style.highlightBackGroundColor,
+				backgroundOpacity = 0.7
+			}
+		)
 
 	-- Cutted split cards
 	if currentTree.splitCount > 0 then
@@ -628,24 +612,22 @@ function WoodHarvesterMeasurement:drawHUD()
 			if index >= startIndex then
 				local splitCard =
 					Card:new(
-					{
-						x = previousSplitX,
-						width = cardWidth,
-						height = cardHeight,
-						fontColor = style.fontColor,
-						fontSize = diameterCard.fontSize / cardsPerRow,
-						y = specieCard.y - cardHeight * row,
-						backgroundColor = style.backgroundColor,
-						text = tostring(data.treeType) ..
-							":" ..
-								WoodHarvesterMeasurement.treeTypeToString(self, data.treeType) ..
-									" " ..
-										string.format("%.0f", (data.cubeMetre * 1000)) ..
-											"L\n" ..
-												string.format("%.0f", (data.length * 100)) ..
-													"cm/" .. string.format("%.0f", data.diameter * 1000) .. "mm\n" .. "#" .. tostring(data.n)
-					}
-				)
+						{
+							x = previousSplitX,
+							width = cardWidth,
+							height = cardHeight,
+							fontColor = style.fontColor,
+							fontSize = diameterCard.fontSize / cardsPerRow,
+							y = specieCard.y - cardHeight * row,
+							backgroundColor = style.backgroundColor,
+							text = WoodHarvesterMeasurement.treeTypeToString(self, data.treeType) ..
+								" " ..
+								string.format("%.0f", (data.cubeMetre * 1000)) ..
+								"L\n" ..
+								string.format("%.0f", (data.length * 100)) ..
+								"cm/" .. string.format("%.0f", data.diameter * 1000) .. "mm\n" .. "#" .. tostring(data.n)
+						}
+					)
 
 				cardCounter = cardCounter + 1
 
@@ -916,6 +898,7 @@ function WoodHarvesterMeasurement:setJSONObjectValue(property, value, noEventSen
 		specWoodHarvesterMeasurement[property] = value
 	end
 end
---[[ 
+
+--[[
 	EVENTS END
 ]]
