@@ -217,3 +217,29 @@ function SettingsController:onClickHudPosition(state) end
 function SettingsController:onClickBack()
     g_gui:closeDialogByName("WoodHarvesterMeasurement_UI")
 end
+
+function SettingsController:onClickSyncWHC()
+    local model = self.model
+    if not model then
+        return
+    end
+
+    if model.spec_woodHarvesterControls ~= nil then
+        local whSpec = model.spec_woodHarvester
+
+        local logDia = math.floor((whSpec.bucking[1].minDiameter or 0) * 100)
+        local shortDia = math.floor((whSpec.bucking[2].minDiameter or 0) * 100)
+        local pulpDia = math.floor((whSpec.bucking[3].minDiameter or 0) * 100)
+
+        self.pineLogMinRadius:setText(tostring(logDia))
+        self.pineShortMinRadius:setText(tostring(shortDia))
+        self.pinePulpwoodMinRadius:setText(tostring(pulpDia))
+
+        self.spruceLogMinRadius:setText(tostring(logDia))
+        self.spruceShortMinRadius:setText(tostring(shortDia))
+        self.sprucePulpwoodMinRadius:setText(tostring(pulpDia))
+    else
+        g_gui:closeDialogByName("WoodHarvesterMeasurement_UI")
+        g_currentMission:showBlinkingWarning("Wood Harvester Controls mod not active for savegame!", 2500)
+    end
+end

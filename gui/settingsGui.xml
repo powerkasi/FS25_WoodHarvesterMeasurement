@@ -284,5 +284,6 @@
     <Button profile="buttonOK" id="okButton" text="$l10n_button_save" onClick="onClickSave"/>
     <Button profile="buttonCancel" text="$l10n_ui_WoodHarvesterMeasurement_resetDefaults" onClick="onClickResetDefaults" inputAction="MENU_EXTRA_1"/>
     <Button profile="buttonCancel" text="$l10n_ui_WoodHarvesterMeasurement_resetStand" onClick="onClickResetStand" inputAction="MENU_EXTRA_1"/>
+    <Button profile="buttonCancel" text="$l10n_ui_WoodHarvesterMeasurement_syncWHC" onClick="onClickSyncWHC" inputAction="MENU_ACTIVATE"/>
   </BoxLayout>
 </GUI>

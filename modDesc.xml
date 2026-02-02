@@ -337,6 +337,13 @@ https://github.com/powerkasi/FS25_WoodHarvesterMeasurement/issues
 			<sv>Återställ Produktionsöversikt</sv>
 			<fr>Réinitialiser les statistiques de la parcelle</fr>
 		</text>
+		<text name="ui_WoodHarvesterMeasurement_syncWHC">
+			<en>Synchronize diameters from WHC</en>
+			<fi>Synkronoi läpimitat WHC:stä</fi>
+			<de>Durchmesser mit WHC synchronisieren</de>
+			<sv>Synkronisera diametrar från WHC</sv>
+			<fr>Synchroniser les diamètres depuis WHC</fr>
+		</text>
 
 		<!-- HUD Translations -->
 		<text name="WOODHARVESTERMEASUREMENT_PINE">
