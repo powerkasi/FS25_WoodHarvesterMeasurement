@@ -876,6 +876,7 @@ end
 
 function WoodHarvesterMeasurement:setTreeSpecie(treeSpecie, noEventSend)
 	local specWoodHarvesterMeasurement = self.spec_woodHarvesterMeasurement
+	local spec = self.spec_woodHarvester
 
 	if treeSpecie ~= specWoodHarvesterMeasurement.treeSpecie then
 		if not noEventSend then
@@ -886,19 +887,26 @@ function WoodHarvesterMeasurement:setTreeSpecie(treeSpecie, noEventSend)
 			end
 		end
 
+		local oldSpecie = specWoodHarvesterMeasurement.treeSpecie
 		specWoodHarvesterMeasurement.treeSpecie = treeSpecie
 
-		local currentTree = json.decode(specWoodHarvesterMeasurement.currentTree)
-		if currentTree.splitCount > 0 then
-			-- Change also specie into treeSplits
-			currentTree.specie = specWoodHarvesterMeasurement.treeSpecie
-			self:setJSONObjectValue("currentTree", json.encode(currentTree))
+		-- Only update the currentTree object if its in the head
+		if spec.attachedSplitShape ~= nil then
+			local currentTree = json.decode(specWoodHarvesterMeasurement.currentTree)
+			if currentTree.splitCount > 0 then
+				currentTree.specie = treeSpecie
+				self:setJSONObjectValue("currentTree", json.encode(currentTree))
 
-			-- Change specie for stand
-			local currentStand = Stand:new(json.decode(specWoodHarvesterMeasurement.currentStand))
-			currentStand:changeSpecie(specWoodHarvesterMeasurement.treeSpecie)
-			currentStand:updateLastTree(currentTree, true)
-			self:setJSONObjectValue("currentStand", json.encode(currentStand))
+				-- Change specie for stand
+				local currentStand = Stand:new(json.decode(specWoodHarvesterMeasurement.currentStand))
+				currentStand:changeSpecie(oldSpecie, treeSpecie)
+				currentStand:updateLastTree(currentTree, true)
+				self:setJSONObjectValue("currentStand", json.encode(currentStand))
+			else
+				-- Update species even if no splits yet, so long as we have the tree
+				currentTree.specie = treeSpecie
+				self:setJSONObjectValue("currentTree", json.encode(currentTree))
+			end
 		end
 	end
 end
