@@ -473,7 +473,7 @@ function WoodHarvesterMeasurement:drawHUD()
 
 	local containerdW = hudType.width or 0
 	local containerH = hudType.height or 0
-	local offSetX = parent.height / 2 * (((hudConfigs.offsetX - 1) * 10) / 100)
+	local offSetX = parent.height / 2 * (((hudConfigs.offsetX - HUDOffset.DEFAULT) * 10) / 100)
 	local bottomMargin = self:scalePixelToScreenHeight(hudType.bottomMargin or 0) + offSetX
 
 	containerdW, containerH =
