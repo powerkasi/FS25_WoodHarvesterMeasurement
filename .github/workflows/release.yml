@@ -35,7 +35,7 @@ jobs:
       - name: Create Zip Archive
         if: steps.check_version.outputs.changed == 'true'
         run: |
-          zip -r FS25_WoodHarvesterMeasurement.zip WoodHarvesterMeasurement.lua modDesc.xml Register.lua icon.dds libs/ classes/ events/ gui/ hud/
+          zip -r FS25_WoodHarvesterMeasurement.zip WoodHarvesterMeasurement.lua modDesc.xml Register.lua icon_WHM.dds libs/ classes/ events/ gui/ hud/
           
       - name: Create GitHub Release
         if: steps.check_version.outputs.changed == 'true'
