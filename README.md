@@ -9,6 +9,7 @@ Setting threshold as 0 will ignore the sortment.
 Default keys:
 - ',' = Set tree specie to pine
 - '-' = Set tree specie to spruce
+- 'L' = Toggle between tree species
 - Alt + m = Open settings menu
 
 

@@ -17,6 +17,7 @@ Setting threshold as 0 will ignore the sortment.
 Default keys:
 - ',' = Set tree specie to pine
 - '-' = Set tree specie to spruce
+- 'L' = Toggle between tree species
 - Alt + m = Open settings menu
 
 
@@ -34,6 +35,7 @@ Wird ein Schwellenwert auf 0 gesetzt, wird das jeweilige Sortiment ignoriert.
 Standardtasten:
 - ',' = Baumart auf Kiefer setzen
 - '-' = Baumart auf Fichte setzen
+- 'L' = Zwischen Baumarten wechseln
 - Alt + m = Einstellungen öffnen
 
 Verwenden Sie die folgende Seite, um Fehlerberichte zu veröffentlichen:
@@ -415,7 +417,7 @@ https://github.com/powerkasi/FS25_WoodHarvesterMeasurement/issues
 			<binding device="KB_MOUSE_DEFAULT" input="KEY_slash"/>
 		</actionBinding>
 		<actionBinding action="WHM_TOGGLE_SPECIE">
-			<binding device="KB_MOUSE_DEFAULT" input=""/>
+			<binding device="KB_MOUSE_DEFAULT" input="KEY_l"/>
 		</actionBinding>
 	</inputBinding>
 	
