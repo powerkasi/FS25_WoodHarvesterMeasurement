@@ -66,6 +66,9 @@ function SettingsController:updateEditableValues()
         self.spruceLogMinRadius:setText(tostring(math.floor((thresholds.spruceLogMinRadius or 0) / 0.01)))
         self.spruceShortMinRadius:setText(tostring(math.floor((thresholds.spruceShortMinRadius or 0) / 0.01)))
         self.sprucePulpwoodMinRadius:setText(tostring(math.floor((thresholds.sprucePulpwoodMinRadius or 0) / 0.01)))
+        self.birchLogMinRadius:setText(tostring(math.floor((thresholds.birchLogMinRadius or 0) / 0.01)))
+        self.birchShortMinRadius:setText(tostring(math.floor((thresholds.birchShortMinRadius or 0) / 0.01)))
+        self.birchPulpwoodMinRadius:setText(tostring(math.floor((thresholds.birchPulpwoodMinRadius or 0) / 0.01)))
         self.otherLogMinRadius:setText(tostring(math.floor((thresholds.otherLogMinRadius or 0) / 0.01)))
         self.otherShortMinRadius:setText(tostring(math.floor((thresholds.otherShortMinRadius or 0) / 0.01)))
         self.otherPulpwoodMinRadius:setText(tostring(math.floor((thresholds.otherPulpwoodMinRadius or 0) / 0.01)))
@@ -136,6 +139,9 @@ function SettingsController:onClickSave()
     thresholds.spruceLogMinRadius = (tonumber(self.spruceLogMinRadius:getText()) or 16) * 0.01
     thresholds.spruceShortMinRadius = (tonumber(self.spruceShortMinRadius:getText()) or 10) * 0.01
     thresholds.sprucePulpwoodMinRadius = (tonumber(self.sprucePulpwoodMinRadius:getText()) or 7) * 0.01
+    thresholds.birchLogMinRadius = (tonumber(self.birchLogMinRadius:getText()) or 16) * 0.01
+    thresholds.birchShortMinRadius = (tonumber(self.birchShortMinRadius:getText()) or 10) * 0.01
+    thresholds.birchPulpwoodMinRadius = (tonumber(self.birchPulpwoodMinRadius:getText()) or 7) * 0.01
     thresholds.otherLogMinRadius = (tonumber(self.otherLogMinRadius:getText()) or 16) * 0.01
     thresholds.otherShortMinRadius = (tonumber(self.otherShortMinRadius:getText()) or 10) * 0.01
     thresholds.otherPulpwoodMinRadius = (tonumber(self.otherPulpwoodMinRadius:getText()) or 7) * 0.01
@@ -163,6 +169,9 @@ function SettingsController:onClickResetDefaults()
         self.spruceLogMinRadius:setText(tostring(math.floor(def.spruceLogMinRadius / 0.01)))
         self.spruceShortMinRadius:setText(tostring(math.floor(def.spruceShortMinRadius / 0.01)))
         self.sprucePulpwoodMinRadius:setText(tostring(math.floor(def.sprucePulpwoodMinRadius / 0.01)))
+        self.birchLogMinRadius:setText(tostring(math.floor(def.birchLogMinRadius / 0.01)))
+        self.birchShortMinRadius:setText(tostring(math.floor(def.birchShortMinRadius / 0.01)))
+        self.birchPulpwoodMinRadius:setText(tostring(math.floor(def.birchPulpwoodMinRadius / 0.01)))
         self.otherLogMinRadius:setText(tostring(math.floor(def.otherLogMinRadius / 0.01)))
         self.otherShortMinRadius:setText(tostring(math.floor(def.otherShortMinRadius / 0.01)))
         self.otherPulpwoodMinRadius:setText(tostring(math.floor(def.otherPulpwoodMinRadius / 0.01)))
@@ -194,6 +203,11 @@ function SettingsController:onClickSyncWHC()
         self.spruceLogMinRadius:setText(tostring(logDia))
         self.spruceShortMinRadius:setText(tostring(shortDia))
         self.sprucePulpwoodMinRadius:setText(tostring(pulpDia))
+
+        self.birchLogMinRadius:setText(tostring(logDia))
+        self.birchShortMinRadius:setText(tostring(shortDia))
+        self.birchPulpwoodMinRadius:setText(tostring(pulpDia))
+
         self.otherLogMinRadius:setText(tostring(logDia))
         self.otherShortMinRadius:setText(tostring(shortDia))
         self.otherPulpwoodMinRadius:setText(tostring(pulpDia))

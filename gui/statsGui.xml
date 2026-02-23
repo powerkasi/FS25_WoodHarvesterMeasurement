@@ -59,6 +59,24 @@
 						</Bitmap>
 						<Bitmap profile="fs25_multiTextOptionContainer">
 							<Text profile="fs25_settingsMultiTextOptionTitle"
+								text="$l10n_ui_WoodHarvesterMeasurement_splitCountBirchLogStand" />
+							<Text profile="fs25_settingsMultiTextOptionTitle" id="splitCountBirchLogStand"
+								textAlignment="right" />
+						</Bitmap>
+						<Bitmap profile="fs25_multiTextOptionContainer">
+							<Text profile="fs25_settingsMultiTextOptionTitle"
+								text="$l10n_ui_WoodHarvesterMeasurement_splitCountBirchShortStand" />
+							<Text profile="fs25_settingsMultiTextOptionTitle" id="splitCountBirchShortStand"
+								textAlignment="right" />
+						</Bitmap>
+						<Bitmap profile="fs25_multiTextOptionContainer">
+							<Text profile="fs25_settingsMultiTextOptionTitle"
+								text="$l10n_ui_WoodHarvesterMeasurement_splitCountBirchPulpwoodStand" />
+							<Text profile="fs25_settingsMultiTextOptionTitle" id="splitCountBirchPulpwoodStand"
+								textAlignment="right" />
+						</Bitmap>
+						<Bitmap profile="fs25_multiTextOptionContainer">
+							<Text profile="fs25_settingsMultiTextOptionTitle"
 								text="$l10n_ui_WoodHarvesterMeasurement_splitCountOtherLogStand" />
 							<Text profile="fs25_settingsMultiTextOptionTitle" id="splitCountOtherLogStand"
 								textAlignment="right" />
@@ -126,6 +144,24 @@
 							<Text profile="fs25_settingsMultiTextOptionTitle"
 								text="$l10n_ui_WoodHarvesterMeasurement_cubicMetreSprucePulpwoodStand" />
 							<Text profile="fs25_settingsMultiTextOptionTitle" id="cubicMetreSprucePulpwoodStand"
+								textAlignment="right" />
+						</Bitmap>
+						<Bitmap profile="fs25_multiTextOptionContainer">
+							<Text profile="fs25_settingsMultiTextOptionTitle"
+								text="$l10n_ui_WoodHarvesterMeasurement_cubicMetreBirchLogStand" />
+							<Text profile="fs25_settingsMultiTextOptionTitle" id="cubicMetreBirchLogStand"
+								textAlignment="right" />
+						</Bitmap>
+						<Bitmap profile="fs25_multiTextOptionContainer">
+							<Text profile="fs25_settingsMultiTextOptionTitle"
+								text="$l10n_ui_WoodHarvesterMeasurement_cubicMetreBirchShortStand" />
+							<Text profile="fs25_settingsMultiTextOptionTitle" id="cubicMetreBirchShortStand"
+								textAlignment="right" />
+						</Bitmap>
+						<Bitmap profile="fs25_multiTextOptionContainer">
+							<Text profile="fs25_settingsMultiTextOptionTitle"
+								text="$l10n_ui_WoodHarvesterMeasurement_cubicMetreBirchPulpwoodStand" />
+							<Text profile="fs25_settingsMultiTextOptionTitle" id="cubicMetreBirchPulpwoodStand"
 								textAlignment="right" />
 						</Bitmap>
 						<Bitmap profile="fs25_multiTextOptionContainer">
