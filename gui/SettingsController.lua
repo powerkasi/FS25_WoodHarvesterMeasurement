@@ -212,6 +212,10 @@ function SettingsController:onClickSyncWHC()
         self.otherShortMinRadius:setText(tostring(shortDia))
         self.otherPulpwoodMinRadius:setText(tostring(pulpDia))
     else
-        g_currentMission:showBlinkingWarning("Wood Harvester Controls mod not active!", 2500)
+        local dialog = g_gui:showDialog("InfoDialog")
+        if dialog then
+            dialog.target:setText("Wood Harvester Controls mod not active!")
+            dialog.target:setDialogType(DialogElement.TYPE_INFO)
+        end
     end
 end
