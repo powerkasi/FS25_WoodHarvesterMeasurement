@@ -59,6 +59,31 @@
 					text="$l10n_ui_WoodHarvesterMeasurement_cutLengthStepTitle" />
 			</Bitmap>
 
+			<!-- HUD CONFIG -->
+			<Text profile="fs25_settingsSectionHeader"
+				text="$l10n_ui_WoodHarvesterMeasurement_sectionHud" />
+
+			<Bitmap profile="fs25_multiTextOptionContainer" id="hudPosSettingBox">
+				<MultiTextOption profile="fs25_settingsMultiTextOption"
+					id="hudPositionSetting"
+					onClick="onClickHudPosition">
+					<Text profile="fs25_multiTextOptionTooltip" name="ignore"
+						text="$l10n_ui_WoodHarvesterMeasurement_hudPositionTitleTT" />
+				</MultiTextOption>
+				<Text profile="fs25_settingsMultiTextOptionTitle"
+					text="$l10n_ui_WoodHarvesterMeasurement_hudPositionTitle" />
+			</Bitmap>
+
+			<Bitmap profile="fs25_multiTextOptionContainer" id="hudOffsetSettingBox">
+				<MultiTextOption profile="fs25_settingsMultiTextOption" id="hudOffsetSetting"
+					onClick="onClickHudOffset">
+					<Text profile="fs25_multiTextOptionTooltip" name="ignore"
+						text="$l10n_ui_WoodHarvesterMeasurement_hudOffsetTitleTT" />
+				</MultiTextOption>
+				<Text profile="fs25_settingsMultiTextOptionTitle"
+					text="$l10n_ui_WoodHarvesterMeasurement_hudOffsetTitle" />
+			</Bitmap>
+
 			<!-- SORTMENT SETTINGS -->
 			<Text profile="fs25_settingsSectionHeader"
 				text="$l10n_ui_WoodHarvesterMeasurement_sectionSortment" />
@@ -231,30 +256,6 @@
 					text="$l10n_ui_WoodHarvesterMeasurement_otherPulpwoodMinTitle" />
 			</Bitmap>
 
-			<!-- HUD CONFIG -->
-			<Text profile="fs25_settingsSectionHeader"
-				text="$l10n_ui_WoodHarvesterMeasurement_sectionHud" />
-
-			<Bitmap profile="fs25_multiTextOptionContainer" id="hudPosSettingBox">
-				<MultiTextOption profile="fs25_settingsMultiTextOption"
-					id="hudPositionSetting"
-					onClick="onClickHudPosition">
-					<Text profile="fs25_multiTextOptionTooltip" name="ignore"
-						text="$l10n_ui_WoodHarvesterMeasurement_hudPositionTitleTT" />
-				</MultiTextOption>
-				<Text profile="fs25_settingsMultiTextOptionTitle"
-					text="$l10n_ui_WoodHarvesterMeasurement_hudPositionTitle" />
-			</Bitmap>
-
-			<Bitmap profile="fs25_multiTextOptionContainer" id="hudOffsetSettingBox">
-				<MultiTextOption profile="fs25_settingsMultiTextOption" id="hudOffsetSetting"
-					onClick="onClickHudOffset">
-					<Text profile="fs25_multiTextOptionTooltip" name="ignore"
-						text="$l10n_ui_WoodHarvesterMeasurement_hudOffsetTitleTT" />
-				</MultiTextOption>
-				<Text profile="fs25_settingsMultiTextOptionTitle"
-					text="$l10n_ui_WoodHarvesterMeasurement_hudOffsetTitle" />
-			</Bitmap>
 		</ScrollingLayout>
 		<Bitmap profile="fs25_settingsTooltipSeparator" />
 		<Bitmap profile="fs25_startClipper" name="topClipper" />
