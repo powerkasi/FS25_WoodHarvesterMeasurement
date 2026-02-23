@@ -49,7 +49,7 @@ https://github.com/powerkasi/FS25_WoodHarvesterMeasurement/issues
 	
 	<multiplayer supported="true"/>   
 	<iconFilename>icon_WHM.dds</iconFilename>
-	<version>1.0.4.0</version>
+	<version>1.0.3.0</version>
 	
 	<extraSourceFiles>
 		<sourceFile filename="Register.lua" />
