@@ -58,46 +58,46 @@ https://github.com/powerkasi/FS25_WoodHarvesterMeasurement/issues
 	<l10n>
 		<!-- Action Translations -->
 		<text name="input_WHM_OPEN_SETTINGS">
-			<en>Wood Harvester Measurement: Menu</en>
-			<fi>Wood Harvester Measurement: Valikko</fi>
-			<de>Wood Harvester Measurement: Menü</de>
-			<sv>Wood Harvester Measurement: Meny</sv>
-			<fr>Wood Harvester Measurement: Menu</fr>
+			<en>WHM: Menu</en>
+			<fi>WHM: Valikko</fi>
+			<de>WHM: Menü</de>
+			<sv>WHM: Meny</sv>
+			<fr>WHM: Menu</fr>
 		</text>
 		<text name="input_WHM_SET_TREE_SPECIE_TO_PINE">
-			<en>Wood Harvester Measurement: Tree type to pine</en>
-			<fi>Wood Harvester Measurement: Aseta puulaji mänty</fi>
-			<de>Wood Harvester Measurement: Baumart auf Kiefer stellen</de>
-			<sv>Wood Harvester Measurement: Trädtyp till tall</sv>
-			<fr>Wood Harvester Measurement: Type d'arbre pin</fr>
+			<en>WHM: Tree type to pine</en>
+			<fi>WHM: Aseta puulaji mänty</fi>
+			<de>WHM: Baumart auf Kiefer stellen</de>
+			<sv>WHM: Trädtyp till tall</sv>
+			<fr>WHM: Type d'arbre pin</fr>
 		</text>
 		<text name="input_WHM_SET_TREE_SPECIE_TO_SPRUCE">
-			<en>Wood Harvester Measurement: Tree type to spruce</en>
-			<fi>Wood Harvester Measurement: Aseta puulaji kuusi</fi>
-			<de>Wood Harvester Measurement: Baumart auf Fichte stellen</de>
-			<sv>Wood Harvester Measurement: Trädtyp till gran</sv>
-			<fr>Wood Harvester Measurement: Type d'arbre épicéa,épinette</fr>
+			<en>WHM: Tree type to spruce</en>
+			<fi>WHM: Aseta puulaji kuusi</fi>
+			<de>WHM: Baumart auf Fichte stellen</de>
+			<sv>WHM: Trädtyp till gran</sv>
+			<fr>WHM: Type d'arbre épicéa,épinette</fr>
 		</text>
 		<text name="input_WHM_SET_TREE_SPECIE_TO_BIRCH">
-			<en>Wood Harvester Measurement: Tree type to birch</en>
-			<fi>Wood Harvester Measurement: Aseta puulaji koivu</fi>
-			<de>Wood Harvester Measurement: Baumart auf Birke stellen</de>
-			<sv>Wood Harvester Measurement: Trädtyp till ek</sv>
-			<fr>Wood Harvester Measurement: Type d'arbre bouleau</fr>
+			<en>WHM: Tree type to birch</en>
+			<fi>WHM: Aseta puulaji koivu</fi>
+			<de>WHM: Baumart auf Birke stellen</de>
+			<sv>WHM: Trädtyp till ek</sv>
+			<fr>WHM: Type d'arbre bouleau</fr>
 		</text>
 		<text name="input_WHM_SET_TREE_SPECIE_TO_OTHER">
-			<en>Wood Harvester Measurement: Tree type to other</en>
-			<fi>Wood Harvester Measurement: Aseta puulaji muu</fi>
-			<de>Wood Harvester Measurement: Baumart auf andere stellen</de>
-			<sv>Wood Harvester Measurement: Trädtyp till annan</sv>
-			<fr>Wood Harvester Measurement: Type d'arbre à autre</fr>
+			<en>WHM: Tree type to other</en>
+			<fi>WHM: Aseta puulaji muu</fi>
+			<de>WHM: Baumart auf andere stellen</de>
+			<sv>WHM: Trädtyp till annan</sv>
+			<fr>WHM: Type d'arbre à autre</fr>
 		</text>
 		<text name="input_WHM_TOGGLE_SPECIE">
-			<en>Wood Harvester Measurement: Switch tree type</en>
-			<fi>Wood Harvester Measurement: Vaihda puulaji</fi>
-			<de>Wood Harvester Measurement: Baumtyp wechseln</de>
-			<sv>Wood Harvester Measurement: Byt trädtyp</sv>
-			<fr>Wood Harvester Measurement: Changer le type d'arbre</fr>
+			<en>WHM: Switch tree type</en>
+			<fi>WHM: Vaihda puulaji</fi>
+			<de>WHM: Baumtyp wechseln</de>
+			<sv>WHM: Byt trädtyp</sv>
+			<fr>WHM: Changer le type d'arbre</fr>
 		</text>
 
 		<!-- GUI Translations -->
