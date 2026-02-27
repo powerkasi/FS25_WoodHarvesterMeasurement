@@ -188,13 +188,11 @@ function WoodHarvesterMeasurement:onLoad(savegame)
 	if self.isClient then
 		if g_woodHarvesterMeasurementGUI == nil then
 			g_woodHarvesterMeasurementGUI = {}
-			g_woodHarvesterMeasurementGUI.settingController = SettingsController.new(g_currentModName, self)
+			g_woodHarvesterMeasurementGUI.statsController = StatsController.new(g_currentModName, self)
+			g_woodHarvesterMeasurementGUI.settingsController = SettingsController.new(g_currentModName, self)
 
-			g_gui:loadGui(
-				modDirectory .. "gui/settingsGui.xml",
-				"WoodHarvesterMeasurement_UI",
-				g_woodHarvesterMeasurementGUI.settingController
-			)
+			g_gui:loadGui(modDirectory .. "gui/statsGui.xml", "WoodHarvesterMeasurement_UI", g_woodHarvesterMeasurementGUI.statsController)
+			g_gui:loadGui(modDirectory .. "gui/settingsGui.xml", "WoodHarvesterMeasurement_UI_SETTINGS", g_woodHarvesterMeasurementGUI.settingsController)
 		end
 		specWoodHarvesterMeasurement.gui = g_woodHarvesterMeasurementGUI
 	end
@@ -280,8 +278,7 @@ end
 
 function WoodHarvesterMeasurement.actionOpenSettings(self)
 	local gui = self.spec_woodHarvesterMeasurement.gui
-	if gui ~= nil and gui.settingController ~= nil then
-		gui.settingController.model = self
+	if gui ~= nil and gui.settingsController ~= nil then
 		g_gui:showDialog("WoodHarvesterMeasurement_UI")
 	end
 end

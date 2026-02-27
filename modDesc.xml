@@ -47,7 +47,7 @@ https://github.com/powerkasi/FS25_WoodHarvesterMeasurement/issues
 	
 	<multiplayer supported="true"/>   
 	<iconFilename>icon_WHM.dds</iconFilename>
-	<version>1.0.1.0</version>
+	<version>1.0.2.0</version>
 	
 	<extraSourceFiles>
 		<sourceFile filename="Register.lua" />
@@ -128,6 +128,13 @@ https://github.com/powerkasi/FS25_WoodHarvesterMeasurement/issues
 			<sv>Kap längd min</sv>
 			<fr>Longeur de coupe min (m)</fr>
 		</text>
+		<text name="ui_WoodHarvesterMeasurement_cutLengthMinTitleTT">
+			<en>Minimum length for logs</en>
+			<fi>Vähimmäispituus puiden katkaisuun</fi>
+			<de>Mindestlänge zum Schneiden von Stämmen</de>
+			<sv>Minsta längd för kapning av stockar</sv>
+			<fr>Longueur minimale pour couper les grumes</fr>
+		</text>
 		<text name="ui_WoodHarvesterMeasurement_cutLengthMaxTitle">
 			<en>Cut length max (m)</en>
 			<fi>Maksimi katkaisupituus (m)</fi>
@@ -135,12 +142,26 @@ https://github.com/powerkasi/FS25_WoodHarvesterMeasurement/issues
 			<sv>Kap längd max</sv>
 			<fr>Longeur de coupe max (m)</fr>
 		</text>
+		<text name="ui_WoodHarvesterMeasurement_cutLengthMaxTitleTT">
+			<en>Maximum length for logs</en>
+			<fi>Enimmäispituus puiden katkaisuun</fi>
+			<de>Maximale Länge zum Schneiden von Stämmen</de>
+			<sv>Maximal längd för kapning av stockar</sv>
+			<fr>Longueur maximale pour couper les grumes</fr>
+		</text>
 		<text name="ui_WoodHarvesterMeasurement_cutLengthStepTitle">
 			<en>Cut length step (m)</en>
 			<fi>Katkaisupituuden väli (m)</fi>
 			<de>Schnittlängenschritt (m)</de>
 			<sv>Kap längd steg</sv>
 			<fr>Longueur de coupe par étape</fr>
+		</text>
+		<text name="ui_WoodHarvesterMeasurement_cutLengthStepTitleTT">
+			<en>Increment between minimum and maximum cut lengths</en>
+			<fi>Lisäys minimi- ja maksimikatkaisupituuden välillä</fi>
+			<de>Schrittweite zwischen minimaler und maximaler Schnittlänge</de>
+			<sv>Stegökning mellan minsta och största kaplängd</sv>
+			<fr>Incrément entre les longueurs de coupe minimale et maximale</fr>
 		</text>
 
 		<text name="ui_WoodHarvesterMeasurement_pineLogMinTitle">
@@ -150,12 +171,26 @@ https://github.com/powerkasi/FS25_WoodHarvesterMeasurement/issues
 			<sv>Tall timmer min diameter</sv>
 			<fr>Diamètre minimum billot: pin (cm)</fr>
 		</text>
+		<text name="ui_WoodHarvesterMeasurement_pineLogMinTitleTT">
+			<en>Minimum diameter to classify pine as log</en>
+			<fi>Vähimmäisläpimitta mäntytukin luokitteluun</fi>
+			<de>Mindestdurchmesser zur Klassifizierung von Kiefer als Stammholz</de>
+			<sv>Minsta diameter för klassificering av tall som timmer</sv>
+			<fr>Diamètre minimum pour classer le pin comme bois de billot</fr>
+		</text>
 		<text name="ui_WoodHarvesterMeasurement_pineShortMinTitle">
 			<en>Pine shortwood min diameter (cm)</en>
 			<fi>Mäntypikkutukin minimi läpimitta (cm)</fi>
 			<de>Mindestdurchmesser von Kiefernholz (cm)</de>
 			<sv>Tall kubb min diameter</sv>
 			<fr>Diamètre minimum billot court: pin (cm)</fr>
+		</text>
+		<text name="ui_WoodHarvesterMeasurement_pineShortMinTitleTT">
+			<en>Minimum diameter to classify pine as shortwood</en>
+			<fi>Vähimmäisläpimitta mäntypikkutukin luokitteluun</fi>
+			<de>Mindestdurchmesser zur Klassifizierung von Kiefer als Kurzholz</de>
+			<sv>Minsta diameter för klassificering av tall som kubb</sv>
+			<fr>Diamètre minimum pour classer le pin comme billot court</fr>
 		</text>
 		<text name="ui_WoodHarvesterMeasurement_pinePulpwoodMinTitle">
 			<en>Pine pulpwood min diameter (cm)</en>
@@ -164,12 +199,26 @@ https://github.com/powerkasi/FS25_WoodHarvesterMeasurement/issues
 			<sv>Barr massa min diameter</sv>
 			<fr>Diamètre minimum pate: pin (cm)</fr>
 		</text>
+		<text name="ui_WoodHarvesterMeasurement_pinePulpwoodMinTitleTT">
+			<en>Minimum diameter to classify pine as pulpwood</en>
+			<fi>Vähimmäisläpimitta mäntykuidun luokitteluun</fi>
+			<de>Mindestdurchmesser zur Klassifizierung von Kiefer als Industrieholz</de>
+			<sv>Minsta diameter för klassificering av barr som massa</sv>
+			<fr>Diamètre minimum pour classer le pin comme bois de pâte</fr>
+		</text>
 		<text name="ui_WoodHarvesterMeasurement_spruceLogMinTitle">
 			<en>Spruce log min diameter (cm)</en>
 			<fi>Kuusitukin minimi läpimitta (cm)</fi>
 			<de>Fichte-Stammholz min. Ø (cm)</de>
 			<sv>Gran timmer min diameter</sv>
 			<fr>Diamètre minimum billot: épicéa (cm)</fr>
+		</text>
+		<text name="ui_WoodHarvesterMeasurement_spruceLogMinTitleTT">
+			<en>Minimum diameter to classify spruce as log</en>
+			<fi>Vähimmäisläpimitta kuusitukin luokitteluun</fi>
+			<de>Mindestdurchmesser zur Klassifizierung von Fichte als Stammholz</de>
+			<sv>Minsta diameter för klassificering av gran som timmer</sv>
+			<fr>Diamètre minimum pour classer l'épicéa comme bois de billot</fr>
 		</text>
 		<text name="ui_WoodHarvesterMeasurement_spruceShortMinTitle">
 			<en>Spruce shortwood min diameter (cm)</en>
@@ -178,12 +227,26 @@ https://github.com/powerkasi/FS25_WoodHarvesterMeasurement/issues
 			<sv>Gran kubb min diameter</sv>
 			<fr>Diamètre minimum billot court: épicéa (cm)</fr>
 		</text>
+		<text name="ui_WoodHarvesterMeasurement_spruceShortMinTitleTT">
+			<en>Minimum diameter to classify spruce as shortwood</en>
+			<fi>Vähimmäisläpimitta kuusipikkutukin luokitteluun</fi>
+			<de>Mindestdurchmesser zur Klassifizierung von Fichte als Kurzholz</de>
+			<sv>Minsta diameter för klassificering av gran som kubb</sv>
+			<fr>Diamètre minimum pour classer l'épicéa comme billot court</fr>
+		</text>
 		<text name="ui_WoodHarvesterMeasurement_sprucePulpwoodMinTitle">
 			<en>Spruce pulpwood min diameter (cm)</en>
 			<fi>Kuusikuidun minimi läpimitta</fi>
 			<de>Fichte-Industrieholz min. Ø (cm)</de>
 			<sv>Gran massa min diameter</sv>
 			<fr>Diamètre minimum pate: épicéa (cm)</fr>
+		</text>
+		<text name="ui_WoodHarvesterMeasurement_sprucePulpwoodMinTitleTT">
+			<en>Minimum diameter to classify spruce as pulpwood</en>
+			<fi>Vähimmäisläpimitta kuusikuidun luokitteluun</fi>
+			<de>Mindestdurchmesser zur Klassifizierung von Fichte als Industrieholz</de>
+			<sv>Minsta diameter för klassificering av gran som massa</sv>
+			<fr>Diamètre minimum pour classer l'épicéa comme bois de pâte</fr>
 		</text>
 
 		<!-- GUI Harvester INFO/Settings -->
@@ -194,12 +257,26 @@ https://github.com/powerkasi/FS25_WoodHarvesterMeasurement/issues
 			<sv>HUD</sv>
 			<fr>HUD</fr>
 		</text>
+		<text name="ui_WoodHarvesterMeasurement_hudPositionTitleTT">
+			<en>Choose HUD position: hidden, bottom center, or bottom right</en>
+			<fi>Valitse HUD:in sijainti: piilotettu, alakeskellä tai alaoikealla</fi>
+			<de>HUD-Position wählen: ausgeblendet, unten mittig oder unten rechts</de>
+			<sv>Välj HUD-position: dold, nedre mitten eller nedre höger</sv>
+			<fr>Choisir la position du HUD: caché, en bas au centre ou en bas à droite</fr>
+		</text>
 		<text name="ui_WoodHarvesterMeasurement_hudOffsetTitle">
 			<en>HUD offset</en>
 			<fi>HUD:in offset</fi>
 			<de>HUD-Offset</de>
 			<sv>HUD-Offset</sv>
 			<fr>Décalage du HUD</fr>
+		</text>
+		<text name="ui_WoodHarvesterMeasurement_hudOffsetTitleTT">
+			<en>Adjust vertical position of the HUD display</en>
+			<fi>Säädä HUD-näytön pystysuuntaista sijaintia</fi>
+			<de>Vertikale Position der HUD-Anzeige anpassen</de>
+			<sv>Justera vertikal position för HUD-visningen</sv>
+			<fr>Ajuster la position verticale de l'affichage HUD</fr>
 		</text>
 		<text name="ui_WoodHarvesterMeasurement_hudPosCenter">
 			<en>Bottom Center</en>
@@ -346,7 +423,14 @@ https://github.com/powerkasi/FS25_WoodHarvesterMeasurement/issues
 			<sv>Synkronisera diametrar från WHC</sv>
 			<fr>Synchroniser les diamètres depuis WHC</fr>
 		</text>
-
+		<text name="ui_WoodHarvesterMeasurement_Settings">
+			<en>Settings</en>
+			<fi>Asetukset</fi>
+			<de>Einstellungen</de>
+			<sv>Inställningar</sv>
+			<fr>Paramètres</fr>
+		</text>
+		
 		<!-- HUD Translations -->
 		<text name="WOODHARVESTERMEASUREMENT_PINE">
 			<en>PINE</en>

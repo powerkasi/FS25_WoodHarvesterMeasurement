@@ -16,6 +16,7 @@ source(Utils.getFilename("events/SetCurrentLengthEvent.lua", g_currentModDirecto
 source(Utils.getFilename("events/SetCutOnGoingEvent.lua", g_currentModDirectory))
 source(Utils.getFilename("events/SetJSONObjectEvent.lua", g_currentModDirectory))
 source(Utils.getFilename("events/SetTreeSpecieEvent.lua", g_currentModDirectory))
+source(Utils.getFilename("gui/StatsController.lua", g_currentModDirectory))
 source(Utils.getFilename("gui/SettingsController.lua", g_currentModDirectory))
 source(Utils.getFilename("WoodHarvesterMeasurement.lua", g_currentModDirectory))
 

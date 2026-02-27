@@ -18,22 +18,19 @@ function SettingsController:onOpen()
     SettingsController:superClass().onOpen(self)
     self:initTexts()
     self:applyAlternatingRowColors()
-    self:updateAll()
+    self:updateEditableValues()
 end
 
 function SettingsController:applyAlternatingRowColors()
-    local panels = { self.leftPanel, self.rightPanel }
-
-    for _, panel in ipairs(panels) do
-        if panel and (panel.children or panel.elements) then
-            local childs = panel.children or panel.elements
-            local alternate = false
-            for _, element in ipairs(childs) do
-                if element.setImageColor and element:getIsVisible() then
-                    local r, g, b, a = unpack(SettingsScreen.COLOR_ALTERNATING[alternate])
-                    element:setImageColor(nil, r, g, b, a)
-                    alternate = not alternate
-                end
+    local panel = self.settingsPanel
+    if panel and (panel.children or panel.elements) then
+        local childs = panel.children or panel.elements
+        local alternate = false
+        for _, element in ipairs(childs) do
+            if element.setImageColor and element:getIsVisible() then
+                local r, g, b, a = unpack(SettingsScreen.COLOR_ALTERNATING[alternate])
+                element:setImageColor(nil, r, g, b, a)
+                alternate = not alternate
             end
         end
     end
@@ -48,11 +45,6 @@ function SettingsController:initTexts()
     self.hudOffsetSetting:setTexts({
         "-30", "-20", "-10", "0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"
     })
-end
-
-function SettingsController:updateAll()
-    self:updateEditableValues()
-    self:updateStatsValues()
 end
 
 function SettingsController:updateEditableValues()
@@ -77,48 +69,10 @@ function SettingsController:updateEditableValues()
     end
 
     local hud = json.decode(meas.hudConfigs)
-    self.hudPositionSetting:setState((hud and hud.position) or 1)
-    self.hudOffsetSetting:setState((hud and hud.offsetX) or HUDOffset.DEFAULT)
-end
-
-function SettingsController:updateStatsValues()
-    local model = self.model
-    if model == nil then return end
-    local meas = model.spec_woodHarvesterMeasurement
-
-    -- Stand stats
-    local stand = json.decode(meas.currentStand)
-    local set = function(id, value, suffix)
-        local element = self[id]
-        if element ~= nil then
-            if value then
-                if suffix then
-                    element:setText(string.format("%0.2f%s", value, suffix))
-                else
-                    element:setText(tostring(value))
-                end
-            else
-                element:setText("0")
-            end
-        end
+    if hud then
+        self.hudPositionSetting:setState(hud.position or 1)
+        self.hudOffsetSetting:setState(hud.offsetX or 4)
     end
-
-
-    set("splitCountPineLogStand", stand.splitCountPineLogStand)
-    set("splitCountPineShortStand", stand.splitCountPineShortStand)
-    set("splitCountPinePulpwoodStand", stand.splitCountPinePulpwoodStand)
-    set("splitCountSpruceLogStand", stand.splitCountSpruceLogStand)
-    set("splitCountSpruceShortStand", stand.splitCountSpruceShortStand)
-    set("splitCountSprucePulpwoodStand", stand.splitCountSprucePulpwoodStand)
-    set("splitCountStand", stand.splitCountStand)
-
-    set("cubicMetrePineLogStand", stand.cubicMetrePineLogStand, " m³")
-    set("cubicMetrePineShortStand", stand.cubicMetrePineShortStand, " m³")
-    set("cubicMetrePinePulpwoodStand", stand.cubicMetrePinePulpwoodStand, " m³")
-    set("cubicMetreSpruceLogStand", stand.cubicMetreSpruceLogStand, " m³")
-    set("cubicMetreSpruceShortStand", stand.cubicMetreSpruceShortStand, " m³")
-    set("cubicMetreSprucePulpwoodStand", stand.cubicMetreSprucePulpwoodStand, " m³")
-    set("cubicMetreStand", stand.cubicMetreStand, " m³")
 end
 
 function SettingsController:onCutLengthChanged(element, text)
@@ -186,8 +140,7 @@ function SettingsController:onClickSave()
     hud.offsetX = self.hudOffsetSetting:getState()
     WoodHarvesterMeasurement.setHUDConfigs(model, json.encode(hud))
 
-    self:updateStatsValues()
-    g_gui:closeDialogByName("WoodHarvesterMeasurement_UI")
+    self:close()
 end
 
 function SettingsController:onClickResetDefaults()
@@ -207,15 +160,9 @@ function SettingsController:onClickResetDefaults()
     end
 end
 
-function SettingsController:onClickResetStand()
-    WoodHarvesterMeasurement.resetStand(self.model)
-    self:updateStatsValues()
-end
-
-function SettingsController:onClickHudPosition(state) end
-
 function SettingsController:onClickBack()
-    g_gui:closeDialogByName("WoodHarvesterMeasurement_UI")
+    self:close()
+    g_gui:showDialog("WoodHarvesterMeasurement_UI")
 end
 
 function SettingsController:onClickSyncWHC()
@@ -239,7 +186,10 @@ function SettingsController:onClickSyncWHC()
         self.spruceShortMinRadius:setText(tostring(shortDia))
         self.sprucePulpwoodMinRadius:setText(tostring(pulpDia))
     else
-        g_gui:closeDialogByName("WoodHarvesterMeasurement_UI")
-        g_currentMission:showBlinkingWarning("Wood Harvester Controls mod not active for savegame!", 2500)
+        local dialog = g_gui:showDialog("InfoDialog")
+        if dialog then
+            dialog.target:setText("Wood Harvester Controls mod not active!")
+            dialog.target:setDialogType(DialogElement.TYPE_INFO)
+        end
     end
 end
