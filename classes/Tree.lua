@@ -4,9 +4,10 @@
 ]]
 
 Species = {
-    UNKNOWN = 0,
+    OTHER = 0,
     PINE = 1, -- mänty
-    SPRUCE = 2 -- kuusi
+    SPRUCE = 2, -- kuusi
+    BIRCH = 3 -- koivu
 }
 
 SplitTypes = {
@@ -17,7 +18,7 @@ SplitTypes = {
 }
 
 Tree = {
-    specie = Species.UNKNOWN,
+    specie = Species.OTHER,
     totalCubeMetre = 0,
     totalLength = 0,
     splitCount = 0,
@@ -48,8 +49,10 @@ function Tree.specieToString(specie)
         return "Pine"
     elseif specie == Species.SPRUCE then
         return "Spruce"
+    elseif specie == Species.BIRCH then
+        return "Birch"
     else
-        return "Unknown"
+        return "Other"
     end
 end
 

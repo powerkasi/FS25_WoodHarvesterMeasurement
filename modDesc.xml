@@ -17,6 +17,7 @@ Setting threshold as 0 will ignore the sortment.
 Default keys:
 - ',' = Set tree specie to pine
 - '-' = Set tree specie to spruce
+- ''' = Set tree specie to other
 - 'L' = Toggle between tree species
 - Alt + m = Open settings menu
 
@@ -35,6 +36,7 @@ Wird ein Schwellenwert auf 0 gesetzt, wird das jeweilige Sortiment ignoriert.
 Standardtasten:
 - ',' = Baumart auf Kiefer setzen
 - '-' = Baumart auf Fichte setzen
+- ''' = Baumart auf andere setzen
 - 'L' = Zwischen Baumarten wechseln
 - Alt + m = Einstellungen öffnen
 
@@ -47,7 +49,7 @@ https://github.com/powerkasi/FS25_WoodHarvesterMeasurement/issues
 	
 	<multiplayer supported="true"/>   
 	<iconFilename>icon_WHM.dds</iconFilename>
-	<version>1.0.2.0</version>
+	<version>1.0.3.0</version>
 	
 	<extraSourceFiles>
 		<sourceFile filename="Register.lua" />
@@ -75,6 +77,20 @@ https://github.com/powerkasi/FS25_WoodHarvesterMeasurement/issues
 			<de>Wood Harvester Measurement: Baumart auf Fichte stellen</de>
 			<sv>Wood Harvester Measurement: Trädtyp till gran</sv>
 			<fr>Wood Harvester Measurement: Type d'arbre épicéa,épinette</fr>
+		</text>
+		<text name="input_WHM_SET_TREE_SPECIE_TO_BIRCH">
+			<en>Wood Harvester Measurement: Tree type to birch</en>
+			<fi>Wood Harvester Measurement: Aseta puulaji koivu</fi>
+			<de>Wood Harvester Measurement: Baumart auf Birke stellen</de>
+			<sv>Wood Harvester Measurement: Trädtyp till ek</sv>
+			<fr>Wood Harvester Measurement: Type d'arbre bouleau</fr>
+		</text>
+		<text name="input_WHM_SET_TREE_SPECIE_TO_OTHER">
+			<en>Wood Harvester Measurement: Tree type to other</en>
+			<fi>Wood Harvester Measurement: Aseta puulaji muu</fi>
+			<de>Wood Harvester Measurement: Baumart auf andere stellen</de>
+			<sv>Wood Harvester Measurement: Trädtyp till annan</sv>
+			<fr>Wood Harvester Measurement: Type d'arbre à autre</fr>
 		</text>
 		<text name="input_WHM_TOGGLE_SPECIE">
 			<en>Wood Harvester Measurement: Switch tree type</en>
@@ -248,6 +264,90 @@ https://github.com/powerkasi/FS25_WoodHarvesterMeasurement/issues
 			<sv>Minsta diameter för klassificering av gran som massa</sv>
 			<fr>Diamètre minimum pour classer l'épicéa comme bois de pâte</fr>
 		</text>
+		<text name="ui_WoodHarvesterMeasurement_birchLogMinTitle">
+			<en>Birch log min diameter (cm)</en>
+			<fi>Koivutukin minimi läpimitta (cm)</fi>
+			<de>Birken-Stammholz min. Ø (cm)</de>
+			<sv>Björk timmer min diameter</sv>
+			<fr>Diamètre minimum billot: bouleau (cm)</fr>
+		</text>
+		<text name="ui_WoodHarvesterMeasurement_birchLogMinTitleTT">
+			<en>Minimum diameter to classify birch as log</en>
+			<fi>Vähimmäisläpimitta koivutukin luokitteluun</fi>
+			<de>Mindestdurchmesser zur Klassifizierung von Birke als Stammholz</de>
+			<sv>Minsta diameter för klassificering av björk som timmer</sv>
+			<fr>Diamètre minimum pour classer le bouleau comme bois de billot</fr>
+		</text>
+		<text name="ui_WoodHarvesterMeasurement_birchShortMinTitle">
+			<en>Birch shortwood min diameter (cm)</en>
+			<fi>Koivupikkutukin minimi läpimitta (cm)</fi>
+			<de>Mindestdurchmesser von Birken-Kurzholz (cm)</de>
+			<sv>Björk kubb min diameter</sv>
+			<fr>Diamètre minimum billot court: bouleau (cm)</fr>
+		</text>
+		<text name="ui_WoodHarvesterMeasurement_birchShortMinTitleTT">
+			<en>Minimum diameter to classify birch as shortwood</en>
+			<fi>Vähimmäisläpimitta koivupikkutukin luokitteluun</fi>
+			<de>Mindestdurchmesser zur Klassifizierung von Birke als Kurzholz</de>
+			<sv>Minsta diameter för klassificering av björk som kubb</sv>
+			<fr>Diamètre minimum pour classer le bouleau comme billot court</fr>
+		</text>
+		<text name="ui_WoodHarvesterMeasurement_birchPulpwoodMinTitle">
+			<en>Birch pulpwood min diameter (cm)</en>
+			<fi>Koivukuidun minimi läpimitta (cm)</fi>
+			<de>Birken-Industrieholz min. Ø (cm)</de>
+			<sv>Björk massa min diameter</sv>
+			<fr>Diamètre minimum pate: bouleau (cm)</fr>
+		</text>
+		<text name="ui_WoodHarvesterMeasurement_birchPulpwoodMinTitleTT">
+			<en>Minimum diameter to classify birch as pulpwood</en>
+			<fi>Vähimmäisläpimitta koivukuidun luokitteluun</fi>
+			<de>Mindestdurchmesser zur Klassifizierung von Birke als Industrieholz</de>
+			<sv>Minsta diameter för klassificering av björk som massa</sv>
+			<fr>Diamètre minimum pour classer le bouleau comme bois de pâte</fr>
+		</text>
+		<text name="ui_WoodHarvesterMeasurement_otherLogMinTitle">
+			<en>Other log min diameter (cm)</en>
+			<fi>Muuntukin minimi läpimitta (cm)</fi>
+			<de>Andere-Stammholz min. Ø (cm)</de>
+			<sv>Annan timmer min diameter</sv>
+			<fr>Diamètre minimum billot: autre (cm)</fr>
+		</text>
+		<text name="ui_WoodHarvesterMeasurement_otherLogMinTitleTT">
+			<en>Minimum diameter to classify other as log</en>
+			<fi>Vähimmäisläpimitta muuntukin luokitteluun</fi>
+			<de>Mindestdurchmesser zur Klassifizierung von andere Baum als Stammholz</de>
+			<sv>Minsta diameter för klassificering av annan träd som timmer</sv>
+			<fr>Diamètre minimum pour classer l'autre arbre comme bois de billot</fr>
+		</text>
+		<text name="ui_WoodHarvesterMeasurement_otherShortMinTitle">
+			<en>Other shortwood min diameter (cm)</en>
+			<fi>Muunpikkutukin minimi läpimitta (cm)</fi>
+			<de>Mindestdurchmesser von Andere-Kurzholz (cm)</de>
+			<sv>Annan kubb min diameter</sv>
+			<fr>Diamètre minimum billot court: autre (cm)</fr>
+		</text>
+		<text name="ui_WoodHarvesterMeasurement_otherShortMinTitleTT">
+			<en>Minimum diameter to classify other as shortwood</en>
+			<fi>Vähimmäisläpimitta muunpikkutukin luokitteluun</fi>
+			<de>Mindestdurchmesser zur Klassifizierung von andere Baum als Kurzholz</de>
+			<sv>Minsta diameter för klassificering av annan träd som kubb</sv>
+			<fr>Diamètre minimum pour classer l'autre arbre comme billot court</fr>
+		</text>
+		<text name="ui_WoodHarvesterMeasurement_otherPulpwoodMinTitle">
+			<en>Other pulpwood min diameter (cm)</en>
+			<fi>Muunkuidun minimi läpimitta</fi>
+			<de>Andere-Industrieholz min. Ø (cm)</de>
+			<sv>Annan massa min diameter</sv>
+			<fr>Diamètre minimum pate: autre (cm)</fr>
+		</text>
+		<text name="ui_WoodHarvesterMeasurement_otherPulpwoodMinTitleTT">
+			<en>Minimum diameter to classify other as pulpwood</en>
+			<fi>Vähimmäisläpimitta muunkuidun luokitteluun</fi>
+			<de>Mindestdurchmesser zur Klassifizierung von andere Baum als Industrieholz</de>
+			<sv>Minsta diameter för klassificering av annan träd som massa</sv>
+			<fr>Diamètre minimum pour classer l'autre arbre comme bois de pâte</fr>
+		</text>
 
 		<!-- GUI Harvester INFO/Settings -->
 		<text name="ui_WoodHarvesterMeasurement_hudPositionTitle">
@@ -343,6 +443,48 @@ https://github.com/powerkasi/FS25_WoodHarvesterMeasurement/issues
 			<sv>Antal stockar gran massa</sv>
 			<fr>Nombre fractionné pate: épicéa</fr>
 		</text>
+		<text name="ui_WoodHarvesterMeasurement_splitCountBirchLogStand">
+			<en>Birch log split count</en>
+			<fi>Koivutukit</fi>
+			<de>Anzahl des Birken-Stammholz</de>
+			<sv>Antal stockar björk timmer</sv>
+			<fr>Nombre fractionné billot: bouleau</fr>
+		</text>
+		<text name="ui_WoodHarvesterMeasurement_splitCountBirchShortStand">
+			<en>Birch shortwood split count</en>
+			<fi>Koivupikkutukit</fi>
+			<de>Birken-Kurzholzspaltzahl</de>
+			<sv>Antal stockar björk kubb</sv>
+			<fr>Nombre fractionné billot court: bouleau</fr>
+		</text>
+		<text name="ui_WoodHarvesterMeasurement_splitCountBirchPulpwoodStand">
+			<en>Birch pulpwood split count</en>
+			<fi>Koivukuidut</fi>
+			<de>Anzahl des Birken-Industrieholz</de>
+			<sv>Antal stockar björk massa</sv>
+			<fr>Nombre fractionné pate: bouleau</fr>
+		</text>
+		<text name="ui_WoodHarvesterMeasurement_splitCountOtherLogStand">
+			<en>Other log split count</en>
+			<fi>Muuttukit</fi>
+			<de>Anzahl des Andere-Stammholz</de>
+			<sv>Antal stockar annan timmer</sv>
+			<fr>Nombre fractionné billot: autre</fr>
+		</text>
+		<text name="ui_WoodHarvesterMeasurement_splitCountOtherShortStand">
+			<en>Other shortwood split count</en>
+			<fi>Muutpikkutukit</fi>
+			<de>Andere-Kurzholzspaltzahl</de>
+			<sv>Antal stockar annan kubb</sv>
+			<fr>Nombre fractionné billot court: autre</fr>
+		</text>
+		<text name="ui_WoodHarvesterMeasurement_splitCountOtherPulpwoodStand">
+			<en>Other pulpwood split count</en>
+			<fi>Muutkuidut</fi>
+			<de>Anzahl des Andere-Industrieholz</de>
+			<sv>Antal stockar annan massa</sv>
+			<fr>Nombre fractionné pate: autre</fr>
+		</text>
 		<text name="ui_WoodHarvesterMeasurement_splitCountStand">
 			<en>Total</en>
 			<fi>Yhteensä</fi>
@@ -393,6 +535,48 @@ https://github.com/powerkasi/FS25_WoodHarvesterMeasurement/issues
 			<de>FM Fichten-Industrieholz</de>
 			<sv>Granmassa volym</sv>
 			<fr>Volume pate: épicéa</fr>
+		</text>
+		<text name="ui_WoodHarvesterMeasurement_cubicMetreBirchLogStand">
+			<en>Birch log volume</en>
+			<fi>Koivutukkien tilavuus</fi>
+			<de>FM Birken-Stammholz</de>
+			<sv>Björk timmer volym</sv>
+			<fr>Volume billot: bouleau</fr>
+		</text>
+		<text name="ui_WoodHarvesterMeasurement_cubicMetreBirchShortStand">
+			<en>Birch shortwood volume</en>
+			<fi>Koivupikkutukkien tilavuus</fi>
+			<de>Birken-Kurzholzvolumen</de>
+			<sv>Björk kubb volym</sv>
+			<fr>Volume billot court: bouleau</fr>
+		</text>
+		<text name="ui_WoodHarvesterMeasurement_cubicMetreBirchPulpwoodStand">
+			<en>Birch pulpwood volume</en>
+			<fi>Koivukuitujen tilavuus</fi>
+			<de>FM Birken-Industrieholz</de>
+			<sv>Björk massa volym</sv>
+			<fr>Volume pate: bouleau</fr>
+		</text>
+		<text name="ui_WoodHarvesterMeasurement_cubicMetreOtherLogStand">
+			<en>Other log volume</en>
+			<fi>Muidentukkien tilavuus</fi>
+			<de>FM Andere-Stammholz</de>
+			<sv>Annan timmer volym</sv>
+			<fr>Volume billot: autre</fr>
+		</text>
+		<text name="ui_WoodHarvesterMeasurement_cubicMetreOtherShortStand">
+			<en>Other shortwood volume</en>
+			<fi>Muidenpikkutukkien tilavuus</fi>
+			<de>Andere-Kurzholzvolumen</de>
+			<sv>Annan kubb volym</sv>
+			<fr>Volume billot court: autre</fr>
+		</text>
+		<text name="ui_WoodHarvesterMeasurement_cubicMetreOtherPulpwoodStand">
+			<en>Other pulpwood volume</en>
+			<fi>Muidenkuitujen tilavuus</fi>
+			<de>FM Andere-Industrieholz</de>
+			<sv>Annan massa volym</sv>
+			<fr>Volume pate: autre</fr>
 		</text>
 		<text name="ui_WoodHarvesterMeasurement_cubicMetreStand">
 			<en>Total</en>
@@ -446,12 +630,19 @@ https://github.com/powerkasi/FS25_WoodHarvesterMeasurement/issues
 			<sv>GRAN</sv>
 			<fr>Épicéa</fr>
 		</text>
-		<text name="WOODHARVESTERMEASUREMENT_UNKNOWN_SPECIE">
-			<en>SET TREE TYPE!</en>
-			<fi>ASETA PUULAJI!</fi>
-			<de>BAUMART!</de>
-			<sv>VÄLJ TRÄDTYP!</sv>
-			<fr>DÉFINIR LE TYPE D'ARBRE !</fr>
+		<text name="WOODHARVESTERMEASUREMENT_BIRCH">
+			<en>BIRCH</en>
+			<fi>KOIVU</fi>
+			<de>BIRKE</de>
+			<sv>BJÖRK</sv>
+			<fr>BOULEAU</fr>
+		</text>
+		<text name="WOODHARVESTERMEASUREMENT_OTHER_SPECIE">
+			<en>OTHER</en>
+			<fi>MUU</fi>
+			<de>ANDERE</de>
+			<sv>ANNAN</sv>
+			<fr>AUTRE</fr>
 		</text>
 		<text name="WOODHARVESTERMEASUREMENT_LOG">
 			<en>Log</en>
@@ -487,6 +678,8 @@ https://github.com/powerkasi/FS25_WoodHarvesterMeasurement/issues
 		<action name="WHM_OPEN_SETTINGS" category="VEHICLE" ignoreComboMask="false"/>
 		<action name="WHM_SET_TREE_SPECIE_TO_PINE" category="VEHICLE" ignoreComboMask="false"/>
 		<action name="WHM_SET_TREE_SPECIE_TO_SPRUCE" category="VEHICLE" ignoreComboMask="false"/>
+		<action name="WHM_SET_TREE_SPECIE_TO_BIRCH" category="VEHICLE" ignoreComboMask="false"/>
+		<action name="WHM_SET_TREE_SPECIE_TO_OTHER" category="VEHICLE" ignoreComboMask="false"/>
 		<action name="WHM_TOGGLE_SPECIE" category="VEHICLE" ignoreComboMask="false"/>
 	</actions>
 	
@@ -499,6 +692,12 @@ https://github.com/powerkasi/FS25_WoodHarvesterMeasurement/issues
 		</actionBinding>
 		<actionBinding action="WHM_SET_TREE_SPECIE_TO_SPRUCE">
 			<binding device="KB_MOUSE_DEFAULT" input="KEY_slash"/>
+		</actionBinding>
+		<actionBinding action="WHM_SET_TREE_SPECIE_TO_BIRCH">
+			<binding device="KB_MOUSE_DEFAULT" input="KEY_equals"/>
+		</actionBinding>
+		<actionBinding action="WHM_SET_TREE_SPECIE_TO_OTHER">
+			<binding device="KB_MOUSE_DEFAULT" input="KEY_backslash"/>
 		</actionBinding>
 		<actionBinding action="WHM_TOGGLE_SPECIE">
 			<binding device="KB_MOUSE_DEFAULT" input="KEY_l"/>

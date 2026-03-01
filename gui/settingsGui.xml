@@ -173,12 +173,56 @@
 			</Bitmap>
 
 			<Bitmap profile="fs25_multiTextOptionContainer">
+				<TextInput profile="fs25_settingsTextInput" id="birchLogMinRadius"
+					onTextChanged="onRadiusChanged">
+					<ThreePartBitmap profile="fs25_textInputBg" />
+					<Bitmap profile="fs25_textInputIconBox">
+						<Bitmap profile="fs25_textInputIcon" />
+					</Bitmap>
+					<Text profile="fs25_multiTextOptionTooltip" name="ignore"
+						text="$l10n_ui_WoodHarvesterMeasurement_birchLogMinTitleTT" position="680px 0px"/>
+				</TextInput>
+				<Text profile="fs25_settingsMultiTextOptionTitle"
+					text="$l10n_ui_WoodHarvesterMeasurement_birchLogMinTitle" />
+			</Bitmap>
+
+			<Bitmap profile="fs25_multiTextOptionContainer">
+				<TextInput profile="fs25_settingsTextInput" id="birchShortMinRadius"
+					onTextChanged="onRadiusChanged">
+					<ThreePartBitmap profile="fs25_textInputBg" />
+					<Bitmap profile="fs25_textInputIconBox">
+						<Bitmap profile="fs25_textInputIcon" />
+					</Bitmap>
+					<Text profile="fs25_multiTextOptionTooltip" name="ignore"
+						text="$l10n_ui_WoodHarvesterMeasurement_birchShortMinTitleTT" position="680px 0px"/>
+				</TextInput>
+				<Text profile="fs25_settingsMultiTextOptionTitle"
+					text="$l10n_ui_WoodHarvesterMeasurement_birchShortMinTitle" />
+			</Bitmap>
+
+			<Bitmap profile="fs25_multiTextOptionContainer">
+				<TextInput profile="fs25_settingsTextInput" id="birchPulpwoodMinRadius"
+					onTextChanged="onRadiusChanged">
+					<ThreePartBitmap profile="fs25_textInputBg" />
+					<Bitmap profile="fs25_textInputIconBox">
+						<Bitmap profile="fs25_textInputIcon" />
+					</Bitmap>
+					<Text profile="fs25_multiTextOptionTooltip" name="ignore"
+						text="$l10n_ui_WoodHarvesterMeasurement_birchPulpwoodMinTitleTT" position="680px 0px"/>
+				</TextInput>
+				<Text profile="fs25_settingsMultiTextOptionTitle"
+					text="$l10n_ui_WoodHarvesterMeasurement_birchPulpwoodMinTitle" />
+			</Bitmap>
+
+			<Bitmap profile="fs25_multiTextOptionContainer">
 				<TextInput profile="fs25_settingsTextInput" id="otherLogMinRadius"
 					onTextChanged="onRadiusChanged">
 					<ThreePartBitmap profile="fs25_textInputBg" />
 					<Bitmap profile="fs25_textInputIconBox">
 						<Bitmap profile="fs25_textInputIcon" />
 					</Bitmap>
+					<Text profile="fs25_multiTextOptionTooltip" name="ignore"
+						text="$l10n_ui_WoodHarvesterMeasurement_otherLogMinTitleTT" position="680px 0px"/>
 				</TextInput>
 				<Text profile="fs25_settingsMultiTextOptionTitle"
 					text="$l10n_ui_WoodHarvesterMeasurement_otherLogMinTitle" />
@@ -191,6 +235,8 @@
 					<Bitmap profile="fs25_textInputIconBox">
 						<Bitmap profile="fs25_textInputIcon" />
 					</Bitmap>
+					<Text profile="fs25_multiTextOptionTooltip" name="ignore"
+						text="$l10n_ui_WoodHarvesterMeasurement_otherShortMinTitleTT" position="680px 0px"/>
 				</TextInput>
 				<Text profile="fs25_settingsMultiTextOptionTitle"
 					text="$l10n_ui_WoodHarvesterMeasurement_otherShortMinTitle" />
@@ -203,6 +249,8 @@
 					<Bitmap profile="fs25_textInputIconBox">
 						<Bitmap profile="fs25_textInputIcon" />
 					</Bitmap>
+					<Text profile="fs25_multiTextOptionTooltip" name="ignore"
+						text="$l10n_ui_WoodHarvesterMeasurement_otherPulpwoodMinTitleTT" position="680px 0px"/>
 				</TextInput>
 				<Text profile="fs25_settingsMultiTextOptionTitle"
 					text="$l10n_ui_WoodHarvesterMeasurement_otherPulpwoodMinTitle" />

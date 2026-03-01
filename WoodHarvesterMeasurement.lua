@@ -32,10 +32,13 @@ WoodHarvesterMeasurement.defaultRadiusThresholds =
 			pinePulpwoodMinRadius = 0.06,
 			spruceLogMinRadius = 0.16,
 			spruceShortMinRadius = 0.10,
-			sprucePulpwoodMinRadius = 0.07,
-			fallbackLogMinRadius = 0.16,
-			fallbackShortMinRadius = 0.10,
-			fallbackPulpwoodMinRadius = 0.06
+			sprucePulpwoodMinRadius = 0.06,
+			birchLogMinRadius = 0.16,
+			birchShortMinRadius = 0.10,
+			birchPulpwoodMinRadius = 0.06,
+			otherLogMinRadius = 0.16,
+			otherShortMinRadius = 0.10,
+			otherPulpwoodMinRadius = 0.06
 		}
 	)
 
@@ -133,7 +136,7 @@ function WoodHarvesterMeasurement:onLoad(savegame)
 	specWoodHarvesterMeasurement.currentDiameter = 0
 	specWoodHarvesterMeasurement.currentLength = 0
 	specWoodHarvesterMeasurement.cutOnGoing = false
-	specWoodHarvesterMeasurement.treeSpecie = Species.UNKNOWN
+	specWoodHarvesterMeasurement.treeSpecie = Species.OTHER
 	specWoodHarvesterMeasurement.currentTree = json.encode(Tree:new())
 
 	-- Values only for server side
@@ -260,6 +263,38 @@ function WoodHarvesterMeasurement:onRegisterActionEvents(isActiveForInput)
 			_, actionEventId =
 				self:addActionEvent(
 					specWoodHarvesterMeasurement.actionEvents,
+					InputAction.WHM_SET_TREE_SPECIE_TO_OTHER,
+					self,
+					WoodHarvesterMeasurement.actionEventSetTreeSpecieToOther,
+					false,
+					true,
+					false,
+					true,
+					nil
+				)
+			g_inputBinding:setActionEventTextPriority(actionEventId, GS_PRIO_HIGH)
+			g_inputBinding:setActionEventTextVisibility(actionEventId, true)
+			g_inputBinding:setActionEventActive(actionEventId, false)
+
+			_, actionEventId =
+				self:addActionEvent(
+					specWoodHarvesterMeasurement.actionEvents,
+					InputAction.WHM_SET_TREE_SPECIE_TO_BIRCH,
+					self,
+					WoodHarvesterMeasurement.actionEventSetTreeSpecieToBirch,
+					false,
+					true,
+					false,
+					true,
+					nil
+				)
+			g_inputBinding:setActionEventTextPriority(actionEventId, GS_PRIO_HIGH)
+			g_inputBinding:setActionEventTextVisibility(actionEventId, true)
+			g_inputBinding:setActionEventActive(actionEventId, false)
+
+			_, actionEventId =
+				self:addActionEvent(
+					specWoodHarvesterMeasurement.actionEvents,
 					InputAction.WHM_TOGGLE_SPECIE,
 					self,
 					WoodHarvesterMeasurement.actionEventToggleTreeSpecie,
@@ -305,12 +340,26 @@ function WoodHarvesterMeasurement.actionEventSetTreeSpecieToSpruce(self, actionN
 	self:setTreeSpecie(Species.SPRUCE)
 end
 
+function WoodHarvesterMeasurement.actionEventSetTreeSpecieToBirch(self, actionName, inputValue, callbackState, isAnalog)
+	local specWoodHarvesterMeasurement = self.spec_woodHarvesterMeasurement
+	self:setTreeSpecie(Species.BIRCH)
+end
+
+function WoodHarvesterMeasurement.actionEventSetTreeSpecieToOther(self, actionName, inputValue, callbackState, isAnalog)
+	local specWoodHarvesterMeasurement = self.spec_woodHarvesterMeasurement
+	self:setTreeSpecie(Species.OTHER)
+end
+
 function WoodHarvesterMeasurement.actionEventToggleTreeSpecie(self, actionName, inputValue, callbackState, isAnalog)
 	local specWoodHarvesterMeasurement = self.spec_woodHarvesterMeasurement
-	if specWoodHarvesterMeasurement.treeSpecie == Species.SPRUCE then
+	if specWoodHarvesterMeasurement.treeSpecie == Species.OTHER then
 		self:setTreeSpecie(Species.PINE)
-	else
+	elseif specWoodHarvesterMeasurement.treeSpecie == Species.PINE then
 		self:setTreeSpecie(Species.SPRUCE)
+	elseif specWoodHarvesterMeasurement.treeSpecie == Species.SPRUCE then
+		self:setTreeSpecie(Species.BIRCH)
+	else
+		self:setTreeSpecie(Species.OTHER)
 	end
 end
 
@@ -404,13 +453,24 @@ function WoodHarvesterMeasurement:addNewSplit(length, averageRadius)
 			-- but then if you feed the tree through without cutting it will display the warning so eh
 			treeType = SplitTypes.UNKNOWN
 		end
-	else
-		g_currentMission:showBlinkingWarning("Select a species first!")
-		if spec.lastDiameter >= radiusThresholds.fallbackLogMinRadius then
+	elseif specWoodHarvesterMeasurement.treeSpecie == Species.BIRCH then
+		if spec.lastDiameter >= radiusThresholds.birchLogMinRadius and radiusThresholds.birchLogMinRadius ~= 0 then
 			treeType = SplitTypes.LOG
-		elseif spec.lastDiameter >= radiusThresholds.fallbackShortMinRadius then
+		elseif spec.lastDiameter >= radiusThresholds.birchShortMinRadius and radiusThresholds.birchShortMinRadius ~= 0 then
 			treeType = SplitTypes.SHORTWOOD
-		elseif spec.lastDiameter >= radiusThresholds.fallbackPulpwoodMinRadius then
+		elseif spec.lastDiameter >= radiusThresholds.birchPulpwoodMinRadius and radiusThresholds.birchPulpwoodMinRadius ~= 0 then
+			treeType = SplitTypes.PULPWOOD
+		else
+			-- These don't get saved anywhere anymore so having a warning might be good
+			-- but then if you feed the tree through without cutting it will display the warning so eh
+			treeType = SplitTypes.UNKNOWN
+		end
+	else
+		if spec.lastDiameter >= radiusThresholds.otherLogMinRadius and radiusThresholds.otherLogMinRadius ~= 0 then
+			treeType = SplitTypes.LOG
+		elseif spec.lastDiameter >= radiusThresholds.otherShortMinRadius and radiusThresholds.otherShortMinRadius ~= 0 then
+			treeType = SplitTypes.SHORTWOOD
+		elseif spec.lastDiameter >= radiusThresholds.otherPulpwoodMinRadius and radiusThresholds.otherPulpwoodMinRadius ~= 0 then
 			treeType = SplitTypes.PULPWOOD
 		else
 			treeType = SplitTypes.UNKNOWN
@@ -481,6 +541,10 @@ function WoodHarvesterMeasurement:drawHUD()
 			backgroundColor = style.pineBackgroundColor
 		elseif specWoodHarvesterMeasurement.treeSpecie == Species.SPRUCE then
 			backgroundColor = style.spruceBackgroundColor
+		elseif specWoodHarvesterMeasurement.treeSpecie == Species.BIRCH then
+			backgroundColor = style.birchBackgroundColor
+		elseif specWoodHarvesterMeasurement.treeSpecie == Species.OTHER then
+			backgroundColor = style.otherBackgroundColor
 		else
 			backgroundColor = Colors.RED
 		end
@@ -700,6 +764,18 @@ function WoodHarvesterMeasurement:onDraw()
 		g_inputBinding:setActionEventText(actionEvent.actionEventId, g_i18n:getText("input_WHM_SET_TREE_SPECIE_TO_SPRUCE"))
 	end
 
+	actionEvent = specWoodHarvesterMeasurement.actionEvents[InputAction.WHM_SET_TREE_SPECIE_TO_BIRCH]
+	if actionEvent ~= nil then
+		g_inputBinding:setActionEventActive(actionEvent.actionEventId, true)
+		g_inputBinding:setActionEventText(actionEvent.actionEventId, g_i18n:getText("input_WHM_SET_TREE_SPECIE_TO_BIRCH"))
+	end
+
+	actionEvent = specWoodHarvesterMeasurement.actionEvents[InputAction.WHM_SET_TREE_SPECIE_TO_OTHER]
+	if actionEvent ~= nil then
+		g_inputBinding:setActionEventActive(actionEvent.actionEventId, true)
+		g_inputBinding:setActionEventText(actionEvent.actionEventId, g_i18n:getText("input_WHM_SET_TREE_SPECIE_TO_OTHER"))
+	end
+
 	actionEvent = specWoodHarvesterMeasurement.actionEvents[InputAction.WHM_TOGGLE_SPECIE]
 	if actionEvent ~= nil then
 		g_inputBinding:setActionEventActive(actionEvent.actionEventId, true)
@@ -716,8 +792,10 @@ function WoodHarvesterMeasurement.treeSpecieToString(self, treeSpecie)
 		return g_i18n:getText("WOODHARVESTERMEASUREMENT_PINE")
 	elseif treeSpecie == Species.SPRUCE then
 		return g_i18n:getText("WOODHARVESTERMEASUREMENT_SPRUCE")
+	elseif treeSpecie == Species.BIRCH then
+		return g_i18n:getText("WOODHARVESTERMEASUREMENT_BIRCH")
 	else
-		return g_i18n:getText("WOODHARVESTERMEASUREMENT_UNKNOWN_SPECIE")
+		return g_i18n:getText("WOODHARVESTERMEASUREMENT_OTHER_SPECIE")
 	end
 end
 

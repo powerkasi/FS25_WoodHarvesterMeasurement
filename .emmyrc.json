@@ -1,0 +1,15 @@
+{
+  "diagnostics": {
+    "disable": [
+      "need-check-nil",
+      "invert-if",
+      "unnecessary-if",
+      "assign-type-mismatch",
+      "need-check-nil",
+      "undefined-field",
+      "invert-if",
+      "inject-field",
+      "param-type-mismatch"
+    ]
+  }
+}
