@@ -314,6 +314,8 @@ end
 function WoodHarvesterMeasurement.actionOpenSettings(self)
 	local gui = self.spec_woodHarvesterMeasurement.gui
 	if gui ~= nil and gui.settingsController ~= nil then
+		gui.settingsController.model = self
+		gui.statsController.model = self
 		g_gui:showDialog("WoodHarvesterMeasurement_UI")
 	end
 end
