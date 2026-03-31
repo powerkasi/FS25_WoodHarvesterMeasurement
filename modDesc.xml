@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no" ?>
-<modDesc descVersion="105">
+<modDesc descVersion="107">
 	<author>powerkasi, DiscoFlower8890</author>
     
 	<title>
@@ -49,7 +49,7 @@ https://github.com/powerkasi/FS25_WoodHarvesterMeasurement/issues
 	
 	<multiplayer supported="true"/>   
 	<iconFilename>icon_WHM.dds</iconFilename>
-	<version>1.0.3.2</version>
+	<version>1.0.4.0</version>
 	
 	<extraSourceFiles>
 		<sourceFile filename="Register.lua" />
