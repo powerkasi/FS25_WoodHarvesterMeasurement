@@ -139,6 +139,9 @@ function WoodHarvesterMeasurement:onLoad(savegame)
 	specWoodHarvesterMeasurement.treeSpecie = Species.OTHER
 	specWoodHarvesterMeasurement.currentTree = json.encode(Tree:new())
 
+	specWoodHarvesterMeasurement.overrideShort = false
+	specWoodHarvesterMeasurement.overridePulp = false
+
 	-- Values only for server side
 	specWoodHarvesterMeasurement.previousCutRadius = 0
 	specWoodHarvesterMeasurement.previousCutY = 0
@@ -283,6 +286,38 @@ function WoodHarvesterMeasurement:onRegisterActionEvents(isActiveForInput)
 			_, actionEventId =
 				self:addActionEvent(
 					specWoodHarvesterMeasurement.actionEvents,
+					InputAction.WHM_OVERRIDE_SHORT,
+					self,
+					WoodHarvesterMeasurement.actionEventForceShortwood,
+					false,
+					true,
+					false,
+					true,
+					nil
+				)
+			g_inputBinding:setActionEventTextPriority(actionEventId, GS_PRIO_HIGH)
+			g_inputBinding:setActionEventTextVisibility(actionEventId, true)
+			g_inputBinding:setActionEventActive(actionEventId, false)
+
+			_, actionEventId =
+				self:addActionEvent(
+					specWoodHarvesterMeasurement.actionEvents,
+					InputAction.WHM_OVERRIDE_PULP,
+					self,
+					WoodHarvesterMeasurement.actionEventForcePulp,
+					false,
+					true,
+					false,
+					true,
+					nil
+				)
+			g_inputBinding:setActionEventTextPriority(actionEventId, GS_PRIO_HIGH)
+			g_inputBinding:setActionEventTextVisibility(actionEventId, true)
+			g_inputBinding:setActionEventActive(actionEventId, false)
+
+			_, actionEventId =
+				self:addActionEvent(
+					specWoodHarvesterMeasurement.actionEvents,
 					InputAction.WHM_SET_TREE_SPECIE_TO_BIRCH,
 					self,
 					WoodHarvesterMeasurement.actionEventSetTreeSpecieToBirch,
@@ -356,6 +391,18 @@ function WoodHarvesterMeasurement.actionEventSetTreeSpecieToOther(self, actionNa
 	self:setTreeSpecie(Species.OTHER)
 end
 
+function WoodHarvesterMeasurement.actionEventForceShortwood(self, actionName, inputValue, callbackState, isAnalog)
+	local spec = self.spec_woodHarvesterMeasurement
+	spec.overrideShort = not spec.overrideShort
+	spec.overridePulp = false
+end
+
+function WoodHarvesterMeasurement.actionEventForcePulp(self, actionName, inputValue, callbackState, isAnalog)
+	local spec = self.spec_woodHarvesterMeasurement
+	spec.overridePulp = not spec.overridePulp
+	spec.overrideShort = false
+end
+
 function WoodHarvesterMeasurement.actionEventToggleTreeSpecie(self, actionName, inputValue, callbackState, isAnalog)
 	local specWoodHarvesterMeasurement = self.spec_woodHarvesterMeasurement
 	if specWoodHarvesterMeasurement.treeSpecie == Species.OTHER then
@@ -421,62 +468,58 @@ function WoodHarvesterMeasurement:onCutTree(radius)
 
 		self:setCurrentLength(0)
 		self:setCutOnGoing(false)
+		specWoodHarvesterMeasurement.overrideShort = false
+		specWoodHarvesterMeasurement.overridePulp = false
 	end
 end
 
 function WoodHarvesterMeasurement:addNewSplit(length, averageRadius)
 	local spec = self.spec_woodHarvester
-	local specWoodHarvesterMeasurement = self.spec_woodHarvesterMeasurement
+	local specWHM = self.spec_woodHarvesterMeasurement
 
 	local cubeMetre = (math.pi * math.pow(averageRadius, 2) * length)
-	self:setCubicMetreTotal(specWoodHarvesterMeasurement.cubicMetreTotal + cubeMetre)
+	self:setCubicMetreTotal(specWHM.cubicMetreTotal + cubeMetre)
 
 	local treeType
-	local radiusThresholds = json.decode(specWoodHarvesterMeasurement.radiusThresholds)
+	local radiusThresholds = json.decode(specWHM.radiusThresholds)
 
 	-- Pine
-	if specWoodHarvesterMeasurement.treeSpecie == Species.PINE then
-		if spec.lastDiameter >= radiusThresholds.pineLogMinRadius and radiusThresholds.pineLogMinRadius ~= 0 then -- Setting 0 will now ignore the type
+	if specWHM.treeSpecie == Species.PINE then
+		if (spec.lastDiameter >= radiusThresholds.pineLogMinRadius and radiusThresholds.pineLogMinRadius ~= 0) and specWHM.overridePulp == false and specWHM.overrideShort == false then
 			treeType = SplitTypes.LOG
-		elseif spec.lastDiameter >= radiusThresholds.pineShortMinRadius and radiusThresholds.pineShortMinRadius ~= 0 then
+		elseif (spec.lastDiameter >= radiusThresholds.pineShortMinRadius and radiusThresholds.pineShortMinRadius ~= 0 and specWHM.overridePulp == false) or specWHM.overrideShort == true then
 			treeType = SplitTypes.SHORTWOOD
-		elseif spec.lastDiameter >= radiusThresholds.pinePulpwoodMinRadius and radiusThresholds.pinePulpwoodMinRadius ~= 0 then
+		elseif (spec.lastDiameter >= radiusThresholds.pinePulpwoodMinRadius and radiusThresholds.pinePulpwoodMinRadius ~= 0 and specWHM.overrideShort == false) or specWHM.overridePulp == true then
 			treeType = SplitTypes.PULPWOOD
 		else
-			-- These don't get saved anywhere anymore so having a warning might be good
-			-- but then if you feed the tree through without cutting it will display the warning so eh
 			treeType = SplitTypes.UNKNOWN
 		end
-	elseif specWoodHarvesterMeasurement.treeSpecie == Species.SPRUCE then
-		if spec.lastDiameter >= radiusThresholds.spruceLogMinRadius and radiusThresholds.spruceLogMinRadius ~= 0 then -- Setting 0 will now ignore the type
+	elseif specWHM.treeSpecie == Species.SPRUCE then
+		if (spec.lastDiameter >= radiusThresholds.spruceLogMinRadius and radiusThresholds.spruceLogMinRadius ~= 0) and specWHM.overridePulp == false and specWHM.overrideShort == false then
 			treeType = SplitTypes.LOG
-		elseif spec.lastDiameter >= radiusThresholds.spruceShortMinRadius and radiusThresholds.spruceShortMinRadius ~= 0 then
+		elseif (spec.lastDiameter >= radiusThresholds.spruceShortMinRadius and radiusThresholds.spruceShortMinRadius ~= 0 and specWHM.overridePulp == false) or specWHM.overrideShort == true then
 			treeType = SplitTypes.SHORTWOOD
-		elseif spec.lastDiameter >= radiusThresholds.sprucePulpwoodMinRadius and radiusThresholds.sprucePulpwoodMinRadius ~= 0 then
+		elseif (spec.lastDiameter >= radiusThresholds.sprucePulpwoodMinRadius and radiusThresholds.sprucePulpwoodMinRadius ~= 0 and specWHM.overrideShort == false) or specWHM.overridePulp == true then
 			treeType = SplitTypes.PULPWOOD
 		else
-			-- These don't get saved anywhere anymore so having a warning might be good
-			-- but then if you feed the tree through without cutting it will display the warning so eh
 			treeType = SplitTypes.UNKNOWN
 		end
-	elseif specWoodHarvesterMeasurement.treeSpecie == Species.BIRCH then
-		if spec.lastDiameter >= radiusThresholds.birchLogMinRadius and radiusThresholds.birchLogMinRadius ~= 0 then
+	elseif specWHM.treeSpecie == Species.BIRCH then
+		if (spec.lastDiameter >= radiusThresholds.birchLogMinRadius and radiusThresholds.birchLogMinRadius ~= 0) and specWHM.overridePulp == false and specWHM.overrideShort == false then
 			treeType = SplitTypes.LOG
-		elseif spec.lastDiameter >= radiusThresholds.birchShortMinRadius and radiusThresholds.birchShortMinRadius ~= 0 then
+		elseif (spec.lastDiameter >= radiusThresholds.birchShortMinRadius and radiusThresholds.birchShortMinRadius ~= 0 and specWHM.overridePulp == false) or specWHM.overrideShort == true then
 			treeType = SplitTypes.SHORTWOOD
-		elseif spec.lastDiameter >= radiusThresholds.birchPulpwoodMinRadius and radiusThresholds.birchPulpwoodMinRadius ~= 0 then
+		elseif (spec.lastDiameter >= radiusThresholds.birchPulpwoodMinRadius and radiusThresholds.birchPulpwoodMinRadius ~= 0 and specWHM.overrideShort == false) or specWHM.overridePulp == true then
 			treeType = SplitTypes.PULPWOOD
 		else
-			-- These don't get saved anywhere anymore so having a warning might be good
-			-- but then if you feed the tree through without cutting it will display the warning so eh
 			treeType = SplitTypes.UNKNOWN
 		end
 	else
-		if spec.lastDiameter >= radiusThresholds.otherLogMinRadius and radiusThresholds.otherLogMinRadius ~= 0 then
+		if (spec.lastDiameter >= radiusThresholds.otherLogMinRadius and radiusThresholds.otherLogMinRadius ~= 0) and specWHM.overridePulp == false and specWHM.overrideShort == false then
 			treeType = SplitTypes.LOG
-		elseif spec.lastDiameter >= radiusThresholds.otherShortMinRadius and radiusThresholds.otherShortMinRadius ~= 0 then
+		elseif (spec.lastDiameter >= radiusThresholds.otherShortMinRadius and radiusThresholds.otherShortMinRadius ~= 0 and specWHM.overridePulp == false) or specWHM.overrideShort == true then
 			treeType = SplitTypes.SHORTWOOD
-		elseif spec.lastDiameter >= radiusThresholds.otherPulpwoodMinRadius and radiusThresholds.otherPulpwoodMinRadius ~= 0 then
+		elseif (spec.lastDiameter >= radiusThresholds.otherPulpwoodMinRadius and radiusThresholds.otherPulpwoodMinRadius ~= 0 and specWHM.overrideShort == false) or specWHM.overridePulp == true then
 			treeType = SplitTypes.PULPWOOD
 		else
 			treeType = SplitTypes.UNKNOWN
@@ -484,8 +527,8 @@ function WoodHarvesterMeasurement:addNewSplit(length, averageRadius)
 	end
 
 	if treeType ~= SplitTypes.UNKNOWN then
-		local currentStand = Stand:new(json.decode(specWoodHarvesterMeasurement.currentStand))
-		local currentTree = Tree:new(json.decode(specWoodHarvesterMeasurement.currentTree))
+		local currentStand = Stand:new(json.decode(specWHM.currentStand))
+		local currentTree = Tree:new(json.decode(specWHM.currentTree))
 		currentTree:addSplit(
 			{
 				n = currentStand.splitCountStand + 1,
@@ -617,23 +660,44 @@ function WoodHarvesterMeasurement:drawHUD()
 		)
 
 	-- Current diameter
-	local diameterCard =
-		Card:new(
-			{
-				anchors = {
-					top = hudContainer.top,
-					right = hudContainer.right
-				},
-				width = diameterCardW,
-				height = diameterCardH,
-				fontSize = self:scalePixelToScreenHeight(32),
-				--diameterCardH / 2,
-				fontColor = style.fontColor,
-				text = textDiameter,
-				backgroundColor = backgroundColor,
-				backgroundOpacity = backgroundOpacity or 0.3
-			}
-		)
+	local diameterCard
+	if specWoodHarvesterMeasurement.overridePulp == true or specWoodHarvesterMeasurement.overrideShort == true then
+		diameterCard =
+			Card:new(
+				{
+					anchors = {
+						top = hudContainer.top,
+						right = hudContainer.right
+					},
+					width = diameterCardW,
+					height = diameterCardH,
+					fontSize = self:scalePixelToScreenHeight(32),
+					--diameterCardH / 2,
+					fontColor = Colors.RED,
+					text = textDiameter,
+					backgroundColor = backgroundColor,
+					backgroundOpacity = backgroundOpacity or 0.3
+				}
+			)
+	else
+		diameterCard =
+			Card:new(
+				{
+					anchors = {
+						top = hudContainer.top,
+						right = hudContainer.right
+					},
+					width = diameterCardW,
+					height = diameterCardH,
+					fontSize = self:scalePixelToScreenHeight(32),
+					--diameterCardH / 2,
+					fontColor = style.fontColor,
+					text = textDiameter,
+					backgroundColor = backgroundColor,
+					backgroundOpacity = backgroundOpacity or 0.3
+				}
+			)
+	end
 
 	-- Current length
 	local lengthCard =
@@ -780,6 +844,18 @@ function WoodHarvesterMeasurement:onDraw()
 	if actionEvent ~= nil then
 		g_inputBinding:setActionEventActive(actionEvent.actionEventId, true)
 		g_inputBinding:setActionEventText(actionEvent.actionEventId, g_i18n:getText("input_WHM_SET_TREE_SPECIE_TO_OTHER"))
+	end
+
+	actionEvent = specWoodHarvesterMeasurement.actionEvents[InputAction.WHM_OVERRIDE_SHORT]
+	if actionEvent ~= nil then
+		g_inputBinding:setActionEventActive(actionEvent.actionEventId, true)
+		g_inputBinding:setActionEventText(actionEvent.actionEventId, g_i18n:getText("input_WHM_OVERRIDE_SHORT"))
+	end
+
+	actionEvent = specWoodHarvesterMeasurement.actionEvents[InputAction.WHM_OVERRIDE_PULP]
+	if actionEvent ~= nil then
+		g_inputBinding:setActionEventActive(actionEvent.actionEventId, true)
+		g_inputBinding:setActionEventText(actionEvent.actionEventId, g_i18n:getText("input_WHM_OVERRIDE_PULP"))
 	end
 
 	actionEvent = specWoodHarvesterMeasurement.actionEvents[InputAction.WHM_TOGGLE_SPECIE]

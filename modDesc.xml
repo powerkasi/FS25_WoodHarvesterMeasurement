@@ -20,6 +20,8 @@ Default keys:
 - ''' = Set tree specie to other
 - 'L' = Toggle between tree species
 - Alt + m = Open settings menu
+- Not assigned = Force shortwood
+- Not assigned = Force pulpwood
 
 
 Use following page to post bug reports:
@@ -39,6 +41,8 @@ Standardtasten:
 - ''' = Baumart auf andere setzen
 - 'L' = Zwischen Baumarten wechseln
 - Alt + m = Einstellungen öffnen
+- Nicht zugewiesen = Kurzholz erzwingen
+- Nicht zugewiesen = Schleifholz erzwingen
 
 Verwenden Sie die folgende Seite, um Fehlerberichte zu veröffentlichen:
 https://github.com/powerkasi/FS25_WoodHarvesterMeasurement/issues
@@ -49,7 +53,7 @@ https://github.com/powerkasi/FS25_WoodHarvesterMeasurement/issues
 	
 	<multiplayer supported="true"/>   
 	<iconFilename>icon_WHM.dds</iconFilename>
-	<version>1.0.4.1</version>
+	<version>1.0.5.0</version>
 	
 	<extraSourceFiles>
 		<sourceFile filename="Register.lua" />
@@ -91,6 +95,20 @@ https://github.com/powerkasi/FS25_WoodHarvesterMeasurement/issues
 			<de>WHM: Baumart auf andere stellen</de>
 			<sv>WHM: Trädtyp till annan</sv>
 			<fr>WHM: Type d'arbre à autre</fr>
+		</text>
+		<text name="input_WHM_OVERRIDE_SHORT">
+			<en>WHM: Force shortwood</en>
+			<fi>WHM: Pakota pikkutukki</fi>
+			<de>WHM: Kurzholz erzwingen</de>
+			<sv>WHM: Tvinga kortvirke</sv>
+			<fr>WHM: Forcer bois court</fr>
+		</text>
+		<text name="input_WHM_OVERRIDE_PULP">
+			<en>WHM: Force pulpwood</en>
+			<fi>WHM: Pakota kuitu</fi>
+			<de>WHM: Faserholz erzwingen</de>
+			<sv>WHM: Tvinga massaved</sv>
+			<fr>WHM: Forcer bois à pâte</fr>
 		</text>
 		<text name="input_WHM_TOGGLE_SPECIE">
 			<en>WHM: Switch tree type</en>
@@ -681,6 +699,8 @@ https://github.com/powerkasi/FS25_WoodHarvesterMeasurement/issues
 		<action name="WHM_SET_TREE_SPECIE_TO_BIRCH" category="VEHICLE" ignoreComboMask="false"/>
 		<action name="WHM_SET_TREE_SPECIE_TO_OTHER" category="VEHICLE" ignoreComboMask="false"/>
 		<action name="WHM_TOGGLE_SPECIE" category="VEHICLE" ignoreComboMask="false"/>
+		<action name="WHM_OVERRIDE_SHORT" category="VEHICLE" ignoreComboMask="false"/>
+		<action name="WHM_OVERRIDE_PULP" category="VEHICLE" ignoreComboMask="false"/>
 	</actions>
 	
 	<inputBinding>
@@ -701,6 +721,12 @@ https://github.com/powerkasi/FS25_WoodHarvesterMeasurement/issues
 		</actionBinding>
 		<actionBinding action="WHM_TOGGLE_SPECIE">
 			<binding device="KB_MOUSE_DEFAULT" input="KEY_l"/>
+		</actionBinding>
+		<actionBinding action="WHM_OVERRIDE_SHORT">
+			<binding device="KB_MOUSE_DEFAULT" input=""/>
+		</actionBinding>
+		<actionBinding action="WHM_OVERRIDE_PULP">
+			<binding device="KB_MOUSE_DEFAULT" input=""/>
 		</actionBinding>
 	</inputBinding>
 	
