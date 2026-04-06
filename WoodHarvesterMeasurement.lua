@@ -209,7 +209,11 @@ function WoodHarvesterMeasurement:onRegisterActionEvents(isActiveForInput)
 			specWoodHarvesterMeasurement.actionEvents = {}
 		end
 
-		self:clearActionEventsTable(specWoodHarvesterMeasurement.actionEvents)
+		if specWoodHarvesterMeasurement.actionEvents ~= nil then
+			for _, actionEvent in pairs(specWoodHarvesterMeasurement.actionEvents) do
+				g_inputBinding:setActionEventActive(actionEvent.actionEventId, false)
+			end
+		end
 
 		if self:getIsActiveForInput(true) then
 			local _, actionEventId =
