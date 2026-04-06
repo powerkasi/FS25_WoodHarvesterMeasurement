@@ -473,6 +473,44 @@ function WoodHarvesterMeasurement:onCutTree(radius)
 	end
 end
 
+function WoodHarvesterMeasurement.getCurrentSortment(self)
+	local spec = self.spec_woodHarvester
+	local specWHM = self.spec_woodHarvesterMeasurement
+	local radiusThresholds = json.decode(specWHM.radiusThresholds)
+	local diameter = specWHM.currentDiameter
+	local specie = specWHM.treeSpecie
+
+	local logMin, shortMin, pulpMin
+
+	if specie == Species.PINE then
+		logMin = radiusThresholds.pineLogMinRadius
+		shortMin = radiusThresholds.pineShortMinRadius
+		pulpMin = radiusThresholds.pinePulpwoodMinRadius
+	elseif specie == Species.SPRUCE then
+		logMin = radiusThresholds.spruceLogMinRadius
+		shortMin = radiusThresholds.spruceShortMinRadius
+		pulpMin = radiusThresholds.sprucePulpwoodMinRadius
+	elseif specie == Species.BIRCH then
+		logMin = radiusThresholds.birchLogMinRadius
+		shortMin = radiusThresholds.birchShortMinRadius
+		pulpMin = radiusThresholds.birchPulpwoodMinRadius
+	else
+		logMin = radiusThresholds.otherLogMinRadius
+		shortMin = radiusThresholds.otherShortMinRadius
+		pulpMin = radiusThresholds.otherPulpwoodMinRadius
+	end
+
+	if (diameter >= logMin and logMin ~= 0) and specWHM.overridePulp == false and specWHM.overrideShort == false then
+		return SplitTypes.LOG
+	elseif (diameter >= shortMin and shortMin ~= 0 and specWHM.overridePulp == false) or specWHM.overrideShort == true then
+		return SplitTypes.SHORTWOOD
+	elseif (diameter >= pulpMin and pulpMin ~= 0 and specWHM.overrideShort == false) or specWHM.overridePulp == true then
+		return SplitTypes.PULPWOOD
+	else
+		return SplitTypes.UNKNOWN
+	end
+end
+
 function WoodHarvesterMeasurement:addNewSplit(length, averageRadius)
 	local spec = self.spec_woodHarvester
 	local specWHM = self.spec_woodHarvesterMeasurement
@@ -480,51 +518,7 @@ function WoodHarvesterMeasurement:addNewSplit(length, averageRadius)
 	local cubeMetre = (math.pi * math.pow(averageRadius, 2) * length)
 	self:setCubicMetreTotal(specWHM.cubicMetreTotal + cubeMetre)
 
-	local treeType
-	local radiusThresholds = json.decode(specWHM.radiusThresholds)
-
-	-- Pine
-	if specWHM.treeSpecie == Species.PINE then
-		if (spec.lastDiameter >= radiusThresholds.pineLogMinRadius and radiusThresholds.pineLogMinRadius ~= 0) and specWHM.overridePulp == false and specWHM.overrideShort == false then
-			treeType = SplitTypes.LOG
-		elseif (spec.lastDiameter >= radiusThresholds.pineShortMinRadius and radiusThresholds.pineShortMinRadius ~= 0 and specWHM.overridePulp == false) or specWHM.overrideShort == true then
-			treeType = SplitTypes.SHORTWOOD
-		elseif (spec.lastDiameter >= radiusThresholds.pinePulpwoodMinRadius and radiusThresholds.pinePulpwoodMinRadius ~= 0 and specWHM.overrideShort == false) or specWHM.overridePulp == true then
-			treeType = SplitTypes.PULPWOOD
-		else
-			treeType = SplitTypes.UNKNOWN
-		end
-	elseif specWHM.treeSpecie == Species.SPRUCE then
-		if (spec.lastDiameter >= radiusThresholds.spruceLogMinRadius and radiusThresholds.spruceLogMinRadius ~= 0) and specWHM.overridePulp == false and specWHM.overrideShort == false then
-			treeType = SplitTypes.LOG
-		elseif (spec.lastDiameter >= radiusThresholds.spruceShortMinRadius and radiusThresholds.spruceShortMinRadius ~= 0 and specWHM.overridePulp == false) or specWHM.overrideShort == true then
-			treeType = SplitTypes.SHORTWOOD
-		elseif (spec.lastDiameter >= radiusThresholds.sprucePulpwoodMinRadius and radiusThresholds.sprucePulpwoodMinRadius ~= 0 and specWHM.overrideShort == false) or specWHM.overridePulp == true then
-			treeType = SplitTypes.PULPWOOD
-		else
-			treeType = SplitTypes.UNKNOWN
-		end
-	elseif specWHM.treeSpecie == Species.BIRCH then
-		if (spec.lastDiameter >= radiusThresholds.birchLogMinRadius and radiusThresholds.birchLogMinRadius ~= 0) and specWHM.overridePulp == false and specWHM.overrideShort == false then
-			treeType = SplitTypes.LOG
-		elseif (spec.lastDiameter >= radiusThresholds.birchShortMinRadius and radiusThresholds.birchShortMinRadius ~= 0 and specWHM.overridePulp == false) or specWHM.overrideShort == true then
-			treeType = SplitTypes.SHORTWOOD
-		elseif (spec.lastDiameter >= radiusThresholds.birchPulpwoodMinRadius and radiusThresholds.birchPulpwoodMinRadius ~= 0 and specWHM.overrideShort == false) or specWHM.overridePulp == true then
-			treeType = SplitTypes.PULPWOOD
-		else
-			treeType = SplitTypes.UNKNOWN
-		end
-	else
-		if (spec.lastDiameter >= radiusThresholds.otherLogMinRadius and radiusThresholds.otherLogMinRadius ~= 0) and specWHM.overridePulp == false and specWHM.overrideShort == false then
-			treeType = SplitTypes.LOG
-		elseif (spec.lastDiameter >= radiusThresholds.otherShortMinRadius and radiusThresholds.otherShortMinRadius ~= 0 and specWHM.overridePulp == false) or specWHM.overrideShort == true then
-			treeType = SplitTypes.SHORTWOOD
-		elseif (spec.lastDiameter >= radiusThresholds.otherPulpwoodMinRadius and radiusThresholds.otherPulpwoodMinRadius ~= 0 and specWHM.overrideShort == false) or specWHM.overridePulp == true then
-			treeType = SplitTypes.PULPWOOD
-		else
-			treeType = SplitTypes.UNKNOWN
-		end
-	end
+	local treeType = WoodHarvesterMeasurement.getCurrentSortment(self)
 
 	if treeType ~= SplitTypes.UNKNOWN then
 		local currentStand = Stand:new(json.decode(specWHM.currentStand))
@@ -562,6 +556,8 @@ function WoodHarvesterMeasurement:drawHUD()
 	local textLength = string.format("%.0f", specWoodHarvesterMeasurement.currentLength)
 	local textDiameter = string.format("%.0f", specWoodHarvesterMeasurement.currentDiameter * 1000)
 	local specieString = WoodHarvesterMeasurement.treeSpecieToString(self, specWoodHarvesterMeasurement.treeSpecie)
+	local currentTree = json.decode(specWoodHarvesterMeasurement.currentTree)
+	local sortmentString = WoodHarvesterMeasurement.treeTypeToString(self, WoodHarvesterMeasurement.getCurrentSortment(self))
 
 	local brand = Helper.trim(string.lower(self:getVehicleBrand().name))
 	local style = WoodHarvesterMeasurement.hudStyles["default"]
@@ -660,44 +656,23 @@ function WoodHarvesterMeasurement:drawHUD()
 		)
 
 	-- Current diameter
-	local diameterCard
-	if specWoodHarvesterMeasurement.overridePulp == true or specWoodHarvesterMeasurement.overrideShort == true then
-		diameterCard =
-			Card:new(
-				{
-					anchors = {
-						top = hudContainer.top,
-						right = hudContainer.right
-					},
-					width = diameterCardW,
-					height = diameterCardH,
-					fontSize = self:scalePixelToScreenHeight(32),
-					--diameterCardH / 2,
-					fontColor = Colors.RED,
-					text = textDiameter,
-					backgroundColor = backgroundColor,
-					backgroundOpacity = backgroundOpacity or 0.3
-				}
-			)
-	else
-		diameterCard =
-			Card:new(
-				{
-					anchors = {
-						top = hudContainer.top,
-						right = hudContainer.right
-					},
-					width = diameterCardW,
-					height = diameterCardH,
-					fontSize = self:scalePixelToScreenHeight(32),
-					--diameterCardH / 2,
-					fontColor = style.fontColor,
-					text = textDiameter,
-					backgroundColor = backgroundColor,
-					backgroundOpacity = backgroundOpacity or 0.3
-				}
-			)
-	end
+	local diameterCard =
+		Card:new(
+			{
+				anchors = {
+					top = hudContainer.top,
+					right = hudContainer.right
+				},
+				width = diameterCardW,
+				height = diameterCardH,
+				fontSize = self:scalePixelToScreenHeight(32),
+				--diameterCardH / 2,
+				fontColor = style.fontColor,
+				text = textDiameter,
+				backgroundColor = backgroundColor,
+				backgroundOpacity = backgroundOpacity or 0.3
+			}
+		)
 
 	-- Current length
 	local lengthCard =
@@ -734,27 +709,59 @@ function WoodHarvesterMeasurement:drawHUD()
 			}
 		)
 
+	-- Sortment type
+	local sortmentCard =
+		Card:new(
+			{
+				anchors = {
+					top = diameterCard.bottom,
+					left = diameterCard.left
+				},
+				width = diameterCard.width,
+				height = diameterCard.height / 2,
+				fontSize = diameterCard.fontSize / 2,
+				fontColor = style.fontColor,
+				text = sortmentString,
+				backgroundColor = style.backgroundColor
+			}
+		)
+
 	-- Current tree status
 	local statusCubeMetre, statusLength = 0, 0
-	local currentTree = json.decode(specWoodHarvesterMeasurement.currentTree)
 	if currentTree ~= nil then
 		statusCubeMetre = currentTree.totalCubeMetre or 0
 		statusLength = currentTree.totalLength or 0
 	end
 
-	local currentTreeStatusCard =
+	local currentTreeCubeMetreCard =
 		Card:new(
 			{
 				anchors = {
-					top = diameterCard.bottom,
-					right = diameterCard.right
+					top = specieCard.bottom,
+					left = specieCard.left
 				},
 				width = diameterCard.width,
 				height = diameterCard.height / 2,
-				fontSize = diameterCard.fontSize / 2.5,
+				fontSize = diameterCard.fontSize / 2,
 				fontColor = style.fontColor,
-				text = string.format("%.0f", (statusCubeMetre * 1000)) ..
-					"L\n" .. string.format("%.0f", (statusLength * 100)) .. "cm",
+				text = string.format("%.0f", (statusCubeMetre * 1000)) .. "L",
+				backgroundColor = style.highlightBackGroundColor,
+				backgroundOpacity = 0.7
+			}
+		)
+
+	local currentTreeLengthCard =
+		Card:new(
+			{
+				anchors = {
+					top = sortmentCard.bottom,
+					left = sortmentCard.left
+				},
+				width = diameterCard.width,
+				height = diameterCard.height / 2,
+				fontSize = diameterCard.fontSize / 2,
+				fontColor = style.fontColor,
+				text = string.format("%.0f", (statusLength * 100)) .. "cm",
 				backgroundColor = style.highlightBackGroundColor,
 				backgroundOpacity = 0.7
 			}
@@ -762,7 +769,7 @@ function WoodHarvesterMeasurement:drawHUD()
 
 	-- Cutted split cards
 	if currentTree.splitCount > 0 then
-		local previousSplitX = specieCard.x
+		local previousSplitX = currentTreeCubeMetreCard.x
 		local cardsPerRow = 3
 		local cardCounter = 0
 		local row = 1
@@ -784,7 +791,7 @@ function WoodHarvesterMeasurement:drawHUD()
 							height = cardHeight,
 							fontColor = style.fontColor,
 							fontSize = diameterCard.fontSize / cardsPerRow,
-							y = specieCard.y - cardHeight * row,
+							y = currentTreeCubeMetreCard.y - cardHeight * row,
 							backgroundColor = style.backgroundColor,
 							text = WoodHarvesterMeasurement.treeTypeToString(self, data.treeType) ..
 								" " ..

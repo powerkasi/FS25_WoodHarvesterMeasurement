@@ -6,21 +6,21 @@
 Styles = {
 	hudTypes = {
 		bottomCenter = {
-			bottomMargin = 25,
+			bottomMargin = 45,
 			width = 256,
 			height = 224, -- 64 + 64 / 2 + 64 / 1.5 * 3
 			bigCardWidth = 128, -- 0.05
 			bigCardheight = 64, -- 0.05
 		},
 		bottomRight = {
-			bottomMargin = 25,
+			bottomMargin = 45,
 			width = 256,
 			height = 224, -- 64 + 64 / 2 + 64 / 1.5 * 3
 			bigCardWidth = 128, -- 0.05
 			bigCardheight = 64, -- 0.05
 		},
 		hidden = {
-			bottomMargin = 25, --could probs just nil all these
+			bottomMargin = 45, --could probs just nil all these
 			width = 256,
 			height = 224, -- 64 + 64 / 2 + 64 / 1.5 * 3
 			bigCardWidth = 128, -- 0.05
