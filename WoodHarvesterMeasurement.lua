@@ -175,6 +175,16 @@ function WoodHarvesterMeasurement:onLoad(savegame)
 		specWoodHarvesterMeasurement.currentStand = json.encode(Stand:new())
 	end
 
+	-- Backup incase new thresholds added in updates, so old savegames won't break and get default values for missing ones
+	local defaults = json.decode(WoodHarvesterMeasurement.defaultRadiusThresholds)
+	local radiusThresholds = json.decode(specWoodHarvesterMeasurement.radiusThresholds)
+	for k, v in pairs(defaults) do
+		if radiusThresholds[k] == nil then
+			radiusThresholds[k] = v
+		end
+	end
+	specWoodHarvesterMeasurement.radiusThresholds = json.encode(radiusThresholds)
+
 	-- prependedFunction() prepend an existing function with the given function or if the original
 	-- function does not exist then only the new one will be returned.
 	-- So if need to execute something before the original function you use this.
