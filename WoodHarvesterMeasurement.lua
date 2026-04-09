@@ -477,7 +477,7 @@ function WoodHarvesterMeasurement.getCurrentSortment(self)
 	local spec = self.spec_woodHarvester
 	local specWHM = self.spec_woodHarvesterMeasurement
 	local radiusThresholds = json.decode(specWHM.radiusThresholds)
-	local diameter = specWHM.currentDiameter
+	local diameter = spec.lastDiameter
 	local specie = specWHM.treeSpecie
 
 	local logMin, shortMin, pulpMin
