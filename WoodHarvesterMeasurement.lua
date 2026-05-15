@@ -680,7 +680,7 @@ function WoodHarvesterMeasurement:drawHUD()
 				fontColor = style.fontColor,
 				text = textDiameter,
 				backgroundColor = backgroundColor,
-				backgroundOpacity = backgroundOpacity or 0.3
+				backgroundOpacity = backgroundOpacity or 0.5
 			}
 		)
 
@@ -698,7 +698,7 @@ function WoodHarvesterMeasurement:drawHUD()
 				fontColor = style.fontColor,
 				text = textLength,
 				backgroundColor = backgroundColor,
-				backgroundOpacity = backgroundOpacity or 0.3
+				backgroundOpacity = backgroundOpacity or 0.5
 			}
 		)
 
@@ -715,7 +715,8 @@ function WoodHarvesterMeasurement:drawHUD()
 				fontSize = diameterCard.fontSize / 2,
 				fontColor = style.fontColor,
 				text = specieString,
-				backgroundColor = style.backgroundColor
+				backgroundColor = style.backgroundColor,
+				backgroundOpacity = backgroundOpacity or 0.5
 			}
 		)
 
@@ -732,7 +733,8 @@ function WoodHarvesterMeasurement:drawHUD()
 				fontSize = diameterCard.fontSize / 2,
 				fontColor = style.fontColor,
 				text = sortmentString,
-				backgroundColor = style.backgroundColor
+				backgroundColor = style.backgroundColor,
+				backgroundOpacity = backgroundOpacity or 0.5
 			}
 		)
 
@@ -756,7 +758,7 @@ function WoodHarvesterMeasurement:drawHUD()
 				fontColor = style.fontColor,
 				text = string.format("%.0f", (statusCubeMetre * 1000)) .. "L",
 				backgroundColor = style.highlightBackGroundColor,
-				backgroundOpacity = 0.7
+				backgroundOpacity = 0.8
 			}
 		)
 
@@ -773,7 +775,7 @@ function WoodHarvesterMeasurement:drawHUD()
 				fontColor = style.fontColor,
 				text = string.format("%.0f", (statusLength * 100)) .. "cm",
 				backgroundColor = style.highlightBackGroundColor,
-				backgroundOpacity = 0.7
+				backgroundOpacity = 0.8
 			}
 		)
 
